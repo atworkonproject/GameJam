@@ -306,12 +306,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BuildController.cs" />
     <Compile Include="Assets\Scripts\cameraScript.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
+    <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
