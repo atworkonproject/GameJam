@@ -35,6 +35,8 @@ public class gameController : MonoBehaviour
     public float TITLE_DISPLAY_TIME;
     float logoTimeCountdown;
 
+    public GameObject gameLogo;
+
     //================================ FUNCTIONS ==================================
     void Awake()
     {
@@ -83,6 +85,7 @@ public class gameController : MonoBehaviour
                 oldState = newState;
                 break;
             case GAME_STATE.LOGO:
+                gameLogo.SetActive(false);
                 break;
             case GAME_STATE.MENU_MAIN:
                 break;
@@ -92,13 +95,14 @@ public class gameController : MonoBehaviour
                 break;
         }
 
-        //Debug.Log("Game state changed from " + gameState.ToString() + " to " + newState.ToString());
+        Debug.Log("Game state changed from " + gameState.ToString() + " to " + newState.ToString());
         gameState = newState;
 
         switch (gameState)
         {
             case GAME_STATE.LOGO:
                 logoTimeCountdown = 0.0f;
+                gameLogo.SetActive(true);
                 break;
             case GAME_STATE.MENU_MAIN:
                 break;
@@ -125,7 +129,6 @@ public class gameController : MonoBehaviour
                 //whean it leaves count - first game launch
                 oldState = newState;
                 break;
-
             case INGAME_STATE.READY:
                 break;
             case INGAME_STATE.GAME:
@@ -136,7 +139,7 @@ public class gameController : MonoBehaviour
                 break;
         }
 
-        //Debug.Log("IN Game state changed from " + ingameState.ToString() + " to " + newState.ToString());
+        Debug.Log("IN Game state changed from " + ingameState.ToString() + " to " + newState.ToString());
         ingameState = newState;
 
         switch (ingameState)
