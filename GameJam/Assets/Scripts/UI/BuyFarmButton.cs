@@ -14,9 +14,6 @@ public class BuyFarmButton : MonoBehaviour {
 
 	public void OnClickedMe()
 	{
-		if (selectedTileC.DisplayedSelectedTile.transform.position != null)
-			buildC.BuildFarm(selectedTileC.DisplayedSelectedTile.transform.position);
-		else
-			Debug.Log("no selected tile");
+		buildC.BuildFarm();
 	}
 }

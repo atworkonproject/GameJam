@@ -14,9 +14,6 @@ public class BuyBarracksButton : MonoBehaviour {
 
 	public void OnClickedMe()
 	{
-		if (selectedTileC.DisplayedSelectedTile.transform.position != null)
-			buildC.BuildBarracks(selectedTileC.DisplayedSelectedTile.transform.position);
-		else
-			Debug.Log("no selected tile");
+		buildC.BuildBarracks();
 	}
 }

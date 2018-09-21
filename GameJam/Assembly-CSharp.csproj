@@ -61,6 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Bases\BarrackBase.cs" />
+    <Compile Include="Assets\Scripts\Bases\BaseBaseClass.cs" />
+    <Compile Include="Assets\Scripts\Bases\FarmBase.cs" />
     <Compile Include="Assets\Scripts\BuildController.cs" />
     <Compile Include="Assets\Scripts\cameraScript.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
