@@ -6,20 +6,22 @@ using UnityEngine;
 public class cameraScript : MonoBehaviour {
 
     public GameObject mapObject;
+    private Bounds mapBounds;
     private Camera cam;
 
     Vector2 targetPos;
-    float targetSize = 1.0f;//zoom
+    float targetSize;//zoom
 
     private float maxOrthoSize = 1.0f;
     public float minZoom = 0.2f;//% of maxZoom
-    public float moveSensitivity = 0.1f;
+    public float scrollSensitivity = 2.5f;
 
     Vector3 mouseLastPos, moveVector;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         cam = this.GetComponent<Camera>();
+        mapBounds = mapObject.GetComponent<SpriteRenderer>().bounds;
         targetPos = cam.transform.position;
         mouseLastPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         moveVector = Vector3.zero;
@@ -32,7 +34,7 @@ public class cameraScript : MonoBehaviour {
         //zoom
         if (Input.mouseScrollDelta.magnitude != 0)
         {
-            targetSize += Input.mouseScrollDelta.y;
+            targetSize += -Input.mouseScrollDelta.y * scrollSensitivity;
             if (targetSize < minZoom * maxOrthoSize)
                 targetSize = minZoom * maxOrthoSize;
             else if (targetSize > maxOrthoSize)
@@ -43,9 +45,9 @@ public class cameraScript : MonoBehaviour {
         UpdateSize(newCamSize);
 
         //moving camera
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(2) || Input.GetMouseButton(1))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))
                 mouseLastPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             moveVector = mouseLastPos - Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -66,24 +68,32 @@ public class cameraScript : MonoBehaviour {
     {
         //set correct size
         if (newCamSize > maxOrthoSize)
+        {
             newCamSize = maxOrthoSize;
+            targetSize = 0;
+        }
         else if (newCamSize < minZoom * maxOrthoSize)
+        {
             newCamSize = minZoom * maxOrthoSize;
+            targetSize = 0;
+        }
 
         cam.orthographicSize = newCamSize;
     }
 
     void SetZoomToWholeMap()
     {
-        float mapX = mapObject.GetComponent<MeshRenderer>().bounds.size.x;
-        float mapY = mapObject.GetComponent<MeshRenderer>().bounds.size.y;
+        float mapX = mapBounds.size.x;
+        float mapY = mapBounds.size.y;
         if (mapX / mapY >= cam.aspect)//use height, map is wider than cam size
-            cam.orthographicSize = mapObject.GetComponent<MeshRenderer>().bounds.size.y / 2.0f;
+            cam.orthographicSize = mapBounds.size.y / 2.0f;
         else
-            cam.orthographicSize = mapObject.GetComponent<MeshRenderer>().bounds.size.x / cam.aspect / 2.0f;
+            cam.orthographicSize = mapBounds.size.x / cam.aspect / 2.0f;
 
         maxOrthoSize = cam.orthographicSize;
+        targetSize = maxOrthoSize;
         cam.transform.position = mapObject.transform.position;
+        cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
     }
 
     void UpdatePosition(Vector3 moveBy)//checks if out of bounds etc
@@ -92,7 +102,7 @@ public class cameraScript : MonoBehaviour {
         float cX = cam.orthographicSize * cam.aspect * 2;
         float cY = cam.orthographicSize * 2;
         Rect c = new Rect(cam.transform.position.x -cX/2.0f + moveBy.x, cam.transform.position.y -cY/2.0f + moveBy.y, cX, cY);
-        Rect m = new Rect(mapObject.transform.position - mapObject.GetComponent<MeshRenderer>().bounds.size/2.0f, mapObject.GetComponent<MeshRenderer>().bounds.size);
+        Rect m = new Rect(mapObject.transform.position -mapBounds.size/2.0f,mapBounds.size);
         if (c.x < m.x)
         {
             moveBy.x += m.x - c.x;
