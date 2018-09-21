@@ -5,6 +5,8 @@ using UnityEngine;
 public class SelectedTileController : MonoBehaviour {
 	[Header("to link")]
 	public GameObject SelectedTilePrefab;
+	public RectTransform buttonsRectTransform;//to check if user didn't click buttons
+
 	[Header("other")]
 	public GameObject DisplayedSelectedTile;
 	public static int DisplayedTileIndexX;
@@ -42,8 +44,11 @@ public class SelectedTileController : MonoBehaviour {
 		DisplayedSelectedTile.SetActive(true);//show
 	}
 
-	public void Input_MouseLeftDown()
+	public void Input_MouseLeftUp()
 	{
-		DisplayTile(MainCamera.ScreenToWorldPoint(Input.mousePosition));
+		if (!RectTransformUtility.RectangleContainsScreenPoint(buttonsRectTransform, Input.mousePosition))//if user didn't click buttons
+		{
+			DisplayTile(MainCamera.ScreenToWorldPoint(Input.mousePosition));
+		}
 	}
 }

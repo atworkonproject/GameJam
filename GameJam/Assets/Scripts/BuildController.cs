@@ -44,21 +44,21 @@ public class BuildController : MonoBehaviour {
 
 	public void BuildBarracks()
 	{
-		if (selectedTileC.DisplayedSelectedTile != null)
-		{
-			if (BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] == BuildController.EmptyClass)
+			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				Vector2 position = selectedTileC.DisplayedSelectedTile.transform.position;
-				GameObject go = Instantiate(BarracksBasePrefab.gameObject);
-				go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
-				BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-				BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] = b;
+				if (BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] == BuildController.EmptyClass)
+				{
+					Vector2 position = selectedTileC.DisplayedSelectedTile.transform.position;
+					GameObject go = Instantiate(BarracksBasePrefab.gameObject);
+					go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
+					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
+					BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] = b;
+				}
+				else
+					Debug.Log("place occupied");
 			}
 			else
-				Debug.Log("place occupied");
-		}
-		else
-			Debug.Log("no selected tile");
+				Debug.Log("no selected tile");
 	}
 	public void BuildFarm()
 	{
