@@ -6,6 +6,7 @@ TagManager:
   tags:
   - _SCRIPTS_
   - BackgroundSprite
+  - BuildController
   layers:
   - Default
   - TransparentFX
