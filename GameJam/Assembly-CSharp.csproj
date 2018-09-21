@@ -63,6 +63,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\cameraScript.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
+    <Compile Include="Assets\Scripts\InputController.cs" />
+    <Compile Include="Assets\Scripts\SelectedTile.cs" />
+    <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Adam/Desktop/GameJam/GameJam/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
