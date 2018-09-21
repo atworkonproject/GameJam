@@ -8,9 +8,11 @@ public class SelectedTileController : MonoBehaviour {
 	[Header("other")]
 	public GameObject DisplayedSelectedTile;
 	public Camera MainCam;
+	public Sprite BackgroundSprite;
 	void Start () {
 		DisplayedSelectedTile = null;
 		MainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<Sprite>();
 	}
 	
 	void Update () {
