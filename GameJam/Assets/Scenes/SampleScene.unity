@@ -480,14 +480,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e00b21ad9de4cb84b98e8b00cec4cc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapObject: {fileID: 0}
+  mapObject: {fileID: 2004729410}
   minZoom: 0.2
-  moveSensitivity: 0.1
+  scrollSensitivity: 2.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1284,7 +1284,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 371fbe3611095d647a7c2775b32c25b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d69055e44f86d06409c7b1f55b578489, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1303,7 +1303,7 @@ Transform:
   m_GameObject: {fileID: 2004729410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 2, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
