@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 759241137}
   - component: {fileID: 759241136}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: BackgroundSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
