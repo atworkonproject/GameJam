@@ -7,34 +7,42 @@ public class SelectedTileController : MonoBehaviour {
 	public GameObject SelectedTilePrefab;
 	[Header("other")]
 	public GameObject DisplayedSelectedTile;
-	public Camera MainCam;
+	public Sprite DisplayedSelectedTileSprite;
+	public Camera MainCamera;
 	public Sprite BackgroundSprite;
+	public float SelectedTileWidth;//the bigger the selected size bigger
+
 	void Start () {
 		DisplayedSelectedTile = null;
-		MainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<Sprite>();
-	}
-	
-	void Update () {
-		
+		MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
+		SelectedTileWidth = 128.0f;
 	}
 
-	public void DisplayTile(Vector2 position)
+	public void DisplayTile(Vector2 clickPosition)
 	{
 		if (DisplayedSelectedTile == null)
 		{
 			GameObject newTile = Instantiate(SelectedTilePrefab);
-			newTile.transform.position = position;
 			DisplayedSelectedTile = newTile;
-		}else
-		{
-			DisplayedSelectedTile.transform.position = position;
+			DisplayedSelectedTileSprite = DisplayedSelectedTile.GetComponent<SpriteRenderer>().sprite;
 		}
+
+		float selectedTileWidth = DisplayedSelectedTileSprite.bounds.size.x;
+		float selectedTileHeight = DisplayedSelectedTileSprite.bounds.size.y;
+
+		float xIndex = (clickPosition.x - BackgroundSprite.bounds.min.x) / selectedTileWidth;//width from left edge of backgroundSprite to click, we divide it by width of selectedTile
+		float resultingX = BackgroundSprite.bounds.min.x + (Mathf.Round(xIndex) * selectedTileWidth);
+
+		float yIndex = (clickPosition.y - BackgroundSprite.bounds.min.y) / selectedTileHeight;
+		float resultingY = BackgroundSprite.bounds.min.y + (Mathf.Round(yIndex) * selectedTileHeight);
+
+		DisplayedSelectedTile.transform.position = new Vector2(resultingX, resultingY);
 	}
 
 	public void MouseLeftDown()
 	{
 		
-		DisplayTile(MainCam.ScreenToWorldPoint(Input.mousePosition));
+		DisplayTile(MainCamera.ScreenToWorldPoint(Input.mousePosition));
 	}
 }

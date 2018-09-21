@@ -10,7 +10,7 @@ public class InputController : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetMouseButton(0))//left mouse down
+		if (Input.GetMouseButtonDown(0))//left mouse pressed
 		{
 			SelectedTileC.MouseLeftDown();
 		}
