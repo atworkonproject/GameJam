@@ -93,7 +93,7 @@ public class cameraScript : MonoBehaviour {
         maxOrthoSize = cam.orthographicSize;
         targetSize = maxOrthoSize;
         cam.transform.position = mapObject.transform.position;
-        cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -1);
+        cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -10);
     }
 
     void UpdatePosition(Vector3 moveBy)//checks if out of bounds etc
