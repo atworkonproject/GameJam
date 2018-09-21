@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildController : MonoBehaviour {
 	[Header("to link")]
 	public GameObject Barracks1BasePrefab;
+	public GameObject FarmBasePrefab;
 
 	void Start () {
 		
@@ -15,8 +16,12 @@ public class BuildController : MonoBehaviour {
 		
 	}
 
-	public void BuildBarracks1(Vector2 position)
+	public void BuildBarracks(Vector2 position)
 	{
-		Instantiate(Barracks1BasePrefab).transform.position = position;
+		Instantiate(Barracks1BasePrefab).transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
+	}
+	public void BuildFarm(Vector2 position)
+	{
+		Instantiate(FarmBasePrefab).transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
 	}
 }

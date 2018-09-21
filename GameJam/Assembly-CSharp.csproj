@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
+    <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />
+    <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Adam/Desktop/GameJam/GameJam/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

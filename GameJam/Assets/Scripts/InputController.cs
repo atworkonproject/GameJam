@@ -10,9 +10,9 @@ public class InputController : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetMouseButtonDown(0))//left mouse pressed
+		if (Input.GetMouseButtonUp(0))//left mouse pressed
 		{
-			SelectedTileC.MouseLeftDown();
+			SelectedTileC.Input_MouseLeftDown();
 		}
 	}
 }

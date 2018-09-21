@@ -40,9 +40,8 @@ public class SelectedTileController : MonoBehaviour {
 		DisplayedSelectedTile.transform.position = new Vector2(resultingX, resultingY);
 	}
 
-	public void MouseLeftDown()
+	public void Input_MouseLeftDown()
 	{
-		
 		DisplayTile(MainCamera.ScreenToWorldPoint(Input.mousePosition));
 	}
 }
