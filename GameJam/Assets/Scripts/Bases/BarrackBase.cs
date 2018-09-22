@@ -9,9 +9,15 @@ public class BarrackBase : BaseBaseClass {
 
     public GameObject Soldier01prefab;
 
+    public Sprite DevilBase;
+    public Sprite AngelBase;
+
+    public bool Fallen;
+
 	// Use this for initialization
 	void Awake () {
         timeToSpawn = 0f;
+        GetComponent<SpriteRenderer>().sprite = Fallen ? DevilBase : AngelBase;
     }
 
     // Update is called once per frame
