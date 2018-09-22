@@ -51,13 +51,14 @@ public class SoldierController : MonoBehaviour
 
         lastAttack = Time.time;
         Hp = MaxHp;
+        Charisma = Random.Range(0, 10);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         checkNearSoldiers();
-
         checkHp();
         setTarget();
     }
@@ -76,14 +77,40 @@ public class SoldierController : MonoBehaviour
 
     void setTarget()
     {
-        if (targetObject == null)
+        
+        bool tooClose = false;
+        /*
+        foreach (Collider2D sold in Soldiers)
+        {
+            Vector3 soldPos = sold.gameObject.transform.position;
+            if ((soldPos - transform.position).magnitude < AttackRange)
+            {
+                targetPosition = 2*transform.position - soldPos;
+                tooClose = true;
+            }
+        }
+        */
+
+        if (targetObject == null && !tooClose)
         {
             if (Enemies.Count > 0)
             {
                 targetObject = Enemies[Random.Range(0, Enemies.Count)];
             }
+            else if(Friends.Count > 0)
+            {
+                foreach(GameObject friend in Friends)
+                {
+                    SoldierController friendControl = friend.GetComponent<SoldierController>();
+                    if(friendControl.Charisma > Charisma && friendControl.Charisma > 7)
+                    {
+                        targetObject = friend;
+                        break;
+                    }
+                }
+            }
         }
-        else
+        else if(!tooClose)
         {
             targetPosition = targetObject.transform.position;
         }
@@ -150,14 +177,18 @@ public class SoldierController : MonoBehaviour
     {
         if (targetObject == null)
         {
-            Debug.Log("Jestem u celu");
             return (transform.position - targetPosition).magnitude < AttackRange;
         }
         else
         {
-            Debug.Log("Idę na wroga. Odl = "+ (transform.position - targetPosition).magnitude);
+            bool near = (transform.position - targetPosition).magnitude < AttackRange;
+            bool distant = (transform.position - targetPosition).magnitude > minimumDistance;
 
-            bool result = ((transform.position - targetPosition).magnitude < AttackRange) && ((transform.position - targetPosition).magnitude > minimumDistance);
+            //if (near) Debug.Log("Jestem blisko");
+            //if (distant) Debug.Log("Jestem daleko");
+
+            bool result = near && distant;
+
             return result;
         }
     }
