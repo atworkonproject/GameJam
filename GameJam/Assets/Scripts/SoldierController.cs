@@ -61,7 +61,15 @@ public class SoldierController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((transform.position - targetPosition).magnitude < AttackRange)
+
+		if (Time.timeSinceLevelLoad % 1.0f == 0.0f)//every second
+		{
+			DamageBubbleController damBubbleController =//todo cache
+					GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+			damBubbleController.CreateDamageBubble(transform.position, Atk);
+		}
+
+		if ((transform.position - targetPosition).magnitude < AttackRange)
         {
             doAction();
         }
@@ -135,14 +143,16 @@ public class SoldierController : MonoBehaviour
 
         if (Time.time - lastAttack > AttackDelay)
         {
-            soldier.Damage(Random.Range(0, Atk) + 1);
+			
+
+			soldier.Damage(Random.Range(0, Atk) + 1);
             lastAttack = Time.time;
         }
     }
 
     public void Damage(int atk)
     {
-        Hp -= atk;
+		Hp -= atk;
     }
 
     void checkHp()
