@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5ad382323c5fa47808d82e46812831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedTilePrefab: {fileID: 1678244355860804, guid: 03326c600e9065c4cb69416df92486ec,
+  SelectedTilePrefab: {fileID: 114696464087924802, guid: 03326c600e9065c4cb69416df92486ec,
     type: 2}
   buttonsRectTransform: {fileID: 2099970027}
   DisplayedSelectedTile: {fileID: 0}

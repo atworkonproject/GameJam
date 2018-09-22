@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class SelectedTile : MonoBehaviour
 {
-
+	public Vector2Int MyIndexes;
 }

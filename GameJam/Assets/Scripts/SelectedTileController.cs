@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class SelectedTileController : MonoBehaviour {
 	[Header("to link")]
-	public GameObject SelectedTilePrefab;
+	public SelectedTile SelectedTilePrefab;
 	public RectTransform buttonsRectTransform;//to check if user didn't click buttons
 
 	[Header("other")]
-	public GameObject DisplayedSelectedTile;
-	public static Vector2Int DisplayedTileIndexes;
+	public SelectedTile DisplayedSelectedTile;
 	public Sprite DisplayedSelectedTileSprite;
 	public Camera MainCamera;
 	public Sprite BackgroundSprite;
@@ -23,9 +22,9 @@ public class SelectedTileController : MonoBehaviour {
 		BaseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		//SelectedTileWidth = 128.0f;
 
-		DisplayedSelectedTile = Instantiate(SelectedTilePrefab);
+		DisplayedSelectedTile = Instantiate(SelectedTilePrefab.gameObject).GetComponent<SelectedTile>();
 		DisplayedSelectedTileSprite = DisplayedSelectedTile.GetComponent<SpriteRenderer>().sprite;
-		DisplayedSelectedTile.SetActive(false);//hide
+		DisplayedSelectedTile.gameObject.SetActive(false);//hide
 	}
 
 	public void DisplayTile(Vector2 clickPosition)
@@ -33,9 +32,9 @@ public class SelectedTileController : MonoBehaviour {
 		Vector2 worldIndexedPosition;
 		Vector2Int Indexes = BaseArrayC.GetIndexesFromWorldPosition(clickPosition, out worldIndexedPosition);
 
-		DisplayedTileIndexes = Indexes;
+		DisplayedSelectedTile.MyIndexes = Indexes;
 		DisplayedSelectedTile.transform.position = worldIndexedPosition;
-		DisplayedSelectedTile.SetActive(true);//show
+		DisplayedSelectedTile.gameObject.SetActive(true);//show
 	}
 
 	public void Input_MouseLeftUp()

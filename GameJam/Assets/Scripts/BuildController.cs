@@ -32,14 +32,14 @@ public class BuildController : MonoBehaviour {
 		{
 			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
+				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
 					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-					b.MyIndexes = SelectedTileController.DisplayedTileIndexes;
-					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes, b);
+					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
+					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
 
                     UIController.uzywac_Credits -= BuildController.BACRRACKS_COST;
@@ -61,14 +61,14 @@ public class BuildController : MonoBehaviour {
 			
 			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
+				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
                     GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
 					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes, b);
-					b.MyIndexes = SelectedTileController.DisplayedTileIndexes;
+					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
+					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
 
                     UIController.uzywac_Credits -= BuildController.FARM_COST;
