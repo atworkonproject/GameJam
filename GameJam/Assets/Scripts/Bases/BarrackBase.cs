@@ -12,8 +12,6 @@ public class BarrackBase : BaseBaseClass {
     public Sprite DevilBase;
     public Sprite AngelBase;
 
-    public bool Fallen;
-
 	// Use this for initialization
 	void Awake () {
         timeToSpawn = 0f;
@@ -33,9 +31,10 @@ public class BarrackBase : BaseBaseClass {
 			UIController.DisplayInfoForPlayer1("no money for a new soldier");
     }
 
-    public void setFallen(bool fallen)
+    public void setFallen(bool fall)
     {
-        Fallen = fallen;
-        GetComponent<SpriteRenderer>().sprite = Fallen ? DevilBase : AngelBase;
+        fallen = fall;
+        GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
     }
+
 }
