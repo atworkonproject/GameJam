@@ -8,7 +8,9 @@ public class BaseBaseClass : MonoBehaviour {
     protected bool fallen;
     bool ownerIsPlayer;
     Vector2Int position;
-	public float HP;
+
+    public int MaxHP;
+	protected int HP;
 
     public void Init(bool isFallen, bool isPlayers, Vector2Int pos)
     {
@@ -20,7 +22,6 @@ public class BaseBaseClass : MonoBehaviour {
 
     public virtual void Init2()
     {
-
     }
 
     // Use this for initialization
@@ -32,4 +33,12 @@ public class BaseBaseClass : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void Damage(int atk)
+    {
+        HP -= atk;
+
+        DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+        damBubbleController.CreateDamageBubble(transform.position, atk);
+    }
 }
