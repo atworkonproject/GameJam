@@ -12,10 +12,6 @@ public class BuildController : MonoBehaviour {
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
 
-	public static List<BaseListRow> GlobalBaseArray;//two dimmensional
-	public List<BaseListRow> GlobalBaseArrayToView;//to view in iinspector
-	public static BaseBaseClass EmptyClass;
-
 	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
@@ -34,13 +30,14 @@ public class BuildController : MonoBehaviour {
 			UIController.uzywac_Credits -= 20;
 			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y) == BuildController.EmptyClass)//if is not occupied by another building
+				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
 					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y, b);
+					b.MyIndexes = SelectedTileController.DisplayedTileIndexes;
+					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes, b);
 					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
 				}
 				else
@@ -60,13 +57,14 @@ public class BuildController : MonoBehaviour {
 			UIController.uzywac_Credits -= 30;
 			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y) == BuildController.EmptyClass)//if is not occupied by another building
+				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
 					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y, b);
+					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes, b);
+					b.MyIndexes = SelectedTileController.DisplayedTileIndexes;
 					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
 				}
 				else

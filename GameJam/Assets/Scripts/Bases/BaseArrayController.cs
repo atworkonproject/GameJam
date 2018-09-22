@@ -6,6 +6,8 @@ using UnityEngine;
 public class BaseArrayController : MonoBehaviour {
 	public static List<BaseListRow> GlobalBaseArray;//two dimmensional
 	public List<BaseListRow> GlobalBaseArrayToView;//to view in iinspector
+	public static BaseBaseClass NoBase;
+
 	public static BaseBaseClass EmptyClass;
 	SelectedTileController selectedTileC;
 	BuildController baseC;
@@ -35,7 +37,7 @@ public class BaseArrayController : MonoBehaviour {
 			for (int j = 0; j <= maxIndexY; j++)
 			{
 				BaseArrayController.GlobalBaseArray[i].row.Add(new BaseBaseClass());
-				BaseArrayController.GlobalBaseArray[i].row[j] = BuildController.EmptyClass;
+				BaseArrayController.GlobalBaseArray[i].row[j] = BaseArrayController.NoBase;
 			}
 		}
 		GlobalBaseArrayToView = BaseArrayController.GlobalBaseArray;
@@ -61,15 +63,15 @@ public class BaseArrayController : MonoBehaviour {
 		return returnedIndexes;
 	}
 
-	public static BaseBaseClass GetBase(int indexX, int indexY)
+	public static BaseBaseClass GetBase(Vector2Int indexes)
 	{
-		return BaseArrayController.GlobalBaseArray[indexX].row[indexY];
+		return BaseArrayController.GlobalBaseArray[indexes.x].row[indexes.y];
 
 	}
 
-	public static void PutBase(int indexX, int indexY, BaseBaseClass baseToPut)
+	public static void PutBase(Vector2Int indexes, BaseBaseClass baseToPut)
 	{
-		BaseArrayController.GlobalBaseArray[indexX].row[indexY] = baseToPut;
+		BaseArrayController.GlobalBaseArray[indexes.x].row[indexes.y] = baseToPut;
 	}
 	public void GetXIndexOfPositionX(float positionX)
 	{

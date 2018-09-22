@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BaseBaseClass : MonoBehaviour {
 	//my indexes
-	public int Xindex;
-	public int Yindex;
+	public Vector2Int MyIndexes;
 
 	// Use this for initialization
 	void Start () {
