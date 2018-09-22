@@ -1,1 +1,0 @@
-Assets/Radial Menu Framework/Graphics/CircleBig.png
