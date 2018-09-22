@@ -12,9 +12,9 @@ public class SoldierController : MonoBehaviour
 
     public float SightRange;
     public float MoveSpeed;
-    public float AttackRange = 0.5f;
+    private float AttackRange;
 
-    private float minimumDistance = 0.2f;
+    private float minimumDistance;
     private bool collided;
 
     public Sprite AngelSprite;
@@ -34,11 +34,12 @@ public class SoldierController : MonoBehaviour
 
     public int MaxHp;
     public int Atk;
-    public int AttackDelay;
+    public float AttackDelay;
     public int Charisma;
 
     private int Hp;
     private float lastAttack;
+    private int leaderCharisma = 7;
 
 
     // Use this for initialization
@@ -48,11 +49,13 @@ public class SoldierController : MonoBehaviour
         sprRender.sprite = Fallen ? DevilSprite : AngelSprite;
         targetPosition = transform.position;
 
+        minimumDistance = 0.1f;
+
+        AttackDelay = (float) Random.Range(2.0f, 4.0f);
 
         lastAttack = Time.time;
         Hp = MaxHp;
         Charisma = Random.Range(0, 10);
-
     }
 
     // Update is called once per frame
@@ -65,13 +68,23 @@ public class SoldierController : MonoBehaviour
 
     private void FixedUpdate()
     {
-		if (isTargetAchieved())
+
+
+
+        float dist = (transform.position - targetPosition).magnitude;
+        if (dist > AttackRange)
         {
-            doAction();
+            //Debug.Log("Poza zasiegiem ataku");
+            moveToTarget(1);
+        }
+        else if (dist < minimumDistance && targetObject != null)
+        {
+            //Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
+            moveToTarget(-1);
         }
         else
         {
-            moveToTarget(1);
+            doAction();
         }
     }
 
@@ -79,17 +92,6 @@ public class SoldierController : MonoBehaviour
     {
         
         bool tooClose = false;
-        /*
-        foreach (Collider2D sold in Soldiers)
-        {
-            Vector3 soldPos = sold.gameObject.transform.position;
-            if ((soldPos - transform.position).magnitude < AttackRange)
-            {
-                targetPosition = 2*transform.position - soldPos;
-                tooClose = true;
-            }
-        }
-        */
 
         if (targetObject == null && !tooClose)
         {
@@ -102,7 +104,7 @@ public class SoldierController : MonoBehaviour
                 foreach(GameObject friend in Friends)
                 {
                     SoldierController friendControl = friend.GetComponent<SoldierController>();
-                    if(friendControl.Charisma > Charisma && friendControl.Charisma > 7)
+                    if(friendControl.Charisma > Charisma && friendControl.Charisma > leaderCharisma)
                     {
                         targetObject = friend;
                         break;
@@ -121,7 +123,8 @@ public class SoldierController : MonoBehaviour
         if (targetObject != null)
         // Walka z przeciwnikiem
         {
-            doAttack(targetObject);
+            if(targetObject.GetComponent<SoldierController>().Fallen != Fallen)
+                doAttack(targetObject);
         }
         else
         // Ustaw nowy cel
@@ -135,6 +138,7 @@ public class SoldierController : MonoBehaviour
     void moveToTarget(int turn)
     {
         Vector3 direction = Vector3.Normalize(targetPosition - transform.position) * MoveSpeed * Time.deltaTime;
+        //Debug.Log("Chce się ruszyć do: " + turn.ToString() + " o wektor "+direction.ToString());
 
         transform.position += turn * direction;
             
@@ -175,18 +179,16 @@ public class SoldierController : MonoBehaviour
     
     bool isTargetAchieved()
     {
+        float dist = (transform.position - targetPosition).magnitude;
         if (targetObject == null)
         {
-            return (transform.position - targetPosition).magnitude < AttackRange;
+            return dist < AttackRange;
         }
         else
         {
-            bool near = (transform.position - targetPosition).magnitude < AttackRange;
-            bool distant = (transform.position - targetPosition).magnitude > minimumDistance;
-
-            //if (near) Debug.Log("Jestem blisko");
-            //if (distant) Debug.Log("Jestem daleko");
-
+            bool near = dist < AttackRange;
+            bool distant = dist > minimumDistance;
+            
             bool result = near && distant;
 
             return result;
@@ -211,8 +213,6 @@ public class SoldierController : MonoBehaviour
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
 		damBubbleController.CreateDamageBubble(transform.position, atk);
-
-        Debug.Log("Siema");
     }
 
     void checkHp()
