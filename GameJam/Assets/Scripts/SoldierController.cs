@@ -9,8 +9,8 @@ public class SoldierController : MonoBehaviour {
     public bool Fallen;
 
     public float SightRange;
-
     public float MoveSpeed;
+    public float AttackRange = 0.01f;
 
     public Sprite AngelSprite;
     public Sprite DevilSprite;
@@ -23,10 +23,15 @@ public class SoldierController : MonoBehaviour {
     public List<GameObject> Friends;
     public List<GameObject> Enemies;
 
-    public float AttackRange = 0.01f;
-    public int MaxHP;
-    public int Attack;
 
+    [Header("Battle Stats")]
+    
+    public int MaxHp;
+    public int Atk;
+    public int AttackDelay;
+
+    private int Hp;
+    private float lastAttack;
 
     // Use this for initialization
     void Start()
@@ -38,11 +43,16 @@ public class SoldierController : MonoBehaviour {
         Sight.radius = SightRange;
 
         targetPosition = transform.position;
+
+
+        lastAttack = Time.time;
+        Hp = MaxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
+        checkHp();
         setTarget();
 
         if ((transform.position - targetPosition).magnitude < AttackRange)
@@ -75,7 +85,7 @@ public class SoldierController : MonoBehaviour {
         if(targetObject != null)
         // Walka z przeciwnikiem
         {
-
+            doAttack(targetObject);
         }
         else
         // Ustaw nowy cel
@@ -125,22 +135,47 @@ public class SoldierController : MonoBehaviour {
     }
 
 
-    void setRandomTargetPosition()
-    { 
-        float radius = Random.Range(0.0f,SightRange);
-        float angle = Random.Range(0.0f, 2 * Mathf.PI);
-
-        targetPosition = transform.position + new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0.0f);
-    }
-
-
-
-
     void moveToTarget()
     {
         Vector3 direction = Vector3.Normalize(targetPosition - transform.position);
 
         transform.position += direction * MoveSpeed;
     }
+
+    void setRandomTargetPosition()
+    { 
+        float radius = Random.Range(0.0f,SightRange);
+        float angle = Random.Range(Mathf.PI/2-0.5f,Mathf.PI/2+0.5f) * (Fallen?-1:1);
+
+        targetPosition = transform.position + new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0.0f);
+    }
+
+
+
+    void doAttack(GameObject enemy)
+    {
+        SoldierController soldier = enemy.GetComponent<SoldierController>();
+
+        if (Time.time - lastAttack > AttackDelay)
+        {
+            soldier.Damage(Random.Range(0, Atk) + 1);
+            lastAttack = Time.time;
+        }
+    }
+
+    public void Damage(int atk)
+    {
+        Hp -= atk;
+    }
+
+    void checkHp()
+    {
+        if (Hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 
 }
