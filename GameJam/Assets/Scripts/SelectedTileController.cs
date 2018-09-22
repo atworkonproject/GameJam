@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectedTileController : MonoBehaviour {
 	[Header("to link")]
 	public SelectedTile SelectedTilePrefab;
 	public RectTransform buttonsRectTransform;//to check if user didn't click buttons
+	//public RectTransform TopHalfRectTransform;//to block putting selected tile onto top half
 
 	[Header("other")]
 	public SelectedTile DisplayedSelectedTile;
@@ -32,9 +34,17 @@ public class SelectedTileController : MonoBehaviour {
 		Vector2 worldIndexedPosition;
 		Vector2Int Indexes = BaseArrayC.GetIndexesFromWorldPosition(clickPosition, out worldIndexedPosition);
 
-		DisplayedSelectedTile.MyIndexes = Indexes;
-		DisplayedSelectedTile.transform.position = worldIndexedPosition;
-		DisplayedSelectedTile.gameObject.SetActive(true);//show
+		if (Indexes.y > (BaseArrayC.GlobalBaseArrayToView_X[0].row_Y.Count / 2) - 1)
+		{
+			UIController.DisplayInfoForPlayer0("build only on bottom half!");
+			GameObject.FindWithTag("TopRightHalf").GetComponent<TopRedSprite>().ShowRedHalf();
+		}
+		else
+		{
+			DisplayedSelectedTile.MyIndexes = Indexes;
+			DisplayedSelectedTile.transform.position = worldIndexedPosition;
+			DisplayedSelectedTile.gameObject.SetActive(true);//show
+		}
 	}
 
 	public void Input_MouseLeftUp()

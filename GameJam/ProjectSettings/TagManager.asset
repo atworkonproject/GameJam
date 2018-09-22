@@ -10,6 +10,7 @@ TagManager:
   - SOLDIERS
   - BASES
   - soldier
+  - TopRightHalf
   layers:
   - Default
   - TransparentFX

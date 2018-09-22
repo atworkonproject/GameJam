@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
+    <Compile Include="Assets\Scripts\TopRedSprite.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
     <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />
     <Compile Include="Assets\Scripts\UI\DamageBubble.cs" />
