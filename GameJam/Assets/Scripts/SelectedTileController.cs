@@ -7,7 +7,8 @@ public class SelectedTileController : MonoBehaviour {
 	[Header("to link")]
 	public SelectedTile SelectedTilePrefab;
 	public RectTransform buttonsRectTransform;//to check if user didn't click buttons
-	//public RectTransform TopHalfRectTransform;//to block putting selected tile onto top half
+											  //public RectTransform TopHalfRectTransform;//to block putting selected tile onto top half
+	public RadialMenuController RadialMenuC;
 
 	[Header("other")]
 	public SelectedTile DisplayedSelectedTile;
@@ -38,15 +39,21 @@ public class SelectedTileController : MonoBehaviour {
 		{
 			UIController.DisplayInfoForPlayer0("build only on bottom half!");
 			GameObject.FindWithTag("TopRightHalf").GetComponent<TopRedSprite>().ShowRedHalf();
+			HideSelectionTile();
 		}
 		else if(BaseArrayController.GetBase(Indexes) != BaseArrayController.NoBase)
 		{
 			//user clicked already occupied tile, do nothing, maybe later display upgrade option
-		}else
+			HideSelectionTile();
+		}
+		else
 		{
 			DisplayedSelectedTile.MyIndexes = Indexes;
 			DisplayedSelectedTile.transform.position = worldIndexedPosition;
 			DisplayedSelectedTile.gameObject.SetActive(true);//show
+
+			RadialMenuC.ShowMenuOnClick(Input.mousePosition);
+
 		}
 	}
 
@@ -56,5 +63,13 @@ public class SelectedTileController : MonoBehaviour {
 		{
 			DisplayTile(MainCamera.ScreenToWorldPoint(Input.mousePosition));
 		}
+		else
+			HideSelectionTile();
+	}
+
+	public void HideSelectionTile()
+	{
+		DisplayedSelectedTile.gameObject.SetActive(false);
+		RadialMenuC.gameObject.SetActive(false);
 	}
 }
