@@ -36,7 +36,7 @@ public class BuildController : MonoBehaviour {
 
 	public void BuildBarracks()
 	{
-		if (UIController.uzywac_Credits > 20)
+		if (UIController.uzywac_Credits > ConfigController.Config.BarracksBuyCost)
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
@@ -50,22 +50,22 @@ public class BuildController : MonoBehaviour {
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
 
-                    UIController.uzywac_Credits -= BuildController.BARRACKS_COST;
-                    playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
-                }
-                else
-					Debug.Log("place occupied");
+					UIController.uzywac_Credits -= BuildController.BARRACKS_COST;
+					playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
+				}
+				else
+					UIController.DisplayInfoForPlayer0("place occupied");
 			}
 			else
-				Debug.Log("no selected tile");
+				UIController.DisplayInfoForPlayer0("no selected tile");
 		}
 		else
-			Debug.Log("not enough credits");
+			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
 
 	public void BuildFarm()
 	{
-		if (UIController.uzywac_Credits > 30)
+		if (UIController.uzywac_Credits > ConfigController.Config.FarmBuyCost)
 		{
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
@@ -84,13 +84,13 @@ public class BuildController : MonoBehaviour {
                     playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
                 }
                 else
-					Debug.Log("place occupied");
+					UIController.DisplayInfoForPlayer0("place occupied");
 			}
 			else
-				Debug.Log("no selected tile");
+				UIController.DisplayInfoForPlayer0("no selected tile");
 		}
 		else
-			Debug.Log("not enough credits");
+			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
 
 	[Serializable]
