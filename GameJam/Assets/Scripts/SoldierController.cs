@@ -208,6 +208,11 @@ public class SoldierController : MonoBehaviour
     public void Damage(int atk)
     {
         Hp -= atk;
+
+        DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+		damBubbleController.CreateDamageBubble(transform.position, atk);
+
+        Debug.Log("Siema");
     }
 
     void checkHp()

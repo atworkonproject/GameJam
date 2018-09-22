@@ -13,6 +13,8 @@ public class gameController : MonoBehaviour
 
     public static UserData playerData, AIData;
 
+    public GameObject buildController;
+
     //================================ FUNCTIONS ==================================
     void Awake()
     {
@@ -34,9 +36,11 @@ public class gameController : MonoBehaviour
     void Start()
     {
         //TEMP
-        bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 2));
+        bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 1));
         playerData.NewGame(!AIIsFallen, true);
         AIData.NewGame(AIIsFallen, false);
+
+        setBuildingsFallen();
     }
 
     void Update()
@@ -65,12 +69,20 @@ public class gameController : MonoBehaviour
         }
     }
 
+    public void setBuildingsFallen()
+    {
+        BuildController bc = buildController.GetComponent<BuildController>();
+        bc.playerFallen = playerData.fallen;
+    }
+
     public void Win()
     {
         //swap sides and play again
         CleanStage();
         playerData.NextLevel();
         AIData.NextLevel();
+
+        setBuildingsFallen();
     }
 
     public void GameOver()
