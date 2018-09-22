@@ -9,6 +9,7 @@ public class SoldierController : MonoBehaviour {
     public bool Fallen;
 
     public float SightRange;
+
     public float MoveSpeed;
 
     public Sprite AngelSprite;
@@ -17,17 +18,20 @@ public class SoldierController : MonoBehaviour {
     CircleCollider2D Sight;
 
     public Vector3 targetPosition;
+    private GameObject targetObject;
 
-    private List<GameObject> Friends;
-    private List<GameObject> Enemies;
+    public List<GameObject> Friends;
+    public List<GameObject> Enemies;
 
-    private float positionResolution = 0.01f;
+    public float AttackRange = 0.01f;
+    public int MaxHP;
+    public int Attack;
 
-    //public Vector3 myPos;
 
     // Use this for initialization
     void Start()
     {
+        targetObject = null;
         Sight = GetComponent<CircleCollider2D>();
         sprRender.sprite = Fallen ? DevilSprite : AngelSprite;
 
@@ -39,40 +43,98 @@ public class SoldierController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if ( (transform.position - targetPosition).magnitude < positionResolution)
+        setTarget();
+
+        if ((transform.position - targetPosition).magnitude < AttackRange)
         {
-            setNewTargetPosition();
+            doAction();
         }
         else
         {
             moveToTarget();
         }
-        //myPos = transform.position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void setTarget()
     {
-        SoldierController other = collision.collider.gameObject.GetComponent<SoldierController>();
-        if(other.Fallen != Fallen)
-        // Spotkano Wroga
+        if (targetObject == null)
+        {
+            if (Enemies.Count > 0)
+            {
+                targetObject = Enemies[Random.Range(0, Enemies.Count)];
+            }
+        }
+        else
+        {
+            targetPosition = targetObject.transform.position;
+        }
+    }
+
+    void doAction()
+    {
+        if(targetObject != null)
+        // Walka z przeciwnikiem
         {
 
         }
         else
-        // Spotkano Sprzymierzeńca
+        // Ustaw nowy cel
         {
-
+            setRandomTargetPosition();
         }
     }
 
-    void setNewTargetPosition()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
+        GameObject otherObj = collider.transform.parent.gameObject;
+        SoldierController other = otherObj.GetComponent<SoldierController>();
+
+        if (!otherObj.Equals(gameObject))
+        {
+            if (other.Fallen != Fallen)
+            // Spotkano Wroga
+            {
+                Enemies.Add(other.gameObject);
+            }
+            else
+            // Spotkano Sprzymierzeńca
+            {
+                Friends.Add(other.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        GameObject otherObj = collider.transform.parent.gameObject;
+        SoldierController other = otherObj.GetComponent<SoldierController>();
+
+        if (!otherObj.Equals(gameObject))
+        {
+            if (other.Fallen != Fallen)
+            // Spotkano Wroga
+            {
+                Enemies.Remove(other.gameObject);
+            }
+            else
+            // Spotkano Sprzymierzeńca
+            {
+                Friends.Remove(other.gameObject);
+            }
+        }
+    }
+
+
+    void setRandomTargetPosition()
+    { 
         float radius = Random.Range(0.0f,SightRange);
         float angle = Random.Range(0.0f, 2 * Mathf.PI);
 
         targetPosition = transform.position + new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0.0f);
-
     }
+
+
+
 
     void moveToTarget()
     {
