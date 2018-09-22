@@ -43,12 +43,14 @@ public class BaseArrayController : MonoBehaviour {
 		GlobalBaseArrayToView_X = BaseArrayController.GlobalBaseArray;
 	}
 
-	public Vector2Int GetIndexesFromWorldPosition(Vector2 position, out Vector2 worldIndexedPosition)
+	public Vector2Int GetIndexesFromWorldPosition(Vector2 position, out Vector2 returnedWorldIndexedPosition)
 	{
 		Vector2Int returnedIndexes;
 		float selectedTileWidth = selectedTileC.DisplayedSelectedTileSprite.bounds.size.x;
 		float selectedTileHeight = selectedTileC.DisplayedSelectedTileSprite.bounds.size.y;
 
+		position.x -= (selectedTileWidth / 2.0f);//na chama zeby zaczynal od poczatku nie od srodka BackgroundSprite
+		position.y -= (selectedTileHeight / 2.0f);
 
 		float xIndex = (position.x - selectedTileC.BackgroundSprite.bounds.min.x) / selectedTileWidth;//width from left edge of backgroundSprite to click, we divide it by width of selectedTile
 		int returnedIndexX = Mathf.RoundToInt(xIndex);
@@ -57,7 +59,7 @@ public class BaseArrayController : MonoBehaviour {
 		int returnedIndexY = Mathf.RoundToInt(yIndex);
 
 		returnedIndexes = new Vector2Int(returnedIndexX, returnedIndexY);
-		worldIndexedPosition = getWorldPositionForIndexes(returnedIndexes);
+		returnedWorldIndexedPosition = getWorldPositionForIndexes(returnedIndexes);
 
 		return returnedIndexes;
 	}
@@ -67,8 +69,9 @@ public class BaseArrayController : MonoBehaviour {
 		float selectedTileWidth = selectedTileC.DisplayedSelectedTileSprite.bounds.size.x;
 		float selectedTileHeight = selectedTileC.DisplayedSelectedTileSprite.bounds.size.y;
 
-		float worldX = selectedTileC.BackgroundSprite.bounds.min.x + (indexes.x * selectedTileWidth);
-		float worldY = selectedTileC.BackgroundSprite.bounds.min.y + (indexes.y * selectedTileHeight);
+		float worldX = selectedTileC.BackgroundSprite.bounds.min.x + (indexes.x * selectedTileWidth) + (selectedTileWidth/2.0f);//(selectedTileWidth/2.0f) na chama zeby zaczynal od poczatku BackgroundSprite nie od srodka
+		float worldY = selectedTileC.BackgroundSprite.bounds.min.y + (indexes.y * selectedTileHeight) + (selectedTileHeight / 2.0f);
+
 
 		return new Vector2(worldX, worldY);
 	}

@@ -1335,7 +1335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499b4877082345e40991bdcdc81e8dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalBaseArrayToView: []
+  GlobalBaseArrayToView_X: []
 --- !u!114 &1910513590
 MonoBehaviour:
   m_ObjectHideFlags: 0
