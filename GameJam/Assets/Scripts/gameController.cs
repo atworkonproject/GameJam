@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour
 {
@@ -50,6 +51,8 @@ public class gameController : MonoBehaviour
          AIData.manualUpdate();
         if (Input.GetKeyDown("r"))//temp
             Win();
+        if (Input.GetKeyDown("g"))//temp
+            GameOver();
     }
 
     private void CleanStage()
@@ -76,6 +79,7 @@ public class gameController : MonoBehaviour
     public void GameOver()
     {
         //change scene
+        SceneManager.LoadScene(2);
     }
 
 }
