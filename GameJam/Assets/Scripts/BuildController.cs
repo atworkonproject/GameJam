@@ -9,7 +9,8 @@ public class BuildController : MonoBehaviour {
 	public FarmBase FarmBasePrefab;
 	[Header("other")]
 	public Sprite BackgroundSprite;
-	SelectedTileController selectedTileC;
+	public SelectedTileController selectedTileC;
+	public BaseArrayController baseArrayC;
 
 	public static List<BaseListRow> GlobalBaseArray;//two dimmensional
 	public List<BaseListRow> GlobalBaseArrayToView;//to view in iinspector
@@ -17,23 +18,8 @@ public class BuildController : MonoBehaviour {
 
 	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
+		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
-		int maxIndexX = Mathf.CeilToInt(BackgroundSprite.bounds.size.x / selectedTileC.DisplayedSelectedTileSprite.bounds.size.x);
-		int maxIndexY = Mathf.CeilToInt(BackgroundSprite.bounds.size.y / selectedTileC.DisplayedSelectedTileSprite.bounds.size.y);
-
-		//initialize
-		BuildController.GlobalBaseArray = new List<BaseListRow>();
-		for (int i = 0; i <= maxIndexX; i++)
-		{
-			BuildController.GlobalBaseArray.Add(new BaseListRow());
-			BuildController.GlobalBaseArray[i].row = new List<BaseBaseClass>();
-			for(int j = 0; j <= maxIndexY; j++)
-			{
-				BuildController.GlobalBaseArray[i].row.Add(new BaseBaseClass());
-				BuildController.GlobalBaseArray[i].row[j] = BuildController.EmptyClass;
-			}
-		}
-		GlobalBaseArrayToView = BuildController.GlobalBaseArray;
 	}
 	
 	// Update is called once per frame
@@ -43,41 +29,54 @@ public class BuildController : MonoBehaviour {
 
 	public void BuildBarracks()
 	{
-		if (selectedTileC.DisplayedSelectedTile != null)
+		if (UIController.uzywac_Credits > 20)
 		{
-			if (BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] == BuildController.EmptyClass)//if is not occupied by another building
+			UIController.uzywac_Credits -= 20;
+			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				Vector2 position = selectedTileC.DisplayedSelectedTile.transform.position;
-				GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
-				go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
-				BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-				BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] = b;
-				PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
+				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y) == BuildController.EmptyClass)//if is not occupied by another building
+				{
+					GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
+					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
+					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
+					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y, b);
+					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
+				}
+				else
+					Debug.Log("place occupied");
 			}
 			else
-				Debug.Log("place occupied");
+				Debug.Log("no selected tile");
 		}
 		else
-			Debug.Log("no selected tile");
+			Debug.Log("not enough credits");
 	}
+
 	public void BuildFarm()
 	{
-		if (selectedTileC.DisplayedSelectedTile != null)
+		if (UIController.uzywac_Credits > 30)
 		{
-			if (BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] == BuildController.EmptyClass)
+			UIController.uzywac_Credits -= 30;
+			if (selectedTileC.DisplayedSelectedTile != null)
 			{
-				Vector2 position = selectedTileC.DisplayedSelectedTile.transform.position;
-				GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
-                go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
-				BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-				BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] = b;
-				PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
+				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y) == BuildController.EmptyClass)//if is not occupied by another building
+				{
+					GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
+					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
+					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
+					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes.x, SelectedTileController.DisplayedTileIndexes.y, b);
+					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
+				}
+				else
+					Debug.Log("place occupied");
 			}
 			else
-				Debug.Log("place occupied");
+				Debug.Log("no selected tile");
 		}
 		else
-			Debug.Log("no selected tile");
+			Debug.Log("not enough credits");
 	}
 
 	[Serializable]

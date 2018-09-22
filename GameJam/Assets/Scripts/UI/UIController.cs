@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour {
 
 	void Start () {
 		nieUzywac_CreditsTextStatic = CreditsText;
-		uzywac_Credits = 0;
+		uzywac_Credits = 100;
 	}
 	
 	void Update () {

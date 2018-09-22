@@ -9,17 +9,18 @@ public class SelectedTileController : MonoBehaviour {
 
 	[Header("other")]
 	public GameObject DisplayedSelectedTile;
-	public static int DisplayedTileIndexX;
-	public static int DisplayedTileIndexY;
+	public static Vector2Int DisplayedTileIndexes;
 	public Sprite DisplayedSelectedTileSprite;
 	public Camera MainCamera;
 	public Sprite BackgroundSprite;
+	public BaseArrayController BaseArrayC;
 	//public float SelectedTileWidth;//the bigger the selected size bigger
 
 	void Start () {
 		DisplayedSelectedTile = null;
 		MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
+		BaseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		//SelectedTileWidth = 128.0f;
 
 		DisplayedSelectedTile = Instantiate(SelectedTilePrefab);
@@ -29,18 +30,11 @@ public class SelectedTileController : MonoBehaviour {
 
 	public void DisplayTile(Vector2 clickPosition)
 	{
-		float selectedTileWidth = DisplayedSelectedTileSprite.bounds.size.x;
-		float selectedTileHeight = DisplayedSelectedTileSprite.bounds.size.y;
+		Vector2 worldIndexedPosition;
+		Vector2Int Indexes = BaseArrayC.GetIndexesFromWorldPosition(clickPosition, out worldIndexedPosition);
 
-		float xIndex = (clickPosition.x - BackgroundSprite.bounds.min.x) / selectedTileWidth;//width from left edge of backgroundSprite to click, we divide it by width of selectedTile
-		SelectedTileController.DisplayedTileIndexX = Mathf.RoundToInt(xIndex);
-		float resultingX = BackgroundSprite.bounds.min.x + (DisplayedTileIndexX * selectedTileWidth);
-
-		float yIndex = (clickPosition.y - BackgroundSprite.bounds.min.y) / selectedTileHeight;
-		SelectedTileController.DisplayedTileIndexY = Mathf.RoundToInt(yIndex);
-		float resultingY = BackgroundSprite.bounds.min.y + (DisplayedTileIndexY * selectedTileHeight);
-
-		DisplayedSelectedTile.transform.position = new Vector2(resultingX, resultingY);
+		DisplayedTileIndexes = Indexes;
+		DisplayedSelectedTile.transform.position = worldIndexedPosition;
 		DisplayedSelectedTile.SetActive(true);//show
 	}
 
