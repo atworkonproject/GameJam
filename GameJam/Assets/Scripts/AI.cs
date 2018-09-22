@@ -88,4 +88,5 @@ public class AI
 
         return pos;//free pos
     }
+
 }
