@@ -11,6 +11,7 @@ TagManager:
   - BASES
   - soldier
   - TopRightHalf
+  - DamageBubble
   layers:
   - Default
   - TransparentFX

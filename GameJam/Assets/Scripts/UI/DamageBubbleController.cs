@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DamageBubbleController : MonoBehaviour {
-	[Header("ToLink")]
-	public Canvas DamageBubbleCanvas;
-	[Header("other")]
+	//[Header("ToLink")]
+	//public Canvas DamageBubbleCanvas;
+	//[Header("other")]
 	public DamageBubble FirstDamageBubble;
 
 	// Use this for initialization
 	void Start () {
-		FirstDamageBubble = DamageBubbleCanvas.GetComponentInChildren<DamageBubble>();
+		FirstDamageBubble = GameObject.FindWithTag("DamageBubble").GetComponent<DamageBubble>();//DamageBubbleCanvas.GetComponentInChildren<DamageBubble>();
 		FirstDamageBubble.gameObject.SetActive(false);//hide
 	}
 	
@@ -37,19 +37,19 @@ public class DamageBubbleController : MonoBehaviour {
 		createdDamageBubble.name = "-" + damagePositive.ToString();
 		if (isPositive)
 		{
-			createdDamageBubble.GetComponent<Text>().text = damagePositive.ToString();
-			createdDamageBubble.GetComponent<Text>().color = Color.green;
+			createdDamageBubble.GetComponent<TextMesh>().text = damagePositive.ToString();
+			createdDamageBubble.GetComponent<TextMesh>().color = Color.green;
 		}
 		else
 		{
-			createdDamageBubble.GetComponent<Text>().text = "-" + damagePositive;
-			createdDamageBubble.GetComponent<Text>().color = Color.red;
+			createdDamageBubble.GetComponent<TextMesh>().text = "-" + damagePositive;
+			createdDamageBubble.GetComponent<TextMesh>().color = Color.red;
 		}
 		createdDamageBubble.gameObject.SetActive(true);
-		createdDamageBubble.transform.SetParent(DamageBubbleCanvas.transform);
+		createdDamageBubble.transform.SetParent(this.transform);
 
-		GameObject camGO = GameObject.FindWithTag("MainCamera");
-		Vector3 screenPoint = camGO.GetComponent<Camera>().WorldToScreenPoint(worldPosition);
-		createdDamageBubble.transform.position = screenPoint;
+		//GameObject camGO = GameObject.FindWithTag("MainCamera");
+		//Vector3 screenPoint = camGO.GetComponent<Camera>().WorldToScreenPoint(worldPosition);
+		createdDamageBubble.transform.position = worldPosition;
 	}
 }
