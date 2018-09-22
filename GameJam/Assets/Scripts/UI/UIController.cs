@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour {
 		set
 		{
 			UIController.nieUzywac_Credits = value;
-			UIController.nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(value).ToString();
+			UIController.nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(nieUzywac_Credits).ToString();
 		}
 	}
 
@@ -30,6 +30,8 @@ public class UIController : MonoBehaviour {
 		foreach (FarmBase farm in PlayerBases.PlayerFarmsStatic)
 			creditIncrement += 10*Time.deltaTime;//10 for a farm
 		uzywac_Credits += creditIncrement;
-        nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(uzywac_Credits).ToString();
+		Debug.Log(ConfigController.Config.maxPlayerCredits);
+
+		uzywac_Credits = Mathf.Clamp(uzywac_Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
 	}
 }

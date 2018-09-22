@@ -67,7 +67,10 @@
     <Compile Include="Assets\Scripts\Bases\FarmBase.cs" />
     <Compile Include="Assets\Scripts\BuildController.cs" />
     <Compile Include="Assets\Scripts\cameraScript.cs" />
+    <Compile Include="Assets\Scripts\ConfigController.cs" />
+    <Compile Include="Assets\Scripts\ConfigurationObject.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
+    <Compile Include="Assets\Scripts\gameplayRecorder.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\PlayerBases.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
