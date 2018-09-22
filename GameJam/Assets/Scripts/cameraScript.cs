@@ -26,7 +26,7 @@ public class cameraScript : MonoBehaviour {
         mouseLastPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         moveVector = Vector3.zero;
         minZoom = 0.2f;
-        scrollSensitivity = 1.4f;
+        scrollSensitivity = 1.0f;
 
         SetZoomToWholeMap();
     }

@@ -29,7 +29,7 @@ public class gameController : MonoBehaviour
             return;
         }
         _instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
         Init();
     }
@@ -120,6 +120,7 @@ public class gameController : MonoBehaviour
 
     public void GameOver()
     {
+        CleanStage();
         //change scene
         SceneManager.LoadScene(2);
     }

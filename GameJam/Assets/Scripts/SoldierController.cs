@@ -53,7 +53,7 @@ public class SoldierController : MonoBehaviour
     public float AttackDelay;
     public int Charisma;
 
-    private int Hp;
+    public int Hp;
     private float lastAttack;
     private int leaderCharisma = 7;
 
@@ -136,7 +136,8 @@ public class SoldierController : MonoBehaviour
 				}
 			}
 
-        
+        if (outOfBounds())
+            Damage(1);
     }
 
     void setTarget()
@@ -283,6 +284,19 @@ public class SoldierController : MonoBehaviour
         }
     }
 
+    public bool outOfBounds()
+    {
+        GameObject bg = GameObject.FindWithTag("BackgroundSprite");
+        Sprite bgSpr = bg.GetComponent<SpriteRenderer>().sprite;
+
+        //Debug.Log(transform.position.y + " < " + (bg.transform.position.y - bgSpr.rect.height / 200).ToString());
+
+
+        return (transform.position.x < bg.transform.position.x - bgSpr.rect.width / 200 ||
+            transform.position.x > bg.transform.position.x + bgSpr.rect.width / 200 ||
+            transform.position.y < bg.transform.position.y - bgSpr.rect.height / 200 ||
+            transform.position.y > bg.transform.position.y + bgSpr.rect.height / 200);
+    }
 
 
 }

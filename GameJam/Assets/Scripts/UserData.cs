@@ -62,9 +62,8 @@ public class UserData : MonoBehaviour
         Credits += creditIncrement;
 
 
-        income = creditIncrement;
-        outcome = ConfigController.Config.CostForSoldier / ConfigController.Config.BarrackSpawnEverySec * Barracks.Count * Time.deltaTime;
-
+        income = ConfigController.Config.FarmEarn / ConfigController.Config.FarmEarnPeriod * Farms.Count;
+        outcome = ConfigController.Config.CostForSoldier / ConfigController.Config.BarrackSpawnEverySec * Barracks.Count;
 
         Credits = Mathf.Clamp(gameController.playerData.Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
     }

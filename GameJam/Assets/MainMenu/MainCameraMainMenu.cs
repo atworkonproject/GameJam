@@ -17,7 +17,7 @@ public class MainCameraMainMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.position = new Vector3(transform.position.x,
-			Mathf.Lerp(transform.position.y, 0.0f, Time.deltaTime * Speed),//going up to y=0.0f;
+			Mathf.Lerp(transform.position.y, 1.0f, Time.deltaTime * Speed),//going up to y=0.0f;
 			transform.position.z);
 	}
 
