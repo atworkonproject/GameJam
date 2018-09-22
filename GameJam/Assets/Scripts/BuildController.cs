@@ -12,6 +12,9 @@ public class BuildController : MonoBehaviour {
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
 
+    public static int FARM_COST = 30;
+    public static int BACRRACKS_COST = 20;
+
 	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
@@ -27,7 +30,6 @@ public class BuildController : MonoBehaviour {
 	{
 		if (UIController.uzywac_Credits > 20)
 		{
-			UIController.uzywac_Credits -= 20;
 			if (selectedTileC.DisplayedSelectedTile != null)
 			{
 				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
@@ -39,8 +41,10 @@ public class BuildController : MonoBehaviour {
 					b.MyIndexes = SelectedTileController.DisplayedTileIndexes;
 					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes, b);
 					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
-				}
-				else
+
+                    UIController.uzywac_Credits -= BuildController.BACRRACKS_COST;
+                }
+                else
 					Debug.Log("place occupied");
 			}
 			else
@@ -54,20 +58,22 @@ public class BuildController : MonoBehaviour {
 	{
 		if (UIController.uzywac_Credits > 30)
 		{
-			UIController.uzywac_Credits -= 30;
+			
 			if (selectedTileC.DisplayedSelectedTile != null)
 			{
 				if (BaseArrayController.GetBase(SelectedTileController.DisplayedTileIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
-					GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+                    GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
 					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 					BaseArrayController.PutBase(SelectedTileController.DisplayedTileIndexes, b);
 					b.MyIndexes = SelectedTileController.DisplayedTileIndexes;
 					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
-				}
-				else
+
+                    UIController.uzywac_Credits -= BuildController.FARM_COST;
+                }
+                else
 					Debug.Log("place occupied");
 			}
 			else
