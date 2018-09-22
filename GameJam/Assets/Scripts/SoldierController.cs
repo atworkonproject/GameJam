@@ -12,7 +12,10 @@ public class SoldierController : MonoBehaviour
 
     public float SightRange;
     public float MoveSpeed;
-    public float AttackRange = 0.01f;
+    public float AttackRange = 0.5f;
+
+    private float minimumDistance = 0.2f;
+    private bool collided;
 
     public Sprite AngelSprite;
     public Sprite DevilSprite;
@@ -53,7 +56,7 @@ public class SoldierController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkNear();
+        checkNearSoldiers();
 
         checkHp();
         setTarget();
@@ -61,13 +64,13 @@ public class SoldierController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((transform.position - targetPosition).magnitude < AttackRange)
+        if (isTargetAchieved())
         {
             doAction();
         }
         else
         {
-            moveToTarget();
+            moveToTarget(1);
         }
     }
 
@@ -102,10 +105,12 @@ public class SoldierController : MonoBehaviour
 
 
 
-    void moveToTarget()
+    void moveToTarget(int turn)
     {
-        Vector3 direction = Vector3.Normalize(targetPosition - transform.position);
-        transform.position += direction * MoveSpeed * Time.deltaTime;
+        Vector3 direction = Vector3.Normalize(targetPosition - transform.position) * MoveSpeed * Time.deltaTime;
+
+        transform.position += turn * direction;
+            
     }
 
     void setRandomTargetPosition()
@@ -116,16 +121,45 @@ public class SoldierController : MonoBehaviour
         targetPosition = transform.position + new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0.0f);
     }
 
-    void checkNear()
+    void checkNearSoldiers()
     {
+        Friends.Clear();
+        Enemies.Clear();
+
         Soldiers = Physics2D.OverlapCircleAll(transform.position, SightRange, soldierLayer);
 
-        /*
-        foreach (Collider2D in Soldiers)
+        foreach (Collider2D item in Soldiers)
         {
+            GameObject obj = item.gameObject;
+            SoldierController soldier = obj.GetComponent<SoldierController>();
+            if (soldier.Fallen == Fallen)
+            {
+                if(!obj.Equals(gameObject))
+                    Friends.Add(obj);
+            }
+            else
+            {
+                Enemies.Add(obj);
+            }
 
-        }*/
+        }
 
+    }
+    
+    bool isTargetAchieved()
+    {
+        if (targetObject == null)
+        {
+            Debug.Log("Jestem u celu");
+            return (transform.position - targetPosition).magnitude < AttackRange;
+        }
+        else
+        {
+            Debug.Log("Idę na wroga. Odl = "+ (transform.position - targetPosition).magnitude);
+
+            bool result = ((transform.position - targetPosition).magnitude < AttackRange) && ((transform.position - targetPosition).magnitude > minimumDistance);
+            return result;
+        }
     }
 
 
