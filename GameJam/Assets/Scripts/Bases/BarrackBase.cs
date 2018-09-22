@@ -20,11 +20,11 @@ public class BarrackBase : BaseBaseClass {
 	// Update is called once per frame
 	void Update () {
         timeToSpawn += Time.deltaTime;
-        if (timeToSpawn >= spawnEverySec && UIController.uzywac_Credits >= COST_FOR_SOLDIER)
+        if (timeToSpawn >= spawnEverySec && UIController.player_Credits >= COST_FOR_SOLDIER)
         {
             timeToSpawn = 0;
             GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, bounds.size.y, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-            UIController.uzywac_Credits -= COST_FOR_SOLDIER;
+            UIController.player_Credits -= COST_FOR_SOLDIER;
         }
     }
 }

@@ -31,12 +31,13 @@ public class BuildController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (Input.GetKeyDown("r"))
+            CleanAll();
 	}
 
 	public void BuildBarracks()
 	{
-		if (UIController.uzywac_Credits > 20)
+		if (UIController.player_Credits > 20)
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
@@ -48,9 +49,9 @@ public class BuildController : MonoBehaviour {
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
-					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
+					Bases.PlayerBarracksStatic.Add((BarrackBase)b);
 
-                    UIController.uzywac_Credits -= BuildController.BARRACKS_COST;
+                    UIController.player_Credits -= BuildController.BARRACKS_COST;
                     playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
                 }
                 else
@@ -65,7 +66,7 @@ public class BuildController : MonoBehaviour {
 
 	public void BuildFarm()
 	{
-		if (UIController.uzywac_Credits > 30)
+		if (UIController.player_Credits > 30)
 		{
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
@@ -78,9 +79,9 @@ public class BuildController : MonoBehaviour {
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
-					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
+					Bases.PlayerFarmsStatic.Add((FarmBase)b);
 
-                    UIController.uzywac_Credits -= BuildController.FARM_COST;
+                    UIController.player_Credits -= BuildController.FARM_COST;
                     playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
                 }
                 else
@@ -98,4 +99,10 @@ public class BuildController : MonoBehaviour {
 	{
 		public List<BaseBaseClass> row;
 	}
+
+    public void CleanAll()
+    {
+        baseArrayC.DestroyAllBases();
+        Bases.DestroyAllBases();
+    }
 }

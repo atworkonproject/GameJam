@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameplayRecorder : MonoBehaviour {
+public class gameplayRecorder {
 
     public enum ACTION_TYPE
     {

@@ -193,6 +193,7 @@ public class gameController : MonoBehaviour
 
     private void CleanStage()
     {
+        GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().CleanAll();
     }
 
     public void GameOver()

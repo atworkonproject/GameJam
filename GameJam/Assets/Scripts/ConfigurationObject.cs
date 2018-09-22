@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//to access use static field ConfigurationController.Configutation
+//to access use static field ConfigController.Configutation
 
 [CreateAssetMenu(menuName = "My Assets/ConfigurationObject")]
 public class ConfigurationObject : ScriptableObject {

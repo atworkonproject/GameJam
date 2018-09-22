@@ -7,7 +7,7 @@ public class UIController : MonoBehaviour {
 	public Text CreditsText;
 	public static Text nieUzywac_CreditsTextStatic;//pierdole robie statiki
 	public static float nieUzywac_Credits;
-	public static float uzywac_Credits
+	public static float player_Credits
 	{
 		get
 		{
@@ -19,19 +19,25 @@ public class UIController : MonoBehaviour {
 			UIController.nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(nieUzywac_Credits).ToString();
 		}
 	}
+    public static float AI_Credits;
 
 	void Start () {
 		nieUzywac_CreditsTextStatic = CreditsText;
-		uzywac_Credits = 100;
-	}
+		player_Credits = ConfigController.Config.maxPlayerCredits;
+        AI_Credits = ConfigController.Config.maxPlayerCredits;
+    }
 	
 	void Update () {
 		float creditIncrement = 0;
-		foreach (FarmBase farm in PlayerBases.PlayerFarmsStatic)
+		foreach (FarmBase farm in Bases.PlayerFarmsStatic)
 			creditIncrement += 10*Time.deltaTime;//10 for a farm
-		uzywac_Credits += creditIncrement;
-		Debug.Log(ConfigController.Config.maxPlayerCredits);
+		player_Credits += creditIncrement;
+        player_Credits = Mathf.Clamp(player_Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
 
-		uzywac_Credits = Mathf.Clamp(uzywac_Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
-	}
+        creditIncrement = 0;
+        foreach (FarmBase farm in Bases.OpponentFarmsStatic)
+            creditIncrement += 10 * Time.deltaTime;//10 for a farm
+        AI_Credits += creditIncrement;
+        AI_Credits = Mathf.Clamp(AI_Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
+    }
 }
