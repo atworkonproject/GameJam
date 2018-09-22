@@ -17,7 +17,6 @@ public class BarrackBase : BaseBaseClass {
 	// Use this for initialization
 	void Awake () {
         timeToSpawn = 0f;
-        GetComponent<SpriteRenderer>().sprite = Fallen ? DevilBase : AngelBase;
     }
 
     // Update is called once per frame
@@ -32,5 +31,11 @@ public class BarrackBase : BaseBaseClass {
 		}
 		else
 			UIController.DisplayInfoForPlayer1("no money for a new soldier");
+    }
+
+    public void setFallen(bool fallen)
+    {
+        Fallen = fallen;
+        GetComponent<SpriteRenderer>().sprite = Fallen ? DevilBase : AngelBase;
     }
 }
