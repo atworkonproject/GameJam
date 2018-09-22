@@ -11,8 +11,8 @@ public class MainCameraMainMenu : MonoBehaviour {
 	public float Speed = 0.5f;
 	// Use this for initialization
 	void Start () {
-		//MainCamera = GetComponent<Camera>();
-	}
+        //MainCamera = GetComponent<Camera>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,7 +28,7 @@ public class MainCameraMainMenu : MonoBehaviour {
 
 	public void OnExitClicked()
 	{
-		Application.Quit();
+        Application.Quit();
 	}
 
 	public void OnCreditsClicked()

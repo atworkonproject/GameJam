@@ -23,7 +23,7 @@ public class MainCameraGameOver : MonoBehaviour {
 	}
 	public void OnRestartButtonClicked()
 	{
-		SceneManager.LoadScene(0);
+        Initiate.Fade("MainMenu", new Color(0, 0, 0), 0.7f);
 	}
 
 }
