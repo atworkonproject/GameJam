@@ -21,8 +21,8 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Start () {
-		UIController.nieUzywac_CreditsTextStatic = CreditsText;
-		UIController.uzywac_Credits = 0;
+		nieUzywac_CreditsTextStatic = CreditsText;
+		uzywac_Credits = 0;
 	}
 	
 	void Update () {
@@ -32,6 +32,6 @@ public class UIController : MonoBehaviour {
 		foreach (BarrackBase barrack in PlayerBases.PlayerBarracksStatic)
 			creditIncrement -= 1 * Time.deltaTime;//1 to maintain barracks
 		uzywac_Credits += creditIncrement;
-		Mathf.Clamp(uzywac_Credits, 0, 200);
+        nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(uzywac_Credits).ToString();
 	}
 }
