@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierController : MonoBehaviour {
-
+public class SoldierController : MonoBehaviour
+{
     public SpriteRenderer sprRender;
+
+    public LayerMask soldierLayer;
 
     public bool Fallen;
 
@@ -22,26 +24,25 @@ public class SoldierController : MonoBehaviour {
 
     public List<GameObject> Friends;
     public List<GameObject> Enemies;
+    public Collider2D[] Soldiers;
 
 
     [Header("Battle Stats")]
-    
+
     public int MaxHp;
     public int Atk;
     public int AttackDelay;
+    public int Charisma;
 
     private int Hp;
     private float lastAttack;
+
 
     // Use this for initialization
     void Start()
     {
         targetObject = null;
-        Sight = GetComponent<CircleCollider2D>();
         sprRender.sprite = Fallen ? DevilSprite : AngelSprite;
-
-        Sight.radius = SightRange;
-
         targetPosition = transform.position;
 
 
@@ -52,9 +53,14 @@ public class SoldierController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        checkNear();
+
         checkHp();
         setTarget();
+    }
 
+    private void FixedUpdate()
+    {
         if ((transform.position - targetPosition).magnitude < AttackRange)
         {
             doAction();
@@ -82,7 +88,7 @@ public class SoldierController : MonoBehaviour {
 
     void doAction()
     {
-        if(targetObject != null)
+        if (targetObject != null)
         // Walka z przeciwnikiem
         {
             doAttack(targetObject);
@@ -94,62 +100,27 @@ public class SoldierController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        GameObject otherObj = collider.transform.parent.gameObject;
-        SoldierController other = otherObj.GetComponent<SoldierController>();
-
-        if (!otherObj.Equals(gameObject))
-        {
-            if (other.Fallen != Fallen)
-            // Spotkano Wroga
-            {
-                Enemies.Add(other.gameObject);
-            }
-            else
-            // Spotkano Sprzymierzeńca
-            {
-                Friends.Add(other.gameObject);
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        GameObject otherObj = collider.transform.parent.gameObject;
-        SoldierController other = otherObj.GetComponent<SoldierController>();
-
-        if (!otherObj.Equals(gameObject))
-        {
-            if (other.Fallen != Fallen)
-            // Spotkano Wroga
-            {
-                Enemies.Remove(other.gameObject);
-            }
-            else
-            // Spotkano Sprzymierzeńca
-            {
-                Friends.Remove(other.gameObject);
-            }
-        }
-    }
 
 
     void moveToTarget()
     {
         Vector3 direction = Vector3.Normalize(targetPosition - transform.position);
-
-        transform.position += direction * MoveSpeed;
+        transform.position += direction * MoveSpeed * Time.deltaTime;
     }
 
     void setRandomTargetPosition()
-    { 
-        float radius = Random.Range(0.0f,SightRange);
-        float angle = Random.Range(Mathf.PI/2-0.5f,Mathf.PI/2+0.5f) * (Fallen?-1:1);
+    {
+        float radius = Random.Range(0.0f, SightRange);
+        float angle = Random.Range(Mathf.PI / 2 - 0.5f, Mathf.PI / 2 + 0.5f) * (Fallen ? -1 : 1);
 
         targetPosition = transform.position + new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0.0f);
     }
 
+    void checkNear()
+    {
+        Soldiers = Physics2D.OverlapCircleAll(transform.position, SightRange, soldierLayer);
+        Debug.Log(LayerMask.NameToLayer("Soldiers"));
+    }
 
 
     void doAttack(GameObject enemy)
