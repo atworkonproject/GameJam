@@ -54,7 +54,7 @@ public class BuildController : MonoBehaviour {
                     builder.Credits -= BuildController.BARRACKS_COST;
 					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
 
-					selectedTileC.DisplayedSelectedTile.gameObject.SetActive(false);
+					selectedTileC.HideSelectionTile();
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -106,7 +106,7 @@ public class BuildController : MonoBehaviour {
                     builder.Credits -= BuildController.FARM_COST;
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
 
-					selectedTileC.DisplayedSelectedTile.gameObject.SetActive(false);
+					selectedTileC.HideSelectionTile();
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
