@@ -65,7 +65,7 @@ public class SoldierController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isTargetAchieved())
+		if (isTargetAchieved())
         {
             doAction();
         }

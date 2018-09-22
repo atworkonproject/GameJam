@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
@@ -37,13 +38,16 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Update () {
-        if (InfoForPlayerText0.gameObject.activeSelf)
-			if (Time.timeSinceLevelLoad - InfoForPlayer_LastDisplayedTime0 > ConfigController.Config.InfoTextDisplayTime)
-				InfoForPlayerText0.gameObject.SetActive(false);//hide
-		if (InfoForPlayerText1.gameObject.activeSelf)
-			if (Time.timeSinceLevelLoad - InfoForPlayer_LastDisplayedTime1 > ConfigController.Config.InfoTextDisplayTime)
-				InfoForPlayerText1.gameObject.SetActive(false);//hide
+		if (SceneManager.GetActiveScene().buildIndex == 1)//1 for main game scene
+		{
+			if (InfoForPlayerText0.gameObject.activeSelf)
+				if (Time.timeSinceLevelLoad - InfoForPlayer_LastDisplayedTime0 > ConfigController.Config.InfoTextDisplayTime)
+					InfoForPlayerText0.gameObject.SetActive(false);//hide
+			if (InfoForPlayerText1.gameObject.activeSelf)
+				if (Time.timeSinceLevelLoad - InfoForPlayer_LastDisplayedTime1 > ConfigController.Config.InfoTextDisplayTime)
+					InfoForPlayerText1.gameObject.SetActive(false);//hide
 
-        UIController.nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(gameController.playerData.Credits).ToString();
+			UIController.nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(gameController.playerData.Credits).ToString();
+		}
     }
 }

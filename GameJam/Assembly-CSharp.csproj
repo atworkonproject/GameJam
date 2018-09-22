@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Audio\AudioController.cs" />
+    <Compile Include="Assets\Audio\SoundManager.cs" />
     <Compile Include="Assets\MainMenu\MainCameraGameOver.cs" />
     <Compile Include="Assets\MainMenu\MainCameraMainMenu.cs" />
     <Compile Include="Assets\Scripts\Bases\BarrackBase.cs" />
@@ -77,12 +79,14 @@
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
+    <Compile Include="Assets\Scripts\TopRedSprite.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
     <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />
     <Compile Include="Assets\Scripts\UI\DamageBubble.cs" />
     <Compile Include="Assets\Scripts\UI\DamageBubbleController.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UserData.cs" />
+    <None Include="Assets\Audio\readme.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Adam/Desktop/GameJam/GameJam/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

@@ -25,15 +25,18 @@ public class BarrackBase : BaseBaseClass {
     // Update is called once per frame
     void Update () {
         timeToSpawn += Time.deltaTime;
-		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec && gameController.playerData.Credits >= ConfigController.Config.CostForSoldier)
+		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec)
 		{
-			timeToSpawn = 0;
-			GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0,0,-2), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-            soldier.GetComponent<SoldierController>().Fallen = fallen;
-            gameController.playerData.Credits -= ConfigController.Config.CostForSoldier;
+			if (gameController.playerData.Credits >= ConfigController.Config.CostForSoldier)
+			{
+				timeToSpawn = 0;
+				GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, 0, -2), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
+				soldier.GetComponent<SoldierController>().Fallen = fallen;
+				gameController.playerData.Credits -= ConfigController.Config.CostForSoldier;
+			}
+			else
+				UIController.DisplayInfoForPlayer1("no money for a new soldier");
 		}
-		else
-			UIController.DisplayInfoForPlayer1("no money for a new soldier");
     }
 
 }
