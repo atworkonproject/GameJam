@@ -119,7 +119,13 @@ public class SoldierController : MonoBehaviour
     void checkNear()
     {
         Soldiers = Physics2D.OverlapCircleAll(transform.position, SightRange, soldierLayer);
-        Debug.Log(LayerMask.NameToLayer("Soldiers"));
+
+        /*
+        foreach (Collider2D in Soldiers)
+        {
+
+        }*/
+
     }
 
 

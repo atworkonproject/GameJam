@@ -24,6 +24,9 @@ public class BuildController : MonoBehaviour {
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
         levelTimeElapsed = 0;
+
+        playerRec = new gameplayRecorder();
+        enemyRec = new gameplayRecorder();
     }
 	
 	// Update is called once per frame
