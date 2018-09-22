@@ -75,7 +75,6 @@ MonoBehaviour:
   Fallen: 1
   SightRange: 4
   MoveSpeed: 0.5
-  AttackRange: 0.01
   AngelSprite: {fileID: 21300000, guid: ed6d1b5301ae01d4ca8dd267a6291876, type: 3}
   DevilSprite: {fileID: 21300000, guid: 14a2328b17959c04998f953724d8ef0d, type: 3}
   targetPosition: {x: 0, y: 0, z: 0}
