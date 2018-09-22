@@ -17,5 +17,6 @@ public class ConfigurationObject : ScriptableObject {
 	public float BarrackSpawnEverySec = 5.0f;
 	[Header("Other")]
 	public float InfoTextDisplayTime = 3.0f;
+    public float AIDecisionEverySec = 2.1f;
 }
 

@@ -23,6 +23,13 @@ public class gameplayRecorder {
             time = _time;
             positionIndex = pos;
         }
+
+        public void SwapPosition()//swap position to the other side of map
+        {
+            Vector2Int size = BaseArrayController.mapSize;
+            positionIndex = new Vector2Int(size.x - positionIndex.x - 1,
+                                            size.y - positionIndex.y - 1);
+        }
     }
 
     List<Action> playerActions = new List<Action>();//chronogically set in the list!
@@ -41,8 +48,7 @@ public class gameplayRecorder {
             else
                 break;
         }
-        if(actions.Count > 0)
-            Debug.Log(actions.Count);
+
         return actions;
     }
 
@@ -58,4 +64,11 @@ public class gameplayRecorder {
     }
 
     public int GetTotalActions() { return playerActions.Count; }
+
+    //changes positions of decisions so now the second side will make actions
+    public void SwapSides()
+    {
+        foreach(Action i in playerActions)
+            i.SwapPosition();
+    }
 }

@@ -8,9 +8,11 @@ public class BaseArrayController : MonoBehaviour {
     public List<BaseListRow> GlobalBaseArrayToView_X;//to view in iinspector
     public static BaseBaseClass NoBase;
 
-    public static BaseBaseClass EmptyClass;
+    //public static BaseBaseClass EmptyClass;
     static SelectedTileController selectedTileC;
     BuildController baseC;
+
+    public static Vector2Int mapSize;//read only
 
     void Start() {
         baseC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>();
@@ -28,6 +30,8 @@ public class BaseArrayController : MonoBehaviour {
 
         int maxIndexX = Mathf.CeilToInt(baseC.BackgroundSprite.bounds.size.x / selectedTileC.DisplayedSelectedTileSprite.bounds.size.x);
         int maxIndexY = Mathf.CeilToInt(baseC.BackgroundSprite.bounds.size.y / selectedTileC.DisplayedSelectedTileSprite.bounds.size.y);
+        mapSize.x = maxIndexX;
+        mapSize.y = maxIndexY;
 
         BaseArrayController.GlobalBaseArray = new List<BaseListRow>();
         for (int i = 0; i <= maxIndexX; i++)
@@ -79,7 +83,6 @@ public class BaseArrayController : MonoBehaviour {
     public static BaseBaseClass GetBase(Vector2Int indexes)
     {
         return BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y];
-
     }
 
     public static void PutBase(Vector2Int indexes, BaseBaseClass baseToPut)

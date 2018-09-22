@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour
 {
-    
+    //uwaga warning
+    //assuming that AI always on top of the screen and player on bottom of the screen - coordinate changes
     //================================ VARIABLES ==================================
     private static gameController _instance = null;
     public static gameController i { get { return _instance; } }//Instance
@@ -33,8 +34,8 @@ public class gameController : MonoBehaviour
     }
     void Init()
     {
-        playerData = new UserData();
-        AIData = new UserData();
+        playerData = gameObject.AddComponent<UserData>();
+        AIData = gameObject.AddComponent<UserData>();
         ai = new AI();
     }
     void Start()
@@ -102,6 +103,7 @@ public class gameController : MonoBehaviour
         AIData.rec = playerData.rec;
         playerData.rec = g;
         playerData.rec.ResetAll();
+        AIData.rec.SwapSides();
 
         setBuildingsFallen();
     }
