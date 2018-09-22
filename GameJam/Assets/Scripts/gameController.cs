@@ -65,6 +65,15 @@ public class gameController : MonoBehaviour
         if (Input.GetKeyDown("g"))//temp
             GameOver();
 
+        // HotKey
+        BuildController bc = buildController.GetComponent<BuildController>();
+
+        if (Input.GetKeyDown("1"))
+            bc.BuildBarracksPlayer(playerData);
+        if (Input.GetKeyDown("2"))
+            bc.BuildFarmPlayer(playerData);
+
+
         ai.Update();
 
         timeElapsed += Time.deltaTime;
