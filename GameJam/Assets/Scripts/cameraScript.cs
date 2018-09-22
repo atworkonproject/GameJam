@@ -13,8 +13,8 @@ public class cameraScript : MonoBehaviour {
     float targetSize;//zoom
 
     private float maxOrthoSize = 1.0f;
-    public float minZoom = 0.2f;//% of maxZoom
-    public float scrollSensitivity = 2.5f;
+    public float minZoom; //% of maxZoom
+    public float scrollSensitivity;
 
     Vector3 mouseLastPos, moveVector;
 
@@ -25,6 +25,8 @@ public class cameraScript : MonoBehaviour {
         targetPos = cam.transform.position;
         mouseLastPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         moveVector = Vector3.zero;
+        minZoom = 0.2f;
+        scrollSensitivity = 1.4f;
 
         SetZoomToWholeMap();
     }
