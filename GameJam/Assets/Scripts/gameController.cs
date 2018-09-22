@@ -41,8 +41,7 @@ public class gameController : MonoBehaviour
         playerData.NewGame(!AIIsFallen, true);
         AIData.NewGame(AIIsFallen, false);
 
-        BuildController bc = buildController.GetComponent<BuildController>();
-        bc.playerFallen = !AIIsFallen;
+        setBuildingsFallen();
     }
 
     void Update()
@@ -73,12 +72,20 @@ public class gameController : MonoBehaviour
         }
     }
 
+    public void setBuildingsFallen()
+    {
+        BuildController bc = buildController.GetComponent<BuildController>();
+        bc.playerFallen = playerData.fallen;
+    }
+
     public void Win()
     {
         //swap sides and play again
         CleanStage();
         playerData.NextLevel();
         AIData.NextLevel();
+
+        setBuildingsFallen();
     }
 
     public void GameOver()

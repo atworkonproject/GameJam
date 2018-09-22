@@ -23,4 +23,9 @@ public class BaseBaseClass : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void setFallen(bool fall)
+    {
+        fallen = fall;
+    }
 }

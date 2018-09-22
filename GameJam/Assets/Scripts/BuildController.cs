@@ -39,6 +39,7 @@ public class BuildController : MonoBehaviour {
 
 	public void BuildBarracks(UserData builder)
 	{
+        Debug.Log("Buduje budynki o fallen " + playerFallen);
 		if (builder.Credits > ConfigController.Config.BarracksBuyCost)
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
@@ -54,7 +55,7 @@ public class BuildController : MonoBehaviour {
                     builder.Barracks.Add((BarrackBase)b);
                     ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer);
 
-                    go.GetComponent<BarrackBase>().Fallen = playerFallen;
+                    go.GetComponent<BarrackBase>().setFallen(playerFallen);
 
                     builder.Credits -= BuildController.BARRACKS_COST;
 					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
@@ -87,7 +88,7 @@ public class BuildController : MonoBehaviour {
                     builder.Farms.Add((FarmBase)b);
                     ((FarmBase)b).Init(builder.fallen, builder.amIPlayer);
 
-                    go.GetComponent<BarrackBase>().Fallen = playerFallen;
+                    //go.GetComponent<BarrackBase>().Fallen = playerFallen;
 
                     builder.Credits -= BuildController.FARM_COST;
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
