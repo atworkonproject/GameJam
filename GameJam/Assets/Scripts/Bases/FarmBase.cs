@@ -6,7 +6,8 @@ public class FarmBase : BaseBaseClass {
 	public float LastTimeFarmEarned;
 	// Use this for initialization
 	void Start () {
-		HP = ConfigController.Config.FarmHP;
+		MaxHP = ConfigController.Config.FarmHP;
+        HP = MaxHP;
 	}
 
 	// Update is called once per frame

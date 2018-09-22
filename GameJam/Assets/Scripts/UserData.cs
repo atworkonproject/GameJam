@@ -15,6 +15,8 @@ public class UserData : MonoBehaviour
 
     public gameplayRecorder rec;
 
+    public float income, outcome;//calculate cash. for ai
+
     public void NewGame(bool isFallen, bool isPlayer)
     {
         Farms = new List<FarmBase>();
@@ -55,6 +57,12 @@ public class UserData : MonoBehaviour
 			}
 		}
         Credits += creditIncrement;
+
+
+        income = creditIncrement;
+        outcome = ConfigController.Config.CostForSoldier / ConfigController.Config.BarrackSpawnEverySec * Barracks.Count * Time.deltaTime;
+
+
         Credits = Mathf.Clamp(gameController.playerData.Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
     }
 

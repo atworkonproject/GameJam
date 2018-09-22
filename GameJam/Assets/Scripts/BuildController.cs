@@ -72,6 +72,8 @@ public class BuildController : MonoBehaviour {
             return;
         if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
             return;
+        if (pos.x < 0 || pos.y < 0)
+            return;
 
         GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
         Vector2 basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
@@ -119,9 +121,11 @@ public class BuildController : MonoBehaviour {
 	}
     public void BuildFarmAI(UserData builder, Vector2Int pos)
     {
-        if (builder.Credits < ConfigController.Config.BarracksBuyCost)
+        if (builder.Credits < ConfigController.Config.FarmBuyCost)
             return;
         if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+            return;
+        if (pos.x < 0 || pos.y < 0)
             return;
 
         GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
