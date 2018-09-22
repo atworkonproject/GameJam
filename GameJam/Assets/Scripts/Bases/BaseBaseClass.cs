@@ -5,9 +5,17 @@ using UnityEngine;
 public class BaseBaseClass : MonoBehaviour {
 	//my indexes
 	public Vector2Int MyIndexes;
+    protected bool fallen;
+    bool ownerIsPlayer;
 
-	// Use this for initialization
-	void Start () {
+    public void Init(bool isFallen, bool isPlayers)
+    {
+        fallen = isFallen;
+        ownerIsPlayer = isPlayers;
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

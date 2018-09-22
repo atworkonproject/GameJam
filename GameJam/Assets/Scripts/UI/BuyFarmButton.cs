@@ -14,6 +14,6 @@ public class BuyFarmButton : MonoBehaviour {
 
 	public void OnClickedMe()
 	{
-		buildC.BuildFarm();
+		buildC.BuildFarm(gameController.playerData);
 	}
 }

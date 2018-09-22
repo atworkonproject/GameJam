@@ -34,9 +34,9 @@ public class BuildController : MonoBehaviour {
 		
 	}
 
-	public void BuildBarracks()
+	public void BuildBarracks(UserData builder)
 	{
-		if (UIController.uzywac_Credits > ConfigController.Config.BarracksBuyCost)
+		if (builder.Credits > ConfigController.Config.BarracksBuyCost)
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
@@ -48,10 +48,11 @@ public class BuildController : MonoBehaviour {
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
-					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
+                    builder.Barracks.Add((BarrackBase)b);
+                    ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer);
 
-					UIController.uzywac_Credits -= BuildController.BARRACKS_COST;
-					playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
+                    builder.Credits -= BuildController.BARRACKS_COST;
+					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -63,9 +64,9 @@ public class BuildController : MonoBehaviour {
 			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
 
-	public void BuildFarm()
+	public void BuildFarm(UserData builder)
 	{
-		if (UIController.uzywac_Credits > ConfigController.Config.FarmBuyCost)
+		if (gameController.playerData.Credits > ConfigController.Config.FarmBuyCost)
 		{
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
@@ -78,10 +79,11 @@ public class BuildController : MonoBehaviour {
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
-					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
+                    builder.Farms.Add((FarmBase)b);
+                    ((FarmBase)b).Init(builder.fallen, builder.amIPlayer);
 
-                    UIController.uzywac_Credits -= BuildController.FARM_COST;
-                    playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
+                    builder.Credits -= BuildController.FARM_COST;
+                    builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
                 }
                 else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -98,4 +100,9 @@ public class BuildController : MonoBehaviour {
 	{
 		public List<BaseBaseClass> row;
 	}
+
+    public void CleanAllBasesOnMap()
+    {
+        baseArrayC.DestroyAllBases();
+    }
 }

@@ -14,6 +14,6 @@ public class BuyBarracksButton : MonoBehaviour {
 
 	public void OnClickedMe()
 	{
-		buildC.BuildBarracks();
+		buildC.BuildBarracks(gameController.playerData);
 	}
 }
