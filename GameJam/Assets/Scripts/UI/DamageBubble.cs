@@ -14,8 +14,8 @@ public class DamageBubble : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float bubbleSpeed = 1f;
-		float timeToLive = 2.0f;
+		float bubbleSpeed = .7f;
+		float timeToLive = 1.5f;
 
 		transform.position = new Vector3(
 			transform.position.x,

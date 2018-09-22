@@ -8,6 +8,7 @@ public class BaseBaseClass : MonoBehaviour {
     protected bool fallen;
     bool ownerIsPlayer;
     Vector2Int position;
+	public float HP;
 
     public void Init(bool isFallen, bool isPlayers, Vector2Int pos)
     {

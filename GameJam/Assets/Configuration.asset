@@ -13,10 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPlayerCredits: 100
   maxPlayerCredits: 120
+  BarracksHP: 30
+  FarmHP: 10
   BarracksBuyCost: 20
   FarmBuyCost: 20
-  FarmEarnPerSecond: 10
-  CostForSoldier: 5
+  FarmEarn: 50
+  FarmEarnPeriod: 5
+  CostForSoldier: 1
   BarrackSpawnEverySec: 5
   InfoTextDisplayTime: 3
-  AIDecisionEverySec: 2.1

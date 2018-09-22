@@ -8,11 +8,14 @@ using UnityEngine;
 public class ConfigurationObject : ScriptableObject {
 	public float startPlayerCredits = 100.0f;
 	public float maxPlayerCredits = 200.0f;
+	public float BarracksHP = 30.0f;
+	public float FarmHP = 10.0f;
 	[Header("BaseBuy")]
 	public float BarracksBuyCost = 20.0f;
 	public float FarmBuyCost = 20.0f;
 	[Header("BaseOperate")]
-	public float FarmEarnPerSecond = 10.0f;
+	public float FarmEarn = 10.0f;
+	public float FarmEarnPeriod = 5.0f;
 	public float CostForSoldier = 5.0f;
 	public float BarrackSpawnEverySec = 5.0f;
 	[Header("Other")]
