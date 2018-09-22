@@ -9,6 +9,7 @@ TagManager:
   - BuildController
   - SOLDIERS
   - BASES
+  - soldier
   layers:
   - Default
   - TransparentFX

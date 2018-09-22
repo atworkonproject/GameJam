@@ -7,24 +7,22 @@ public class BarrackBase : BaseBaseClass {
     //public static float spawnEverySec = 5.0f;//moved to config Controller
     //public static int COST_FOR_SOLDIER = 5;
 
-    Bounds bounds;
-
     public GameObject Soldier01prefab;
 
 	// Use this for initialization
 	void Awake () {
         timeToSpawn = 0f;
-        bounds = this.GetComponent<SpriteRenderer>().bounds;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         timeToSpawn += Time.deltaTime;
-		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec && UIController.uzywac_Credits >= ConfigController.Config.CostForSoldier)
+		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec && gameController.playerData.Credits >= ConfigController.Config.CostForSoldier)
 		{
 			timeToSpawn = 0;
-			GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, bounds.size.y, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-			UIController.uzywac_Credits -= ConfigController.Config.CostForSoldier;
+			GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0,0,-2), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
+            soldier.GetComponent<SoldierController>().Fallen = fallen;
+            gameController.playerData.Credits -= ConfigController.Config.CostForSoldier;
 		}
 		else
 			UIController.DisplayInfoForPlayer1("no money for a new soldier");

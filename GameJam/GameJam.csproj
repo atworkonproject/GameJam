@@ -319,13 +319,13 @@
     <Compile Include="Assets\Scripts\gameController.cs" />
     <Compile Include="Assets\Scripts\gameplayRecorder.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
-    <Compile Include="Assets\Scripts\Bases.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
     <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
+    <Compile Include="Assets\Scripts\UserData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
