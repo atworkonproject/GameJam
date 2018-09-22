@@ -44,8 +44,17 @@ public class UserData : MonoBehaviour
         //check if all hp of bases are > 0 if yes game over
 
         float creditIncrement = 0;
-        foreach (FarmBase farm in Farms)
-            creditIncrement += ConfigController.Config.FarmEarnPerSecond * Time.deltaTime;
+		foreach (FarmBase farm in Farms)
+		{
+			//creditIncrement += ConfigController.Config.FarmEarnAfterPeriod * Time.deltaTime;
+			if (Time.timeSinceLevelLoad - farm.LastTimeFarmEarned > ConfigController.Config.FarmEarnPeriod)
+			{
+				creditIncrement += ConfigController.Config.FarmEarnAfterPeriod;
+				GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>().CreateDamageBubble(
+					farm.transform.position, ConfigController.Config.FarmEarnAfterPeriod, true);
+				farm.LastTimeFarmEarned = Time.timeSinceLevelLoad;
+			}
+		}
         Credits += creditIncrement;
         Credits = Mathf.Clamp(gameController.playerData.Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
     }

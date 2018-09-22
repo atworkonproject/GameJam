@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DamageBubbleController : MonoBehaviour {
@@ -37,7 +38,7 @@ public class DamageBubbleController : MonoBehaviour {
 		createdDamageBubble.name = "-" + damagePositive.ToString();
 		if (isPositive)
 		{
-			createdDamageBubble.GetComponent<TextMesh>().text = damagePositive.ToString();
+			createdDamageBubble.GetComponent<TextMesh>().text = "+" + damagePositive.ToString();
 			createdDamageBubble.GetComponent<TextMesh>().color = Color.green;
 		}
 		else
