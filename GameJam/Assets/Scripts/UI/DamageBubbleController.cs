@@ -30,12 +30,21 @@ public class DamageBubbleController : MonoBehaviour {
 			damBubbleController.CreateDamageBubble(transform.position, Atk);
 		}
 		*/
-	public void CreateDamageBubble(Vector2 worldPosition, float damagePositive)
+	public void CreateDamageBubble(Vector2 worldPosition, float damagePositive, bool isPositive = false)
 	{
 		GameObject go = Instantiate(FirstDamageBubble.gameObject);
 		DamageBubble createdDamageBubble = go.GetComponent<DamageBubble>();
 		createdDamageBubble.name = "-" + damagePositive.ToString();
-		createdDamageBubble.GetComponent<Text>().text = "-" + damagePositive;
+		if (isPositive)
+		{
+			createdDamageBubble.GetComponent<Text>().text = damagePositive.ToString();
+			createdDamageBubble.GetComponent<Text>().color = Color.green;
+		}
+		else
+		{
+			createdDamageBubble.GetComponent<Text>().text = "-" + damagePositive;
+			createdDamageBubble.GetComponent<Text>().color = Color.red;
+		}
 		createdDamageBubble.gameObject.SetActive(true);
 		createdDamageBubble.transform.SetParent(DamageBubbleCanvas.transform);
 
