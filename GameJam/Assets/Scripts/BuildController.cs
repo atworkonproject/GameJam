@@ -48,7 +48,7 @@ public class BuildController : MonoBehaviour {
 			if (BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] == BuildController.EmptyClass)//if is not occupied by another building
 			{
 				Vector2 position = selectedTileC.DisplayedSelectedTile.transform.position;
-				GameObject go = Instantiate(BarracksBasePrefab.gameObject);
+				GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 				go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
 				BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 				BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] = b;
@@ -67,8 +67,8 @@ public class BuildController : MonoBehaviour {
 			if (BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] == BuildController.EmptyClass)
 			{
 				Vector2 position = selectedTileC.DisplayedSelectedTile.transform.position;
-				GameObject go = Instantiate(FarmBasePrefab.gameObject);
-				go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
+				GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+                go.transform.position = new Vector3(position.x, position.y, -1.0f);//-1.0f to be in front of backgroundSprite
 				BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 				BuildController.GlobalBaseArray[SelectedTileController.DisplayedTileIndexX].row[SelectedTileController.DisplayedTileIndexY] = b;
 				PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);

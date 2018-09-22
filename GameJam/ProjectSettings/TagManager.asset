@@ -7,6 +7,8 @@ TagManager:
   - _SCRIPTS_
   - BackgroundSprite
   - BuildController
+  - SOLDIERS
+  - BASES
   layers:
   - Default
   - TransparentFX

@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4493849060446816}
-  - component: {fileID: 58341143355878002}
   - component: {fileID: 114728825173513586}
+  - component: {fileID: 58700936227000734}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -37,6 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4278138206965348}
   - component: {fileID: 212358998384124672}
+  - component: {fileID: 50283618849044760}
+  - component: {fileID: 70232053740000402}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -64,14 +66,34 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439192437928330}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.99, y: 2.05, z: -5}
+  m_LocalPosition: {x: 64.60531, y: 297.4975, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4278138206965348}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58341143355878002
+--- !u!50 &50283618849044760
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971903219840478}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0.81
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 7
+--- !u!58 &58700936227000734
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,6 +108,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!70 &70232053740000402
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971903219840478}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.6}
+  m_Direction: 0
 --- !u!114 &114728825173513586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,12 +135,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprRender: {fileID: 212358998384124672}
-  Fallen: 0
-  SightRange: 2
+  Fallen: 1
+  SightRange: 4
   MoveSpeed: 0.005
-  AngelSprite: {fileID: 21300000, guid: 688e1d26c7f3b2a429e2a27d2183f300, type: 3}
-  DevilSprite: {fileID: 21300000, guid: cfcc65f531dfb1f42b81a50b557c238f, type: 3}
+  AttackRange: 0.01
+  AngelSprite: {fileID: 21300000, guid: ed6d1b5301ae01d4ca8dd267a6291876, type: 3}
+  DevilSprite: {fileID: 21300000, guid: 14a2328b17959c04998f953724d8ef0d, type: 3}
   targetPosition: {x: 0, y: 0, z: 0}
+  Friends: []
+  Enemies: []
+  MaxHp: 20
+  Atk: 5
+  AttackDelay: 5
 --- !u!212 &212358998384124672
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -139,14 +182,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6187ad0d46d4a8f4ea4a56d356709921, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed6d1b5301ae01d4ca8dd267a6291876, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.46, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

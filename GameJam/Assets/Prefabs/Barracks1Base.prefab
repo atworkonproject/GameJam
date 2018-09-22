@@ -54,6 +54,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Xindex: 0
   Yindex: 0
+  Soldier01prefab: {fileID: 1439192437928330, guid: 14ee58f6ccf25c44ebcb0d275ab115a7,
+    type: 2}
 --- !u!212 &212864465340856412
 SpriteRenderer:
   m_ObjectHideFlags: 1
