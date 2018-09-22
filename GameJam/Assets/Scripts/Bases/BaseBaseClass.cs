@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseBaseClass : MonoBehaviour {
 	//my indexes
 	public Vector2Int MyIndexes;
-    protected bool fallen;
+    public bool fallen;
     bool ownerIsPlayer;
     Vector2Int position;
 
