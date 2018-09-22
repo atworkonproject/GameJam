@@ -13,13 +13,18 @@ public class BuildController : MonoBehaviour {
 	public BaseArrayController baseArrayC;
 
     public static int FARM_COST = 30;
-    public static int BACRRACKS_COST = 20;
+    public static int BARRACKS_COST = 20;
 
-	void Start () {
+    gameplayRecorder playerRec, enemyRec;
+
+    float levelTimeElapsed;
+
+    void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
-	}
+        levelTimeElapsed = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -42,7 +47,8 @@ public class BuildController : MonoBehaviour {
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					PlayerBases.PlayerBarracksStatic.Add((BarrackBase)b);
 
-                    UIController.uzywac_Credits -= BuildController.BACRRACKS_COST;
+                    UIController.uzywac_Credits -= BuildController.BARRACKS_COST;
+                    playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
                 }
                 else
 					Debug.Log("place occupied");
@@ -72,6 +78,7 @@ public class BuildController : MonoBehaviour {
 					PlayerBases.PlayerFarmsStatic.Add((FarmBase)b);
 
                     UIController.uzywac_Credits -= BuildController.FARM_COST;
+                    playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
                 }
                 else
 					Debug.Log("place occupied");

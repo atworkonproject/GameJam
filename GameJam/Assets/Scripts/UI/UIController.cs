@@ -29,8 +29,6 @@ public class UIController : MonoBehaviour {
 		float creditIncrement = 0;
 		foreach (FarmBase farm in PlayerBases.PlayerFarmsStatic)
 			creditIncrement += 10*Time.deltaTime;//10 for a farm
-		foreach (BarrackBase barrack in PlayerBases.PlayerBarracksStatic)
-			creditIncrement -= 1 * Time.deltaTime;//1 to maintain barracks
 		uzywac_Credits += creditIncrement;
         nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(uzywac_Credits).ToString();
 	}
