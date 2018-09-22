@@ -8,6 +8,7 @@ public class gameController : MonoBehaviour
 {
     //uwaga warning
     //assuming that AI always on top of the screen and player on bottom of the screen - coordinate changes
+
     //================================ VARIABLES ==================================
     private static gameController _instance = null;
     public static gameController i { get { return _instance; } }//Instance
