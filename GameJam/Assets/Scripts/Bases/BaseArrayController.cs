@@ -46,21 +46,32 @@ public class BaseArrayController : MonoBehaviour {
 	public Vector2Int GetIndexesFromWorldPosition(Vector2 position, out Vector2 worldIndexedPosition)
 	{
 		Vector2Int returnedIndexes;
-
 		float selectedTileWidth = selectedTileC.DisplayedSelectedTileSprite.bounds.size.x;
 		float selectedTileHeight = selectedTileC.DisplayedSelectedTileSprite.bounds.size.y;
 
+
 		float xIndex = (position.x - selectedTileC.BackgroundSprite.bounds.min.x) / selectedTileWidth;//width from left edge of backgroundSprite to click, we divide it by width of selectedTile
 		returnedIndexes = new Vector2Int(Mathf.RoundToInt(xIndex), 0);
-		float worldIndexedX = selectedTileC.BackgroundSprite.bounds.min.x + (returnedIndexes.x * selectedTileWidth);
+		//float worldIndexedX = selectedTileC.BackgroundSprite.bounds.min.x + (returnedIndexes.x * selectedTileWidth);
 
 		float yIndex = (position.y - selectedTileC.BackgroundSprite.bounds.min.y) / selectedTileHeight;
-		returnedIndexes = new Vector2Int(returnedIndexes.y, Mathf.RoundToInt(yIndex));
-		float worldIndexedY = selectedTileC.BackgroundSprite.bounds.min.y + (returnedIndexes.y * selectedTileHeight);
+		returnedIndexes = new Vector2Int(returnedIndexes.x, Mathf.RoundToInt(yIndex));
+		//float worldIndexedY = selectedTileC.BackgroundSprite.bounds.min.y + (returnedIndexes.y * selectedTileHeight);
 
-		worldIndexedPosition = new Vector2(worldIndexedX, worldIndexedY);
+		worldIndexedPosition = getWorldPositionForIndexes(returnedIndexes);
 
 		return returnedIndexes;
+	}
+
+	public Vector2 getWorldPositionForIndexes(Vector2Int indexes)
+	{
+		float selectedTileWidth = selectedTileC.DisplayedSelectedTileSprite.bounds.size.x;
+		float selectedTileHeight = selectedTileC.DisplayedSelectedTileSprite.bounds.size.y;
+
+		float worldIndexedX = selectedTileC.BackgroundSprite.bounds.min.x + (indexes.x * selectedTileWidth);
+		float worldIndexedY = selectedTileC.BackgroundSprite.bounds.min.y + (indexes.y * selectedTileHeight);
+
+		return new Vector2(worldIndexedX, worldIndexedY);
 	}
 
 	public static BaseBaseClass GetBase(Vector2Int indexes)
