@@ -30,7 +30,7 @@ public class BuildController : MonoBehaviour {
 	{
 		if (UIController.uzywac_Credits > 20)
 		{
-			if (selectedTileC.DisplayedSelectedTile != null)
+			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
 				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
@@ -59,7 +59,7 @@ public class BuildController : MonoBehaviour {
 		if (UIController.uzywac_Credits > 30)
 		{
 			
-			if (selectedTileC.DisplayedSelectedTile != null)
+			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
 				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{

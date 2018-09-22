@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BaseArrayController : MonoBehaviour {
 	public static List<BaseListRow> GlobalBaseArray;//two dimmensional
-	public List<BaseListRow> GlobalBaseArrayToView;//to view in iinspector
+	public List<BaseListRow> GlobalBaseArrayToView_X;//to view in iinspector
 	public static BaseBaseClass NoBase;
 
 	public static BaseBaseClass EmptyClass;
@@ -33,14 +33,14 @@ public class BaseArrayController : MonoBehaviour {
 		for (int i = 0; i <= maxIndexX; i++)
 		{
 			BaseArrayController.GlobalBaseArray.Add(new BaseListRow());
-			BaseArrayController.GlobalBaseArray[i].row = new List<BaseBaseClass>();
+			BaseArrayController.GlobalBaseArray[i].row_Y = new List<BaseBaseClass>();
 			for (int j = 0; j <= maxIndexY; j++)
 			{
-				BaseArrayController.GlobalBaseArray[i].row.Add(new BaseBaseClass());
-				BaseArrayController.GlobalBaseArray[i].row[j] = BaseArrayController.NoBase;
+				BaseArrayController.GlobalBaseArray[i].row_Y.Add(new BaseBaseClass());
+				BaseArrayController.GlobalBaseArray[i].row_Y[j] = BaseArrayController.NoBase;
 			}
 		}
-		GlobalBaseArrayToView = BaseArrayController.GlobalBaseArray;
+		GlobalBaseArrayToView_X = BaseArrayController.GlobalBaseArray;
 	}
 
 	public Vector2Int GetIndexesFromWorldPosition(Vector2 position, out Vector2 worldIndexedPosition)
@@ -51,13 +51,12 @@ public class BaseArrayController : MonoBehaviour {
 
 
 		float xIndex = (position.x - selectedTileC.BackgroundSprite.bounds.min.x) / selectedTileWidth;//width from left edge of backgroundSprite to click, we divide it by width of selectedTile
-		returnedIndexes = new Vector2Int(Mathf.RoundToInt(xIndex), 0);
-		//float worldIndexedX = selectedTileC.BackgroundSprite.bounds.min.x + (returnedIndexes.x * selectedTileWidth);
+		int returnedIndexX = Mathf.RoundToInt(xIndex);
 
 		float yIndex = (position.y - selectedTileC.BackgroundSprite.bounds.min.y) / selectedTileHeight;
-		returnedIndexes = new Vector2Int(returnedIndexes.x, Mathf.RoundToInt(yIndex));
-		//float worldIndexedY = selectedTileC.BackgroundSprite.bounds.min.y + (returnedIndexes.y * selectedTileHeight);
+		int returnedIndexY = Mathf.RoundToInt(yIndex);
 
+		returnedIndexes = new Vector2Int(returnedIndexX, returnedIndexY);
 		worldIndexedPosition = getWorldPositionForIndexes(returnedIndexes);
 
 		return returnedIndexes;
@@ -68,21 +67,21 @@ public class BaseArrayController : MonoBehaviour {
 		float selectedTileWidth = selectedTileC.DisplayedSelectedTileSprite.bounds.size.x;
 		float selectedTileHeight = selectedTileC.DisplayedSelectedTileSprite.bounds.size.y;
 
-		float worldIndexedX = selectedTileC.BackgroundSprite.bounds.min.x + (indexes.x * selectedTileWidth);
-		float worldIndexedY = selectedTileC.BackgroundSprite.bounds.min.y + (indexes.y * selectedTileHeight);
+		float worldX = selectedTileC.BackgroundSprite.bounds.min.x + (indexes.x * selectedTileWidth);
+		float worldY = selectedTileC.BackgroundSprite.bounds.min.y + (indexes.y * selectedTileHeight);
 
-		return new Vector2(worldIndexedX, worldIndexedY);
+		return new Vector2(worldX, worldY);
 	}
 
 	public static BaseBaseClass GetBase(Vector2Int indexes)
 	{
-		return BaseArrayController.GlobalBaseArray[indexes.x].row[indexes.y];
+		return BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y];
 
 	}
 
 	public static void PutBase(Vector2Int indexes, BaseBaseClass baseToPut)
 	{
-		BaseArrayController.GlobalBaseArray[indexes.x].row[indexes.y] = baseToPut;
+		BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y] = baseToPut;
 	}
 	public void GetXIndexOfPositionX(float positionX)
 	{
@@ -92,6 +91,6 @@ public class BaseArrayController : MonoBehaviour {
 	[Serializable]
 	public class BaseListRow
 	{
-		public List<BaseBaseClass> row;
+		public List<BaseBaseClass> row_Y;
 	}
 }
