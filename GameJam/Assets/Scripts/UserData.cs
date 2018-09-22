@@ -51,8 +51,11 @@ public class UserData : MonoBehaviour
 			if (Time.timeSinceLevelLoad - farm.LastTimeFarmEarned > ConfigController.Config.FarmEarnPeriod)
 			{
 				creditIncrement += ConfigController.Config.FarmEarn;
-				GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>().CreateDamageBubble(
-					farm.transform.position, ConfigController.Config.FarmEarn, true);
+				if (farm.fallen == gameController.playerData.fallen)
+				{
+					GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>().CreateDamageBubble(
+						farm.transform.position, ConfigController.Config.FarmEarn, true);
+				}
 				farm.LastTimeFarmEarned = Time.timeSinceLevelLoad;
 			}
 		}

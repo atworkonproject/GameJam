@@ -65,10 +65,6 @@
     <Compile Include="Assets\Audio\SoundManager.cs" />
     <Compile Include="Assets\MainMenu\MainCameraGameOver.cs" />
     <Compile Include="Assets\MainMenu\MainCameraMainMenu.cs" />
-    <Compile Include="Assets\Radial Menu Framework\Scripts\RMF_Demo.cs" />
-    <Compile Include="Assets\Radial Menu Framework\Scripts\RMF_ForceDirection.cs" />
-    <Compile Include="Assets\Radial Menu Framework\Scripts\RMF_RadialMenu.cs" />
-    <Compile Include="Assets\Radial Menu Framework\Scripts\RMF_RadialMenuElement.cs" />
     <Compile Include="Assets\Scripts\AI.cs" />
     <Compile Include="Assets\Scripts\Bases\BarrackBase.cs" />
     <Compile Include="Assets\Scripts\Bases\BaseArrayController.cs" />
@@ -92,7 +88,9 @@
     <Compile Include="Assets\Scripts\UI\RadialMenuController.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UserData.cs" />
+    <None Include="Assets\MainMenu\mp_gritty\license.txt" />
     <None Include="Assets\Audio\readme.txt" />
+    <None Include="Assets\MainMenu\mp_gritty\Gritty Residue.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Adam/Desktop/GameJam/GameJam/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

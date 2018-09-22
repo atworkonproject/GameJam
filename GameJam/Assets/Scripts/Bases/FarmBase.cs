@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class FarmBase : BaseBaseClass {
 	public float LastTimeFarmEarned;
-	// Use this for initialization
-	void Start () {
-		MaxHP = ConfigController.Config.FarmHP;
-        HP = MaxHP;
-	}
 
 	// Update is called once per frame
 	void Update () {
 		
+
+
 	}
+
+    override public void Init2()
+    {
+        GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
+        MaxHP = ConfigController.Config.BarracksHP;
+        HP = MaxHP;
+    }
 }

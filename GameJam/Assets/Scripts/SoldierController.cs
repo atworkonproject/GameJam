@@ -99,7 +99,7 @@ public class SoldierController : MonoBehaviour
 		float dist = (transform.position - targetPosition).magnitude;
 
 		if (_targetObjectSoldierController != null)
-			if(_targetObjectSoldierController.Fallen != gameController.playerData.fallen)
+			if(_targetObjectSoldierController.Fallen != Fallen)
 			{
 				//enemy
 				if (dist > AttackRange)
@@ -136,7 +136,7 @@ public class SoldierController : MonoBehaviour
 				}
 			}
 
-        if (outOfBounds())
+        if ((int)Time.time %5==0 && outOfBounds())
             Damage(1);
     }
 
@@ -263,17 +263,26 @@ public class SoldierController : MonoBehaviour
 
         if (Time.time - lastAttack > AttackDelay)
         {
-            soldier.Damage(Random.Range(0, Atk) + 1);
+            soldier.Damage(this);
             lastAttack = Time.time;
         }
     }
 
-    public void Damage(int atk)
+    public void Damage(SoldierController attacker)
     {
-        Hp -= atk;
+        int damage = Random.Range(0, attacker.Atk) + 1;
+        Hp -= damage;
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
-		damBubbleController.CreateDamageBubble(transform.position, atk);
+		damBubbleController.CreateDamageBubble(transform.position, damage);
+    }
+
+    public void Damage(int damage)
+    {
+        Hp -= damage;
+
+        DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+        damBubbleController.CreateDamageBubble(transform.position, damage);
     }
 
     void checkHp()

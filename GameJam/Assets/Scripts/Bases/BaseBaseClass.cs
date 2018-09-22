@@ -5,12 +5,15 @@ using UnityEngine;
 public class BaseBaseClass : MonoBehaviour {
 	//my indexes
 	public Vector2Int MyIndexes;
-    protected bool fallen;
+    public bool fallen;
     bool ownerIsPlayer;
     Vector2Int position;
 
     public int MaxHP;
 	protected int HP;
+
+    public Sprite AngelBase;
+    public Sprite DevilBase;
 
     public void Init(bool isFallen, bool isPlayers, Vector2Int pos)
     {
