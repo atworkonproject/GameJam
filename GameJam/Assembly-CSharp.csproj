@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\cameraScript.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
+    <Compile Include="Assets\Scripts\PlayerBases.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
