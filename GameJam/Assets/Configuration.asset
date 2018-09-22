@@ -11,4 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdaf0de0667f0df4e97ec6da6b1f9c81, type: 3}
   m_Name: Configuration
   m_EditorClassIdentifier: 
+  startPlayerCredits: 100
   maxPlayerCredits: 120
+  BarracksHP: 30
+  FarmHP: 10
+  BarracksBuyCost: 20
+  FarmBuyCost: 20
+  FarmEarn: 50
+  FarmEarnPeriod: 5
+  CostForSoldier: 1
+  BarrackSpawnEverySec: 5
+  InfoTextDisplayTime: 3

@@ -39,7 +39,10 @@ public class SelectedTileController : MonoBehaviour {
 			UIController.DisplayInfoForPlayer0("build only on bottom half!");
 			GameObject.FindWithTag("TopRightHalf").GetComponent<TopRedSprite>().ShowRedHalf();
 		}
-		else
+		else if(BaseArrayController.GetBase(Indexes) != BaseArrayController.NoBase)
+		{
+			//user clicked already occupied tile, do nothing, maybe later display upgrade option
+		}else
 		{
 			DisplayedSelectedTile.MyIndexes = Indexes;
 			DisplayedSelectedTile.transform.position = worldIndexedPosition;

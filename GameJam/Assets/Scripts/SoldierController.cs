@@ -23,12 +23,28 @@ public class SoldierController : MonoBehaviour
     CircleCollider2D Sight;
 
     public Vector3 targetPosition;
-    private GameObject targetObject;
+	private SoldierController _targetObjectSoldierController;
+	private GameObject targetObject
+	{
+		get {
+			if (_targetObjectSoldierController == null)
+				return null;
+			else
+				return _targetObjectSoldierController.gameObject;
+		}
+		set
+		{
+			if (value == null)
+				_targetObjectSoldierController = null;
+			else
+				_targetObjectSoldierController = value.GetComponent<SoldierController>();
+		}
+	}
+	public Vector2 MyOffsetToLeader;//if we go to leader we set this random offset
 
-    public List<GameObject> Friends;
+	public List<GameObject> Friends;
     public List<GameObject> Enemies;
     public Collider2D[] Soldiers;
-
 
     [Header("Battle Stats")]
 
@@ -45,7 +61,7 @@ public class SoldierController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        targetObject = null;
+		targetObject = null;
         sprRender.sprite = Fallen ? DevilSprite : AngelSprite;
         targetPosition = transform.position;
 
@@ -56,6 +72,18 @@ public class SoldierController : MonoBehaviour
         lastAttack = Time.time;
         Hp = MaxHp;
         Charisma = Random.Range(0, 10);
+
+		//random offset to leader but it shouldn't be zero
+		float offsetX, offsetY;
+		if (Random.Range(0, 1) == 0)
+			offsetX = Random.Range(-1.5f, -.5f);
+		else
+			offsetX = Random.Range(.5f, 1.5f);
+		if (Random.Range(0, 1) == 0)
+			offsetY = Random.Range(-1.5f, -.5f);
+		else
+			offsetY = Random.Range(.5f, 1.5f);
+		MyOffsetToLeader = new Vector2(offsetX, offsetY);
     }
 
     // Update is called once per frame
@@ -68,24 +96,47 @@ public class SoldierController : MonoBehaviour
 
     private void FixedUpdate()
     {
+		float dist = (transform.position - targetPosition).magnitude;
 
+		if (_targetObjectSoldierController != null)
+			if(_targetObjectSoldierController.Fallen != gameController.playerData.fallen)
+			{
+				//enemy
+				if (dist > AttackRange)
+				{
+					//Debug.Log("Poza zasiegiem ataku");
+					moveToTarget(1);
+				}
+				else if (dist < minimumDistance && targetObject != null)
+				{
+					//Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
+					moveToTarget(-1);
+				}
+				else
+				{
+					doAction();
+				}
+			}
+			else
+			{
+				//leader
+				if (dist > AttackRange)
+				{
+					//Debug.Log("Poza zasiegiem ataku");
+					moveToLeaderTarget(1);
+				}
+				else if (dist < minimumDistance && targetObject != null)
+				{
+					//Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
+					moveToLeaderTarget(-1);
+				}
+				else
+				{
+					doAction();
+				}
+			}
 
-
-        float dist = (transform.position - targetPosition).magnitude;
-        if (dist > AttackRange)
-        {
-            //Debug.Log("Poza zasiegiem ataku");
-            moveToTarget(1);
-        }
-        else if (dist < minimumDistance && targetObject != null)
-        {
-            //Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
-            moveToTarget(-1);
-        }
-        else
-        {
-            doAction();
-        }
+        
     }
 
     void setTarget()
@@ -135,16 +186,25 @@ public class SoldierController : MonoBehaviour
 
 
 
-    void moveToTarget(int turn)
-    {
-        Vector3 direction = Vector3.Normalize(targetPosition - transform.position) * MoveSpeed * Time.deltaTime;
-        //Debug.Log("Chce się ruszyć do: " + turn.ToString() + " o wektor "+direction.ToString());
+	void moveToTarget(int turn)
+	{
+		Vector3 direction = Vector3.Normalize(targetPosition - transform.position) * MoveSpeed * Time.deltaTime;
+		//Debug.Log("Chce się ruszyć do: " + turn.ToString() + " o wektor "+direction.ToString());
 
-        transform.position += turn * direction;
-            
-    }
+		transform.position += turn * direction;
 
-    void setRandomTargetPosition()
+	}
+
+	void moveToLeaderTarget(int turn)
+	{
+		Vector3 direction = Vector3.Normalize((targetPosition + (Vector3)MyOffsetToLeader) - transform.position) * MoveSpeed * Time.deltaTime;
+		//Debug.Log("Chce się ruszyć do: " + turn.ToString() + " o wektor "+direction.ToString());
+
+		transform.position += turn * direction;
+
+	}
+
+	void setRandomTargetPosition()
     {
         float radius = Random.Range(0.0f, SightRange);
         float angle = Random.Range(Mathf.PI / 2 - 0.5f, Mathf.PI / 2 + 0.5f) * (Fallen ? -1 : 1);

@@ -6,6 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainCameraGameOver : MonoBehaviour {
 	public float Speed = 0.5f;
 
+	private void Start()
+	{
+		//destroy all gameBubbles
+		DamageBubble[] damageBubbleArray = GameObject.FindObjectsOfType<DamageBubble>();
+		foreach (var bubble in damageBubbleArray)
+			Destroy(bubble.gameObject);
+	}
+
 	void Update()
 	{
 

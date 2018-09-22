@@ -14,7 +14,7 @@ public class ConfigurationObject : ScriptableObject {
 	public float BarracksBuyCost = 20.0f;
 	public float FarmBuyCost = 20.0f;
 	[Header("BaseOperate")]
-	public float FarmEarnAfterPeriod = 10.0f;
+	public float FarmEarn = 10.0f;
 	public float FarmEarnPeriod = 5.0f;
 	public float CostForSoldier = 5.0f;
 	public float BarrackSpawnEverySec = 5.0f;
