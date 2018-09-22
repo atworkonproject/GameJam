@@ -31,13 +31,12 @@ public class BuildController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("r"))
-            CleanAll();
+		
 	}
 
 	public void BuildBarracks()
 	{
-		if (UIController.player_Credits > 20)
+		if (UIController.uzywac_Credits > ConfigController.Config.BarracksBuyCost)
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
@@ -49,24 +48,24 @@ public class BuildController : MonoBehaviour {
 					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
-					Bases.PlayerBarracksStatic.Add((BarrackBase)b);
+                    Bases.PlayerBarracksStatic.Add((BarrackBase)b);
 
-                    UIController.player_Credits -= BuildController.BARRACKS_COST;
-                    playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
-                }
-                else
-					Debug.Log("place occupied");
+					UIController.uzywac_Credits -= BuildController.BARRACKS_COST;
+					playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
+				}
+				else
+					UIController.DisplayInfoForPlayer0("place occupied");
 			}
 			else
-				Debug.Log("no selected tile");
+				UIController.DisplayInfoForPlayer0("no selected tile");
 		}
 		else
-			Debug.Log("not enough credits");
+			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
 
 	public void BuildFarm()
 	{
-		if (UIController.player_Credits > 30)
+		if (UIController.uzywac_Credits > ConfigController.Config.FarmBuyCost)
 		{
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
@@ -81,17 +80,17 @@ public class BuildController : MonoBehaviour {
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					Bases.PlayerFarmsStatic.Add((FarmBase)b);
 
-                    UIController.player_Credits -= BuildController.FARM_COST;
+                    UIController.uzywac_Credits -= BuildController.FARM_COST;
                     playerRec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
                 }
                 else
-					Debug.Log("place occupied");
+					UIController.DisplayInfoForPlayer0("place occupied");
 			}
 			else
-				Debug.Log("no selected tile");
+				UIController.DisplayInfoForPlayer0("no selected tile");
 		}
 		else
-			Debug.Log("not enough credits");
+			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
 
 	[Serializable]

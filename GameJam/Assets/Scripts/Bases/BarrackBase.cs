@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BarrackBase : BaseBaseClass {
     float timeToSpawn;
-    public static float spawnEverySec = 5.0f;
-    public static int COST_FOR_SOLDIER = 5;
+    //public static float spawnEverySec = 5.0f;//moved to config Controller
+    //public static int COST_FOR_SOLDIER = 5;
 
     Bounds bounds;
 
@@ -20,11 +20,13 @@ public class BarrackBase : BaseBaseClass {
 	// Update is called once per frame
 	void Update () {
         timeToSpawn += Time.deltaTime;
-        if (timeToSpawn >= spawnEverySec && UIController.player_Credits >= COST_FOR_SOLDIER)
-        {
-            timeToSpawn = 0;
-            GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, bounds.size.y, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-            UIController.player_Credits -= COST_FOR_SOLDIER;
-        }
+		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec && UIController.uzywac_Credits >= ConfigController.Config.CostForSoldier)
+		{
+			timeToSpawn = 0;
+			GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, bounds.size.y, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
+			UIController.uzywac_Credits -= ConfigController.Config.CostForSoldier;
+		}
+		else
+			UIController.DisplayInfoForPlayer1("no money for a new soldier");
     }
 }
