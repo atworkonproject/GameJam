@@ -15,6 +15,8 @@ public class BuildController : MonoBehaviour {
     public static int FARM_COST = 30;
     public static int BARRACKS_COST = 20;
 
+    public bool playerFallen;
+
     gameplayRecorder playerRec, enemyRec;
 
     float levelTimeElapsed;
@@ -24,6 +26,7 @@ public class BuildController : MonoBehaviour {
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
         levelTimeElapsed = 0;
+
 
         playerRec = new gameplayRecorder();
         enemyRec = new gameplayRecorder();
@@ -50,6 +53,8 @@ public class BuildController : MonoBehaviour {
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
                     builder.Barracks.Add((BarrackBase)b);
                     ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer);
+
+                    go.GetComponent<BarrackBase>().Fallen = playerFallen;
 
                     builder.Credits -= BuildController.BARRACKS_COST;
 					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
@@ -81,6 +86,8 @@ public class BuildController : MonoBehaviour {
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
                     builder.Farms.Add((FarmBase)b);
                     ((FarmBase)b).Init(builder.fallen, builder.amIPlayer);
+
+                    go.GetComponent<BarrackBase>().Fallen = playerFallen;
 
                     builder.Credits -= BuildController.FARM_COST;
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);

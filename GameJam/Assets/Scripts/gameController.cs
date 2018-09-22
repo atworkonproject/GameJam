@@ -13,6 +13,8 @@ public class gameController : MonoBehaviour
 
     public static UserData playerData, AIData;
 
+    public GameObject buildController;
+
     //================================ FUNCTIONS ==================================
     void Awake()
     {
@@ -34,9 +36,12 @@ public class gameController : MonoBehaviour
     void Start()
     {
         //TEMP
-        bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 2));
+        bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 1));
         playerData.NewGame(!AIIsFallen, true);
         AIData.NewGame(AIIsFallen, false);
+
+        BuildController bc = buildController.GetComponent<BuildController>();
+        bc.playerFallen = !AIIsFallen;
     }
 
     void Update()

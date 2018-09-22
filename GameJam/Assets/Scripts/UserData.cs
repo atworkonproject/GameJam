@@ -10,7 +10,7 @@ public class UserData : MonoBehaviour
     public List<BarrackBase> BarracksDBG;
 
     public float Credits;
-    public bool fallen;//god or evil
+    public bool fallen; //god or evil
     public bool amIPlayer;//or Ai
 
     public gameplayRecorder rec;
