@@ -20,7 +20,8 @@ public class BarrackBase : BaseBaseClass {
     override public void Init2()
     {
         GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
-		HP = ConfigController.Config.BarracksHP;
+		MaxHP = ConfigController.Config.BarracksHP;
+        HP = MaxHP;
     }
 
     // Update is called once per frame
