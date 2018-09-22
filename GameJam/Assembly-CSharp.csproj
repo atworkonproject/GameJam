@@ -65,6 +65,7 @@
     <Compile Include="Assets\Audio\SoundManager.cs" />
     <Compile Include="Assets\MainMenu\MainCameraGameOver.cs" />
     <Compile Include="Assets\MainMenu\MainCameraMainMenu.cs" />
+    <Compile Include="Assets\Scripts\AI.cs" />
     <Compile Include="Assets\Scripts\Bases\BarrackBase.cs" />
     <Compile Include="Assets\Scripts\Bases\BaseArrayController.cs" />
     <Compile Include="Assets\Scripts\Bases\BaseBaseClass.cs" />

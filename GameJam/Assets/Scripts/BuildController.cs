@@ -53,6 +53,8 @@ public class BuildController : MonoBehaviour {
 
                     builder.Credits -= BuildController.BARRACKS_COST;
 					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
+
+					selectedTileC.DisplayedSelectedTile.gameObject.SetActive(false);
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -81,9 +83,9 @@ public class BuildController : MonoBehaviour {
         ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
 
         builder.Credits -= BuildController.BARRACKS_COST;
-    }
+	}
 
-    public void BuildFarmPlayer(UserData builder)
+	public void BuildFarmPlayer(UserData builder)
 	{
 		if (gameController.playerData.Credits >= ConfigController.Config.FarmBuyCost)
 		{
@@ -103,8 +105,10 @@ public class BuildController : MonoBehaviour {
 
                     builder.Credits -= BuildController.FARM_COST;
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
-                }
-                else
+
+					selectedTileC.DisplayedSelectedTile.gameObject.SetActive(false);
+				}
+				else
 					UIController.DisplayInfoForPlayer0("place occupied");
 			}
 			else
@@ -130,9 +134,9 @@ public class BuildController : MonoBehaviour {
         ((FarmBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
 
         builder.Credits -= BuildController.FARM_COST;
-    }
+	}
 
-    [Serializable]
+	[Serializable]
 	public class BaseListRow
 	{
 		public List<BaseBaseClass> row;

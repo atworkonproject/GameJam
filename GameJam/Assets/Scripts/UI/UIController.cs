@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour {
 				if (Time.timeSinceLevelLoad - InfoForPlayer_LastDisplayedTime1 > ConfigController.Config.InfoTextDisplayTime)
 					InfoForPlayerText1.gameObject.SetActive(false);//hide
 
-			UIController.nieUzywac_CreditsTextStatic.text = "$ " + Mathf.Round(gameController.playerData.Credits).ToString();
+			UIController.nieUzywac_CreditsTextStatic.text = Mathf.Round(gameController.playerData.Credits).ToString();
 		}
     }
 }
