@@ -74,7 +74,6 @@
     <Compile Include="Assets\Scripts\gameController.cs" />
     <Compile Include="Assets\Scripts\gameplayRecorder.cs" />
     <Compile Include="Assets\Scripts\InputController.cs" />
-    <Compile Include="Assets\Scripts\PlayerBases.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Assets\Scripts\UI\DamageBubble.cs" />
     <Compile Include="Assets\Scripts\UI\DamageBubbleController.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
+    <Compile Include="Assets\Scripts\UserData.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Adam/Desktop/GameJam/GameJam/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

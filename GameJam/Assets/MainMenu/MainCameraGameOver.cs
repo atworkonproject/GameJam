@@ -15,7 +15,7 @@ public class MainCameraGameOver : MonoBehaviour {
 	}
 	public void OnRestartButtonClicked()
 	{
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(0);
 	}
 
 }
