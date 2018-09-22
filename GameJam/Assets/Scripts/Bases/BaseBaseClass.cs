@@ -12,6 +12,9 @@ public class BaseBaseClass : MonoBehaviour {
     public int MaxHP;
 	protected int HP;
 
+    public Sprite AngelBase;
+    public Sprite DevilBase;
+
     public void Init(bool isFallen, bool isPlayers, Vector2Int pos)
     {
         fallen = isFallen;

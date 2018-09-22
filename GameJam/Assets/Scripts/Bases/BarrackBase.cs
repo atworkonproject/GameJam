@@ -9,9 +9,6 @@ public class BarrackBase : BaseBaseClass {
 
     public GameObject Soldier01prefab;
 
-    public Sprite DevilBase;
-    public Sprite AngelBase;
-
 	public DamageBubbleController DamageBubblC;
 
 	// Use this for initialization
