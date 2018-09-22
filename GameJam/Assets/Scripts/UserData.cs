@@ -27,18 +27,36 @@ public class UserData : MonoBehaviour
 
         rec = new gameplayRecorder();
 
-        Credits = ConfigController.Config.startPlayerCredits;
         fallen = isFallen;
         amIPlayer = isPlayer;
+
+        StartLevel();
     }
 
     public void NextLevel()
     {
         //gamecontroller deletes all bases
-        Credits = ConfigController.Config.startPlayerCredits;
 
         //swap fallen and not falle
         fallen = !fallen;
+
+        StartLevel();
+    }
+
+    public void StartLevel()
+    {
+        Credits = ConfigController.Config.FarmBuyCost * 2;//cash for the first farm!
+
+        //without recording it, put a farm around center of my part of map
+        Vector2Int firstFarmPos;
+        if (amIPlayer)
+            firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y / 4);
+        else
+            firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y * 3 / 4);
+        //we can use this because AI version of build farm don't record and don't use  selection base - cursor
+        GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().BuildFarmAI(this, firstFarmPos);
+
+        Credits = ConfigController.Config.startPlayerCredits;//after creating first farm!
     }
 
     public void manualUpdate()

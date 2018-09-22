@@ -1,5 +1,5 @@
 TO DO list
-na pocz¹tku farma dla obu druzyn
+--na pocz¹tku farma dla obu druzyn
 budynki HP i ich niszczenie przez ludzi
 to ze jak sie zniszczy wszysktie budynki to przejdzie do nast levelu
 enemy I piesi
@@ -7,11 +7,11 @@ grafiki: budynki, ludzie, UI, kursor
 UI z opisaem co to, ile kosztuje, skrót klawiaturowy, background, i wersje ludzików: obronca atakujacy i atakujacy budynki
 na koñcu wypoziomowaæ trudnoœæ: ceny produktów, spawnowanie, AI... czas?
 
-
 BUGFIX
 przy kliknieciu na pole rzeczy do wyboru powinny byæ wycentrowane wzgl. pola a nie mousepos
 przy krawedzi ekranu nie widaæ rzeczy do wyboru
 rzeczy do wyboru siê nie skaluj¹ i nie przesuwaj¹ wzgl. selected base
+
 ****opcjonalne
 animacja obracania planszy czy coœ...
 SFX, i louder music: stawianie budynków, attack, zniszczenie budynku (jak ma 0 hp to nie dzia³a)
@@ -26,3 +26,4 @@ damage '-1' itp. nad ludŸmi i budynkami atakowanymi
 BG np. woda jakas i skraj levelu
 animacje walki / particle krwi
 numer levelu który aktualnie przechodzimy. Choæ mo¿e nie, bo poziom trudnoœci 'inteligentny' :)
+anio³y mog¹ chodziæ w grupach a diaby osobno e

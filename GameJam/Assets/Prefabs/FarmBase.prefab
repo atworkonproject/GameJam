@@ -52,8 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffff7254dbb742045a499dc86fb2410b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Xindex: 0
-  Yindex: 0
+  MyIndexes: {x: 0, y: 0}
+  fallen: 0
+  MaxHP: 0
+  AngelBase: {fileID: 21300000, guid: 6b4d325f3fa91b847a13b71d3a52b95f, type: 3}
+  DevilBase: {fileID: 21300000, guid: 6b4d325f3fa91b847a13b71d3a52b95f, type: 3}
+  LastTimeFarmEarned: 0
 --- !u!212 &212864465340856412
 SpriteRenderer:
   m_ObjectHideFlags: 1
