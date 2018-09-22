@@ -55,8 +55,8 @@ MonoBehaviour:
   MyIndexes: {x: 0, y: 0}
   fallen: 0
   MaxHP: 0
-  AngelBase: {fileID: 21300000, guid: 6b4d325f3fa91b847a13b71d3a52b95f, type: 3}
-  DevilBase: {fileID: 21300000, guid: 6b4d325f3fa91b847a13b71d3a52b95f, type: 3}
+  AngelBase: {fileID: 21300000, guid: 9d151eccd438d9d4f98729942e6088f6, type: 3}
+  DevilBase: {fileID: 21300000, guid: 8f7765ba0ebff2f41a792bc9bcf2ef2d, type: 3}
   LastTimeFarmEarned: 0
 --- !u!212 &212864465340856412
 SpriteRenderer:
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6b4d325f3fa91b847a13b71d3a52b95f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d151eccd438d9d4f98729942e6088f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

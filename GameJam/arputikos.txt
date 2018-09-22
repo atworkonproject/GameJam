@@ -14,8 +14,8 @@ rzeczy do wyboru siê nie skaluj¹ i nie przesuwaj¹ wzgl. selected base
 
 ****opcjonalne
 animacja obracania planszy czy coœ...
-SFX, i louder music: stawianie budynków, attack, zniszczenie budynku (jak ma 0 hp to nie dzia³a)
-, wybranie kwadracika, zespawnowanie, dostanie kasy, pocz¹tek levelu
+SFX, i louder music: -stawianie budynków, -ukonczenie budowy, attack, -zniszczenie budynku (jak ma 0 hp to nie dzia³a)
+, -wybranie kwadracika, -zespawnowanie, -dostanie kasy, pocz¹tek levelu
 fade in
 enemy II ³ucznicy
 enemy III czolgi
