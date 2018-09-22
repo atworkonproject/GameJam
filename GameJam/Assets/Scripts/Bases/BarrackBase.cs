@@ -17,6 +17,11 @@ public class BarrackBase : BaseBaseClass {
         timeToSpawn = 0f;
     }
 
+    override public void Init2()
+    {
+        GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
+    }
+
     // Update is called once per frame
     void Update () {
         timeToSpawn += Time.deltaTime;
@@ -29,12 +34,6 @@ public class BarrackBase : BaseBaseClass {
 		}
 		else
 			UIController.DisplayInfoForPlayer1("no money for a new soldier");
-    }
-
-    public void setFallen(bool fall)
-    {
-        fallen = fall;
-        GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
     }
 
 }

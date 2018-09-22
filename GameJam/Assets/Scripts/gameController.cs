@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour
 {
-
     
     //================================ VARIABLES ==================================
     private static gameController _instance = null;
     public static gameController i { get { return _instance; } }//Instance
 
     public static UserData playerData, AIData;
+    private AI ai;
 
     public GameObject buildController;
+
+    public static float timeElapsed { get; private set; }//of current level
 
     //================================ FUNCTIONS ==================================
     void Awake()
@@ -33,13 +35,16 @@ public class gameController : MonoBehaviour
     {
         playerData = new UserData();
         AIData = new UserData();
+        ai = new AI();
     }
     void Start()
     {
+        timeElapsed = 0;
         //TEMP
         bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 1));
         playerData.NewGame(!AIIsFallen, true);
         AIData.NewGame(AIIsFallen, false);
+        ai.Init(AIData);
 
         setBuildingsFallen();
     }
@@ -57,6 +62,10 @@ public class gameController : MonoBehaviour
             Win();
         if (Input.GetKeyDown("g"))//temp
             GameOver();
+
+        ai.Update();
+
+        timeElapsed += Time.deltaTime;
     }
 
     private void CleanStage()
@@ -80,10 +89,19 @@ public class gameController : MonoBehaviour
 
     public void Win()
     {
+        timeElapsed = 0;
         //swap sides and play again
         CleanStage();
+
         playerData.NextLevel();
         AIData.NextLevel();
+        ai.NextLevel();
+
+        //swap recordings...so the PC now has recorded player moves
+        gameplayRecorder g = AIData.rec;
+        AIData.rec = playerData.rec;
+        playerData.rec = g;
+        playerData.rec.ResetAll();
 
         setBuildingsFallen();
     }

@@ -7,11 +7,19 @@ public class BaseBaseClass : MonoBehaviour {
 	public Vector2Int MyIndexes;
     protected bool fallen;
     bool ownerIsPlayer;
+    Vector2Int position;
 
-    public void Init(bool isFallen, bool isPlayers)
+    public void Init(bool isFallen, bool isPlayers, Vector2Int pos)
     {
         fallen = isFallen;
         ownerIsPlayer = isPlayers;
+        position = pos;
+        Init2();
+    }
+
+    public virtual void Init2()
+    {
+
     }
 
     // Use this for initialization
@@ -23,9 +31,4 @@ public class BaseBaseClass : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    public void setFallen(bool fall)
-    {
-        fallen = fall;
-    }
 }

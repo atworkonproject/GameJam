@@ -9,7 +9,7 @@ public class BaseArrayController : MonoBehaviour {
     public static BaseBaseClass NoBase;
 
     public static BaseBaseClass EmptyClass;
-    SelectedTileController selectedTileC;
+    static SelectedTileController selectedTileC;
     BuildController baseC;
 
     void Start() {
@@ -64,7 +64,7 @@ public class BaseArrayController : MonoBehaviour {
         return returnedIndexes;
     }
 
-    public Vector2 getWorldPositionForIndexes(Vector2Int indexes)
+    public static Vector2 getWorldPositionForIndexes(Vector2Int indexes)
     {
         float selectedTileWidth = selectedTileC.DisplayedSelectedTileSprite.bounds.size.x;
         float selectedTileHeight = selectedTileC.DisplayedSelectedTileSprite.bounds.size.y;

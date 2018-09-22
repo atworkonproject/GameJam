@@ -19,14 +19,10 @@ public class BuildController : MonoBehaviour {
 
     gameplayRecorder playerRec, enemyRec;
 
-    float levelTimeElapsed;
-
     void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
-        levelTimeElapsed = 0;
-
 
         playerRec = new gameplayRecorder();
         enemyRec = new gameplayRecorder();
@@ -36,11 +32,11 @@ public class BuildController : MonoBehaviour {
 	void Update () {
 		
 	}
-
-	public void BuildBarracks(UserData builder)
+     
+    //with recording (player uses this)
+	public void BuildBarracksPlayer(UserData builder)
 	{
-        Debug.Log("Buduje budynki o fallen " + playerFallen);
-		if (builder.Credits > ConfigController.Config.BarracksBuyCost)
+		if (builder.Credits >= ConfigController.Config.BarracksBuyCost)
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
@@ -53,12 +49,10 @@ public class BuildController : MonoBehaviour {
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
                     builder.Barracks.Add((BarrackBase)b);
-                    ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer);
-
-                    go.GetComponent<BarrackBase>().setFallen(playerFallen);
+                    ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
 
                     builder.Credits -= BuildController.BARRACKS_COST;
-					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, levelTimeElapsed, b.MyIndexes);
+					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -69,10 +63,29 @@ public class BuildController : MonoBehaviour {
 		else
 			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
+    //no recording (because AI uses this)
+    public void BuildBarracksAI(UserData builder, Vector2Int pos)
+    {
+        if (builder.Credits < ConfigController.Config.BarracksBuyCost)
+            return;
+        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+            return;
 
-	public void BuildFarm(UserData builder)
+        GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+        Vector2 basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
+        go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
+        BaseBaseClass b = go.GetComponent<BaseBaseClass>();
+        b.MyIndexes = pos;
+        BaseArrayController.PutBase(pos, b);
+        builder.Barracks.Add((BarrackBase)b);
+        ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
+
+        builder.Credits -= BuildController.BARRACKS_COST;
+    }
+
+    public void BuildFarmPlayer(UserData builder)
 	{
-		if (gameController.playerData.Credits > ConfigController.Config.FarmBuyCost)
+		if (gameController.playerData.Credits >= ConfigController.Config.FarmBuyCost)
 		{
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
@@ -86,12 +99,10 @@ public class BuildController : MonoBehaviour {
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
                     builder.Farms.Add((FarmBase)b);
-                    ((FarmBase)b).Init(builder.fallen, builder.amIPlayer);
-
-                    //go.GetComponent<BarrackBase>().Fallen = playerFallen;
+                    ((FarmBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
 
                     builder.Credits -= BuildController.FARM_COST;
-                    builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, levelTimeElapsed, b.MyIndexes);
+                    builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
                 }
                 else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -102,8 +113,26 @@ public class BuildController : MonoBehaviour {
 		else
 			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
+    public void BuildFarmAI(UserData builder, Vector2Int pos)
+    {
+        if (builder.Credits < ConfigController.Config.BarracksBuyCost)
+            return;
+        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+            return;
 
-	[Serializable]
+        GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+        Vector2 basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
+        go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
+        BaseBaseClass b = go.GetComponent<BaseBaseClass>();
+        b.MyIndexes = pos;
+        BaseArrayController.PutBase(pos, b);
+        builder.Farms.Add((FarmBase)b);
+        ((FarmBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
+
+        builder.Credits -= BuildController.FARM_COST;
+    }
+
+    [Serializable]
 	public class BaseListRow
 	{
 		public List<BaseBaseClass> row;

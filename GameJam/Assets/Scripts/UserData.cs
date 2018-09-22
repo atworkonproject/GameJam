@@ -43,7 +43,6 @@ public class UserData : MonoBehaviour
     {
         //check if all hp of bases are > 0 if yes game over
 
-
         float creditIncrement = 0;
         foreach (FarmBase farm in Farms)
             creditIncrement += ConfigController.Config.FarmEarnPerSecond * Time.deltaTime;
