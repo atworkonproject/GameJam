@@ -217,6 +217,8 @@ public class Soldier01Controller : Soldier {
     override public void Hurt(Soldier attacker, int damage)
     {
         HP -= damage;
+        SFXController.PlaySound(SOUNDS.HIT);
+
         if (HP <= 0)
         {
             HP = 0;

@@ -25,6 +25,9 @@ public class BarrackBase : BaseBaseClass {
 
 	// Update is called once per frame
 	void Update () {
+        if (getHP() <= 0)
+            return;
+
         timeToSpawn += Time.deltaTime;
 		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec)
 		{

@@ -62,6 +62,8 @@ public class SelectedTileController : MonoBehaviour {
 		if (!RectTransformUtility.RectangleContainsScreenPoint(buttonsRectTransform, Input.mousePosition))//if user didn't click buttons
 		{
 			DisplayTile(MainCamera.ScreenToWorldPoint(Input.mousePosition));
+
+            SFXController.PlaySound(SOUNDS.SELECT_BASE);
 		}
 		else
 			HideSelectionTile();

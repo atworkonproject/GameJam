@@ -45,7 +45,8 @@ public class BuildController : MonoBehaviour {
                     ((BarrackBase)b).Init(builder, b.MyIndexes);
 
                     builder.Credits -= BuildController.BARRACKS_COST;
-					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
+                    SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+                    builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
 
 					selectedTileC.HideSelectionTile();
 				}
@@ -78,6 +79,7 @@ public class BuildController : MonoBehaviour {
         ((BarrackBase)b).Init(builder, b.MyIndexes);
 
         builder.Credits -= BuildController.BARRACKS_COST;
+        SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
 	public void BuildFarmPlayer(UserData builder)
@@ -99,6 +101,7 @@ public class BuildController : MonoBehaviour {
                     ((FarmBase)b).Init(builder, b.MyIndexes);
 
                     builder.Credits -= BuildController.FARM_COST;
+                    SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
 
 					selectedTileC.HideSelectionTile();
@@ -131,7 +134,8 @@ public class BuildController : MonoBehaviour {
         ((FarmBase)b).Init(builder, b.MyIndexes);
 
         builder.Credits -= BuildController.FARM_COST;
-	}
+        SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+    }
 
 	[Serializable]
 	public class BaseListRow

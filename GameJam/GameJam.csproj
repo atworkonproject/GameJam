@@ -308,8 +308,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Audio\AudioController.cs" />
-    <Compile Include="Assets\Audio\SoundManager.cs" />
     <Compile Include="Assets\MainMenu\MainCameraGameOver.cs" />
     <Compile Include="Assets\MainMenu\MainCameraMainMenu.cs" />
     <Compile Include="Assets\Scripts\AI.cs" />
@@ -317,9 +315,9 @@
     <Compile Include="Assets\Scripts\Bases\BaseArrayController.cs" />
     <Compile Include="Assets\Scripts\Bases\BaseBaseClass.cs" />
     <Compile Include="Assets\Scripts\Bases\FarmBase.cs" />
+    <Compile Include="Assets\Scripts\BFXController.cs" />
     <Compile Include="Assets\Scripts\BuildController.cs" />
     <Compile Include="Assets\Scripts\cameraScript.cs" />
-    <Compile Include="Assets\Scripts\Soldier.cs" />
     <Compile Include="Assets\Scripts\ConfigController.cs" />
     <Compile Include="Assets\Scripts\ConfigurationObject.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
@@ -327,7 +325,9 @@
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
+    <Compile Include="Assets\Scripts\Soldier.cs" />
     <Compile Include="Assets\Scripts\Soldier01Controller.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\TopRedSprite.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
     <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />
@@ -336,6 +336,7 @@
     <Compile Include="Assets\Scripts\UI\RadialMenuController.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UserData.cs" />
+    <Compile Include="Assets\Scripts\SFXController.cs" />
     <Compile Include="Assets\Simple Scene Fade Load System\Scripts\Fader.cs" />
     <Compile Include="Assets\Simple Scene Fade Load System\Scripts\Initiate.cs" />
   </ItemGroup>

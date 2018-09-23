@@ -48,7 +48,8 @@ public class BaseBaseClass : MonoBehaviour {
         {
             HP = 0;
             //destroy this building - change the color
-            this.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+            this.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
+            SFXController.PlaySound(SOUNDS.BASE_DESTROY);
         }
     }
 }
