@@ -16,9 +16,18 @@ public class HPBar : MonoBehaviour {
 
 	public void SetHP(float newHPValue, float maxHPValue)
 	{
+		if (!this.gameObject.activeSelf)
+			this.gameObject.SetActive(true);//show if damaged
+
+		if (newHPValue <= 0)
+		{
+			newHPValue = 0.0f;
+			this.gameObject.SetActive(false);
+		}
+
 		Foreground.transform.localScale = new Vector3(
-			Foreground.transform.localScale.x,
 			newHPValue / maxHPValue,
+			Foreground.transform.localScale.y,
 			Foreground.transform.localScale.z
 			);
 	}

@@ -7,6 +7,7 @@ public class BaseBaseClass : MonoBehaviour {
 	public Vector2Int MyIndexes;
     public UserData owner { get; protected set; }
     Vector2Int position;
+	public HPBar MyHPBar;
 
     protected int HP = 1;
 
@@ -15,6 +16,8 @@ public class BaseBaseClass : MonoBehaviour {
 
     public void Init(UserData _owner, Vector2Int pos)
     {
+		MyHPBar = GetComponentInChildren<HPBar>().GetComponent<HPBar>();
+		MyHPBar.gameObject.SetActive(false);//hide
         owner = _owner;
         position = pos;
         Init2();
@@ -41,7 +44,19 @@ public class BaseBaseClass : MonoBehaviour {
 
         HP -= atk;
 
-        DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+		if (this is FarmBase)
+		{
+			MyHPBar.SetHP(HP, ConfigController.Config.FarmMaxHP);
+			Debug.Log("farm");
+		}
+		else if (this is BarrackBase)
+		{
+			MyHPBar.SetHP(HP, ConfigController.Config.BarracksMaxHP);
+			Debug.Log("barrack");
+
+		}
+
+		DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
         damBubbleController.CreateDamageBubble(transform.position, atk);
 
         if(HP <= 0)

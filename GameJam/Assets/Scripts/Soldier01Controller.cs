@@ -23,9 +23,16 @@ public class Soldier01Controller : Soldier {
     float attackTimer;
     bool attackedAlready;
 
-    public void Init(UserData _owner)
+	DamageBubbleController DamageBubbleC;
+	HPBar MyHPBar;
+
+	public void Init(UserData _owner)
     {
-        owner = _owner;
+		MyHPBar = GetComponentInChildren<HPBar>(true);
+		MyHPBar.gameObject.SetActive(false);//hide
+		DamageBubbleC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+
+		owner = _owner;
         fallen = owner.fallen;
 
         target = null;
@@ -217,6 +224,9 @@ public class Soldier01Controller : Soldier {
     override public void Hurt(Soldier attacker, int damage)
     {
         HP -= damage;
+
+		MyHPBar.SetHP(HP, ConfigController.Config.Soldier01MaxHP);
+		DamageBubbleC.CreateDamageBubble(this.transform.position, damage);
         SFXController.PlaySound(SOUNDS.HIT);
 
         if (HP <= 0)
