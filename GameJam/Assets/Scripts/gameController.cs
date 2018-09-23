@@ -18,6 +18,8 @@ public class gameController : MonoBehaviour
 
     public GameObject buildController;
 
+    public static List<Soldier> soldiers;
+
     public static float timeElapsed { get; private set; }//of current level
 
     //================================ FUNCTIONS ==================================
@@ -37,6 +39,7 @@ public class gameController : MonoBehaviour
     {
         playerData = gameObject.AddComponent<UserData>();
         AIData = gameObject.AddComponent<UserData>();
+        soldiers = new List<Soldier>();
         ai = new AI();
     }
     void Start()
@@ -90,11 +93,14 @@ public class gameController : MonoBehaviour
         playerData.DestroyAllBases();
         AIData.DestroyAllBases();
 
-        {
-            GameObject[] units = GameObject.FindGameObjectsWithTag("soldier");
-            foreach (var u in units)
-                Destroy(u);
-        }
+        
+        foreach (var x in soldiers)
+            Destroy(x);
+        soldiers.Clear();
+        GameObject[] units = GameObject.FindGameObjectsWithTag("soldier");
+        foreach (var u in units)
+            Destroy(u.gameObject);
+        //soldiers.RemoveAll();
     }
 
     public void Win()

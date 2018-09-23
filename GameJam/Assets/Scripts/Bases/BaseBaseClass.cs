@@ -34,8 +34,11 @@ public class BaseBaseClass : MonoBehaviour {
 		
 	}
 
-    void Damage(int atk)
+    public int getHP() { return HP; }
+    public void Hurt(int atk)
     {
+        if (HP <= 0) return;
+
         HP -= atk;
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
@@ -45,7 +48,8 @@ public class BaseBaseClass : MonoBehaviour {
         {
             HP = 0;
             //destroy this building - change the color
-            this.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+            this.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
+            SFXController.PlaySound(SOUNDS.BASE_DESTROY);
         }
     }
 }
