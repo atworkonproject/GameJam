@@ -20,11 +20,13 @@ public class BarrackBase : BaseBaseClass {
 	override public void Init2()
     {
         GetComponent<SpriteRenderer>().sprite = (owner.fallen) ? DevilBase : AngelBase;
-        HP = ConfigController.Config.BarracksMaxHP;
+        HP = getMaxHP();
     }
 
-	// Update is called once per frame
-	void Update () {
+    override protected int getMaxHP() { return ConfigController.Config.BarracksMaxHP; }
+
+    // Update is called once per frame
+    void Update () {
         if (getHP() <= 0)
             return;
 
@@ -38,6 +40,7 @@ public class BarrackBase : BaseBaseClass {
                 Soldier01Controller ctrl = soldier.GetComponent<Soldier01Controller>();
                 ctrl.Init(owner);
                 gameController.soldiers.Add(ctrl);
+                SFXController.PlaySound(SOUNDS.SPAWN);
 				owner.Credits -= ConfigController.Config.CostForSoldier;
                 if(owner.amIPlayer)
                     DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier);
