@@ -14,6 +14,8 @@ public class gameController : MonoBehaviour
     public static gameController i { get { return _instance; } }//Instance
 
     public static UserData playerData, AIData;
+    public UserData playerData2;
+    public UserData AIData2;
     private AI ai;
 
     public GameObject buildController;
@@ -37,8 +39,8 @@ public class gameController : MonoBehaviour
     }
     void Init()
     {
-        playerData = gameObject.AddComponent<UserData>();
-        AIData = gameObject.AddComponent<UserData>();
+        playerData = playerData2;
+        AIData = AIData2;
         soldiers = new List<Soldier>();
         ai = new AI();
     }
@@ -146,7 +148,7 @@ public class gameController : MonoBehaviour
 
     public void CheckIfWon()
     {
-        if (timeElapsed < 1.0)
+        if (timeElapsed < 10.0)
             return;//to fast to win, propably scene not created yet and bases = 0 so went here
 
         if(buildController.GetComponent<BuildController>().playerAliveBases <= 0)//jestli oba 0 to i tak lost
