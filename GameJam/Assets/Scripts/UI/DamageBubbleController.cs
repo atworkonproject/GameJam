@@ -31,21 +31,27 @@ public class DamageBubbleController : MonoBehaviour {
 			damBubbleController.CreateDamageBubble(transform.position, Atk);
 		}
 		*/
-	public void CreateDamageBubble(Vector2 worldPosition, float damagePositive, bool isPositive = false)
+	public void CreateDamageBubble(Vector2 worldPosition, float damagePositive, bool isPositive = false, bool isCash = false)
 	{
 		GameObject go = Instantiate(FirstDamageBubble.gameObject);
 		DamageBubble createdDamageBubble = go.GetComponent<DamageBubble>();
 		createdDamageBubble.name = "-" + damagePositive.ToString();
+		TextMesh MytextMesh = createdDamageBubble.GetComponent<TextMesh>();
 		if (isPositive)
 		{
-			createdDamageBubble.GetComponent<TextMesh>().text = "+" + damagePositive.ToString();
-			createdDamageBubble.GetComponent<TextMesh>().color = Color.green;
+			MytextMesh.text = "+" + damagePositive.ToString();
+			MytextMesh.color = Color.green;
 		}
 		else
 		{
-			createdDamageBubble.GetComponent<TextMesh>().text = "-" + damagePositive;
-			createdDamageBubble.GetComponent<TextMesh>().color = Color.red;
+			MytextMesh.text = "-" + damagePositive;
+			MytextMesh.color = Color.red;
 		}
+		if(isCash)
+		{
+			MytextMesh.text = "$" + MytextMesh.text;
+		}
+
 		createdDamageBubble.gameObject.SetActive(true);
 		createdDamageBubble.transform.SetParent(this.transform);
 

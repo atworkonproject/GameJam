@@ -37,7 +37,7 @@ public class BuildController : MonoBehaviour {
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
-				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
+				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBaseStatic)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(BarracksSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(BarracksBasePrefab.gameObject,
@@ -67,7 +67,7 @@ public class BuildController : MonoBehaviour {
     {
         if (builder.Credits < ConfigController.Config.BarracksBuyCost)
             return;
-        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic)
             return;
         if (pos.x < 0 || pos.y < 0)
             return;
@@ -92,7 +92,7 @@ public class BuildController : MonoBehaviour {
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
-				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
+				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBaseStatic)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(FarmBasePrefab.gameObject,
@@ -124,7 +124,7 @@ public class BuildController : MonoBehaviour {
     {
         if (builder.Credits < ConfigController.Config.FarmBuyCost)
             return;
-        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic)
             return;
         if (pos.x < 0 || pos.y < 0)
             return;

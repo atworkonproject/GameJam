@@ -84,7 +84,7 @@ public class AI
                 return new Vector2Int(-1, -1);
             pos.x = UnityEngine.Random.Range(0, BaseArrayController.mapSize.x);
             pos.y = UnityEngine.Random.Range(BaseArrayController.mapSize.y / 2, BaseArrayController.mapSize.y);
-        } while (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase);
+        } while (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic);
 
         return pos;//free pos
     }

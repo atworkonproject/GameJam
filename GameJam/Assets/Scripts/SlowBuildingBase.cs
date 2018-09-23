@@ -59,6 +59,7 @@ public class SlowBuildingBase : MonoBehaviour
 		DisplayedSelectedTile_MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 
 		this.gameObject.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
+		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, BaseArrayController.SlowBuildingBaseStatic);
 		GetComponent<SpriteRenderer>().sprite = (builder.fallen) ? DevilBase : AngelBase;
 
 	}
@@ -72,7 +73,7 @@ public class SlowBuildingBase : MonoBehaviour
 		basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
 		DisplayedSelectedTile_MyIndexes = pos;
 		this.gameObject.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
-		BaseArrayController.PutBase(pos, BaseArrayController.SlowBuildingBase);
+		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, BaseArrayController.SlowBuildingBaseStatic);
 		GetComponent<SpriteRenderer>().sprite = (builder.fallen) ? DevilBase : AngelBase;
 	}
 
@@ -82,11 +83,11 @@ public class SlowBuildingBase : MonoBehaviour
 		go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
 		BaseBaseClass b = go.GetComponent<BaseBaseClass>();
 		b.MyIndexes = DisplayedSelectedTile_MyIndexes;
-		if (BaseArrayController.GetBase(DisplayedSelectedTile_MyIndexes) == BaseArrayController.SlowBuildingBase)//destroy slowBuildingBase
+		if (BaseArrayController.GetBase(DisplayedSelectedTile_MyIndexes) == BaseArrayController.SlowBuildingBaseStatic)//destroy slowBuildingBase
 			BaseArrayController.RemoveBase(DisplayedSelectedTile_MyIndexes);
 		else
 			Debug.Log("nobuilding base a powinna byc");
-		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, BaseArrayController.NoBase);
+		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, BaseArrayController.NoBaseStatic);
 
 		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, b);
 		if (b is BarrackBase)
