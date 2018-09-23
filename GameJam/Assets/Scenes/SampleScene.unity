@@ -1136,6 +1136,7 @@ MonoBehaviour:
   mapObject: {fileID: 2004729410}
   minZoom: 0.2
   scrollSensitivity: 2.5
+  CAM_MARGIN: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -3068,7 +3069,6 @@ MonoBehaviour:
   BackgroundSprite: {fileID: 0}
   selectedTileC: {fileID: 0}
   baseArrayC: {fileID: 0}
-  playerFallen: 0
 --- !u!1 &1910513587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3236,7 +3236,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 50aee265e95f1cf4d8dd03be32fba2a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b06fcd63cd632548a15daaaeda1a722, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

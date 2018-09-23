@@ -16,6 +16,8 @@ public class cameraScript : MonoBehaviour {
     public float minZoom; //% of maxZoom
     public float scrollSensitivity;
 
+    public float CAM_MARGIN = 1.0f;//margin outside of the map
+
     Vector3 mouseLastPos, moveVector;
 
 	// Use this for initialization
@@ -104,7 +106,7 @@ public class cameraScript : MonoBehaviour {
         float cX = cam.orthographicSize * cam.aspect * 2;
         float cY = cam.orthographicSize * 2;
         Rect c = new Rect(cam.transform.position.x -cX/2.0f + moveBy.x, cam.transform.position.y -cY/2.0f + moveBy.y, cX, cY);
-        Rect m = new Rect(mapObject.transform.position -mapBounds.size/2.0f,mapBounds.size);
+        Rect m = new Rect(mapObject.transform.position -mapBounds.size/2.0f + new Vector3(-CAM_MARGIN, -CAM_MARGIN, 0), mapBounds.size + new Vector3(2* CAM_MARGIN,2* CAM_MARGIN, 0));
         if (c.x < m.x)
         {
             moveBy.x += m.x - c.x;

@@ -7,15 +7,12 @@ public class FarmBase : BaseBaseClass {
 
 	// Update is called once per frame
 	void Update () {
-		
-
 
 	}
 
     override public void Init2()
     {
         GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
-        MaxHP = ConfigController.Config.BarracksHP;
-        HP = MaxHP;
+        HP = ConfigController.Config.BarracksHP;
     }
 }

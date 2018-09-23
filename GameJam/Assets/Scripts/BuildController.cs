@@ -15,8 +15,6 @@ public class BuildController : MonoBehaviour {
     public static int FARM_COST = 30;
     public static int BARRACKS_COST = 20;
 
-    public bool playerFallen;
-
     gameplayRecorder playerRec, enemyRec;
 
     void Start () {

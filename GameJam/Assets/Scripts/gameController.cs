@@ -42,13 +42,18 @@ public class gameController : MonoBehaviour
     void Start()
     {
         timeElapsed = 0;
-        //TEMP
-        bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 1));
+
+        bool AIIsFallen = (0 == UnityEngine.Random.Range(0, 2));
         playerData.NewGame(!AIIsFallen, true);
         AIData.NewGame(AIIsFallen, false);
         ai.Init(AIData);
 
-        setBuildingsFallen();
+        UpdateBgSprite();
+    }
+
+    private void UpdateBgSprite()//rotate map if player is evil or good
+    {
+         GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().flipY = playerData.fallen;
     }
 
     void Update()
@@ -92,12 +97,6 @@ public class gameController : MonoBehaviour
         }
     }
 
-    public void setBuildingsFallen()
-    {
-        BuildController bc = buildController.GetComponent<BuildController>();
-        bc.playerFallen = playerData.fallen;
-    }
-
     public void Win()
     {
         timeElapsed = 0;
@@ -115,7 +114,7 @@ public class gameController : MonoBehaviour
         playerData.rec.ResetAll();
         AIData.rec.SwapSides();
 
-        setBuildingsFallen();
+        UpdateBgSprite();
     }
 
     public void GameOver()
