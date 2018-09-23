@@ -14,6 +14,10 @@ public class BaseBaseClass : MonoBehaviour {
     public Sprite AngelBase;
     public Sprite DevilBase;
 
+    public Sprite AngelBaseShadow;
+    public Sprite DevilBaseShadow;
+    public SpriteRenderer shadow;
+
     public void Init(UserData _owner, Vector2Int pos)
     {
 		MyHPBar = GetComponentInChildren<HPBar>().GetComponent<HPBar>();
