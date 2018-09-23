@@ -49,8 +49,8 @@ public class DamageBubbleController : MonoBehaviour {
 		createdDamageBubble.gameObject.SetActive(true);
 		createdDamageBubble.transform.SetParent(this.transform);
 
-		//GameObject camGO = GameObject.FindWithTag("MainCamera");
-		//Vector3 screenPoint = camGO.GetComponent<Camera>().WorldToScreenPoint(worldPosition);
-		createdDamageBubble.transform.position = worldPosition;
-	}
+        //GameObject camGO = GameObject.FindWithTag("MainCamera");
+        //Vector3 screenPoint = camGO.GetComponent<Camera>().WorldToScreenPoint(worldPosition);
+        createdDamageBubble.transform.position = new Vector3(worldPosition.x, worldPosition.y, -2.0f);
+    }
 }

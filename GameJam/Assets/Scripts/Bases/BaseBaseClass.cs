@@ -5,20 +5,17 @@ using UnityEngine;
 public class BaseBaseClass : MonoBehaviour {
 	//my indexes
 	public Vector2Int MyIndexes;
-    public bool fallen;
-    bool ownerIsPlayer;
+    public UserData owner { get; protected set; }
     Vector2Int position;
 
-    public int MaxHP;
-	protected int HP;
+    protected int HP = 1;
 
     public Sprite AngelBase;
     public Sprite DevilBase;
 
-    public void Init(bool isFallen, bool isPlayers, Vector2Int pos)
+    public void Init(UserData _owner, Vector2Int pos)
     {
-        fallen = isFallen;
-        ownerIsPlayer = isPlayers;
+        owner = _owner;
         position = pos;
         Init2();
     }
@@ -43,5 +40,12 @@ public class BaseBaseClass : MonoBehaviour {
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
         damBubbleController.CreateDamageBubble(transform.position, atk);
+
+        if(HP <= 0)
+        {
+            HP = 0;
+            //destroy this building - change the color
+            this.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+        }
     }
 }

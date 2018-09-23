@@ -9,7 +9,6 @@ public class cameraScript : MonoBehaviour {
     private Bounds mapBounds;
     private Camera cam;
 
-    Vector2 targetPos;
     float targetSize;//zoom
 
     private float maxOrthoSize = 1.0f;
@@ -24,7 +23,6 @@ public class cameraScript : MonoBehaviour {
 	void Awake () {
         cam = this.GetComponent<Camera>();
         mapBounds = mapObject.GetComponent<SpriteRenderer>().bounds;
-        targetPos = cam.transform.position;
         mouseLastPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         moveVector = Vector3.zero;
         minZoom = 0.2f;

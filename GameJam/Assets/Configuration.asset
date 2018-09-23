@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPlayerCredits: 100
   maxPlayerCredits: 200
-  BarracksHP: 30
-  FarmHP: 10
+  BarracksMaxHP: 10
+  FarmMaxHP: 5
   BarracksBuyCost: 20
   FarmBuyCost: 20
   FarmEarn: 50

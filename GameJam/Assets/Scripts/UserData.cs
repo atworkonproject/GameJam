@@ -50,9 +50,9 @@ public class UserData : MonoBehaviour
         //without recording it, put a farm around center of my part of map
         Vector2Int firstFarmPos;
         if (amIPlayer)
-            firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y / 4);
+            firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y / 8);
         else
-            firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y * 3 / 4);
+            firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y * 7 / 8);
         //we can use this because AI version of build farm don't record and don't use  selection base - cursor
         GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().BuildFarmAI(this, firstFarmPos);
 
@@ -69,11 +69,9 @@ public class UserData : MonoBehaviour
 			if (Time.timeSinceLevelLoad - farm.LastTimeFarmEarned > ConfigController.Config.FarmEarnPeriod)
 			{
 				creditIncrement += ConfigController.Config.FarmEarn;
-				if (farm.fallen == gameController.playerData.fallen)
-				{
+				if (farm.owner.amIPlayer)
 					GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>().CreateDamageBubble(
-						farm.transform.position, ConfigController.Config.FarmEarn, true);
-				}
+						    farm.transform.position, ConfigController.Config.FarmEarn, true);
 				farm.LastTimeFarmEarned = Time.timeSinceLevelLoad;
 			}
 		}

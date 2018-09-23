@@ -12,7 +12,7 @@ public class SoldierController : MonoBehaviour
 
     public float SightRange;
     public float MoveSpeed;
-    private float AttackRange;
+    private float AttackRange = 1;
 
     private float minimumDistance;
     private bool collided;
@@ -435,7 +435,7 @@ public class SoldierController : MonoBehaviour
 
             BaseBaseClass building = obj.GetComponent<BaseBaseClass>();
 
-            if (building.fallen == Fallen)
+            if (building.owner.fallen == Fallen)
             {
                 if (!obj.Equals(gameObject))
                     FriendBases.Add(obj);

@@ -1,12 +1,12 @@
 TO DO list
 --na pocz¹tku farma dla obu druzyn
-budynki HP i ich niszczenie przez ludzi
+--budynki HP i ich niszczenie przez ludzi
 to ze jak sie zniszczy wszysktie budynki to przejdzie do nast levelu
-enemy I piesi
+enemy I piesi (nie wychodzic poza plansze)
 grafiki: budynki, ludzie, UI, kursor
 UI z opisaem co to, ile kosztuje, skrót klawiaturowy, background, i wersje ludzików: obronca atakujacy i atakujacy budynki
 na koñcu wypoziomowaæ trudnoœæ: ceny produktów, spawnowanie, AI... czas?
-
+sortowanie tak by sie obiekty nie zaslanialy	
 BUGFIX
 przy kliknieciu na pole rzeczy do wyboru powinny byæ wycentrowane wzgl. pola a nie mousepos
 przy krawedzi ekranu nie widaæ rzeczy do wyboru
@@ -14,7 +14,7 @@ rzeczy do wyboru siê nie skaluj¹ i nie przesuwaj¹ wzgl. selected base
 
 ****opcjonalne
 animacja obracania planszy czy coœ...
-SFX, i louder music: -stawianie budynków, -ukonczenie budowy, attack, -zniszczenie budynku (jak ma 0 hp to nie dzia³a)
+SFX, i louder music: -stawianie budynków, -ukonczenie budowy, -attack( -hurt) -zniszczenie budynku (jak ma 0 hp to nie dzia³a)
 , -wybranie kwadracika, -zespawnowanie, -dostanie kasy, pocz¹tek levelu
 fade in
 enemy II ³ucznicy

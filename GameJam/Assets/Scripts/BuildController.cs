@@ -15,15 +15,10 @@ public class BuildController : MonoBehaviour {
     public static int FARM_COST = 30;
     public static int BARRACKS_COST = 20;
 
-    gameplayRecorder playerRec, enemyRec;
-
     void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
-
-        playerRec = new gameplayRecorder();
-        enemyRec = new gameplayRecorder();
     }
 	
 	// Update is called once per frame
@@ -47,7 +42,7 @@ public class BuildController : MonoBehaviour {
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
                     builder.Barracks.Add((BarrackBase)b);
-                    ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
+                    ((BarrackBase)b).Init(builder, b.MyIndexes);
 
                     builder.Credits -= BuildController.BARRACKS_COST;
 					builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
@@ -80,7 +75,7 @@ public class BuildController : MonoBehaviour {
         b.MyIndexes = pos;
         BaseArrayController.PutBase(pos, b);
         builder.Barracks.Add((BarrackBase)b);
-        ((BarrackBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
+        ((BarrackBase)b).Init(builder, b.MyIndexes);
 
         builder.Credits -= BuildController.BARRACKS_COST;
 	}
@@ -101,7 +96,7 @@ public class BuildController : MonoBehaviour {
 					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
 					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
                     builder.Farms.Add((FarmBase)b);
-                    ((FarmBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
+                    ((FarmBase)b).Init(builder, b.MyIndexes);
 
                     builder.Credits -= BuildController.FARM_COST;
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
@@ -133,7 +128,7 @@ public class BuildController : MonoBehaviour {
         b.MyIndexes = pos;
         BaseArrayController.PutBase(pos, b);
         builder.Farms.Add((FarmBase)b);
-        ((FarmBase)b).Init(builder.fallen, builder.amIPlayer, b.MyIndexes);
+        ((FarmBase)b).Init(builder, b.MyIndexes);
 
         builder.Credits -= BuildController.FARM_COST;
 	}

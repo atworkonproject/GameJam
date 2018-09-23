@@ -19,8 +19,8 @@ public class BarrackBase : BaseBaseClass {
 
 	override public void Init2()
     {
-        GetComponent<SpriteRenderer>().sprite = fallen ? DevilBase : AngelBase;
-        HP = ConfigController.Config.BarracksHP;
+        GetComponent<SpriteRenderer>().sprite = (owner.fallen) ? DevilBase : AngelBase;
+        HP = ConfigController.Config.BarracksMaxHP;
     }
 
 	// Update is called once per frame
@@ -28,18 +28,24 @@ public class BarrackBase : BaseBaseClass {
         timeToSpawn += Time.deltaTime;
 		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec)
 		{
-			if (gameController.playerData.Credits >= ConfigController.Config.CostForSoldier)
+			if (owner.Credits >= ConfigController.Config.CostForSoldier)
 			{
 				timeToSpawn = 0;
 				GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, 0, -2), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-				soldier.GetComponent<SoldierController>().Fallen = fallen;
-				gameController.playerData.Credits -= ConfigController.Config.CostForSoldier;
-				if(this.fallen == gameController.playerData.fallen)
-					DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier);
+				soldier.GetComponent<SoldierController>().Fallen = owner.fallen;
+				owner.Credits -= ConfigController.Config.CostForSoldier;
+                if(owner.amIPlayer)
+                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier);
 			}
 			else
-				UIController.DisplayInfoForPlayer1("no money for a new soldier");
-		}
+            {
+                if(owner.amIPlayer)
+                    UIController.DisplayInfoForPlayer0("no money for a new soldier");
+                else
+                    UIController.DisplayInfoForPlayer1("no money for a new soldier");
+
+            }
+        }
     }
 
 }
