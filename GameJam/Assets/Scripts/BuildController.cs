@@ -7,20 +7,20 @@ public class BuildController : MonoBehaviour {
 	[Header("to link")]
 	public BarrackBase BarracksBasePrefab;
 	public FarmBase FarmBasePrefab;
+	public SlowBuildingBase BarracksSlowBuildingBasePrefab;
+	public FarmBase FarmSlowBuildingBasePrefab;
 	[Header("other")]
 	public Sprite BackgroundSprite;
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
 
-    public int playerAliveBases;
-    public int AIaliveBases;
+    public static int FARM_COST = 30;
+    public static int BARRACKS_COST = 20;
 
     void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
-
-        playerAliveBases = AIaliveBases = 0;
     }
 	
 	// Update is called once per frame
@@ -37,21 +37,14 @@ public class BuildController : MonoBehaviour {
 			{
 				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
-					GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
-					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
-					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
-					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
-					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
-                    builder.Barracks.Add((BarrackBase)b);
-                    ((BarrackBase)b).Init(builder, b.MyIndexes);
+					GameObject go = Instantiate(BarracksSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+					go.GetComponent<SlowBuildingBase>().Init(BarracksBasePrefab.gameObject,
+						selectedTileC, builder);
 
-                    builder.Credits -= ConfigController.Config.BarracksBuyCost;
-                    SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
-                    builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
-                    if (builder.amIPlayer) playerAliveBases++;
-                    else AIaliveBases++;
-                    selectedTileC.HideSelectionTile();
+					builder.Credits -= BuildController.BARRACKS_COST;
+					SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+
+					selectedTileC.HideSelectionTile();
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -72,18 +65,11 @@ public class BuildController : MonoBehaviour {
         if (pos.x < 0 || pos.y < 0)
             return;
 
-        GameObject go = Instantiate(BarracksBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
-        Vector2 basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
-        go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
-        BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-        b.MyIndexes = pos;
-        BaseArrayController.PutBase(pos, b);
-        builder.Barracks.Add((BarrackBase)b);
-        ((BarrackBase)b).Init(builder, b.MyIndexes);
-        if (builder.amIPlayer) playerAliveBases++;
-        else AIaliveBases++;
+		GameObject go = Instantiate(BarracksSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+		go.GetComponent<SlowBuildingBase>().InitForAI(pos, BarracksBasePrefab.gameObject,
+			selectedTileC, builder);
 
-        builder.Credits -= ConfigController.Config.BarracksBuyCost;
+		builder.Credits -= BuildController.BARRACKS_COST;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
@@ -96,22 +82,15 @@ public class BuildController : MonoBehaviour {
 			{
 				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
 				{
-                    GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
-					Vector2 basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
-					go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
-					BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-					BaseArrayController.PutBase(selectedTileC.DisplayedSelectedTile.MyIndexes, b);
-					b.MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
-                    builder.Farms.Add((FarmBase)b);
-                    ((FarmBase)b).Init(builder, b.MyIndexes);
+					GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+					go.GetComponent<SlowBuildingBase>().Init(FarmBasePrefab.gameObject,
+						selectedTileC, builder);
 
-                    builder.Credits -= ConfigController.Config.FarmBuyCost;
-                    SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
-                    builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
-                    if (builder.amIPlayer) playerAliveBases++;
-                    else AIaliveBases++;
+					builder.Credits -= BuildController.FARM_COST;
+					SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
-                    selectedTileC.HideSelectionTile();
+					selectedTileC.HideSelectionTile();
+
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -131,18 +110,11 @@ public class BuildController : MonoBehaviour {
         if (pos.x < 0 || pos.y < 0)
             return;
 
-        GameObject go = Instantiate(FarmBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
-        Vector2 basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
-        go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
-        BaseBaseClass b = go.GetComponent<BaseBaseClass>();
-        b.MyIndexes = pos;
-        BaseArrayController.PutBase(pos, b);
-        builder.Farms.Add((FarmBase)b);
-        ((FarmBase)b).Init(builder, b.MyIndexes);
-        if (builder.amIPlayer) playerAliveBases++;
-        else AIaliveBases++;
+		GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
+		go.GetComponent<SlowBuildingBase>().InitForAI(pos, FarmBasePrefab.gameObject,
+			selectedTileC, builder);
 
-        builder.Credits -= ConfigController.Config.FarmBuyCost;
+		builder.Credits -= BuildController.FARM_COST;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
     }
 
