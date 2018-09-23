@@ -103,7 +103,12 @@ public class gameController : MonoBehaviour
         soldiers.Clear();
         GameObject[] units = GameObject.FindGameObjectsWithTag("soldier");
         foreach (var u in units)
+        {
+            HPBar bar = u.GetComponentInChildren<HPBar>(true);
+            if (bar != null)
+                Destroy(bar.gameObject);
             Destroy(u.gameObject);
+        }
 
     }
 
@@ -136,6 +141,9 @@ public class gameController : MonoBehaviour
 
     public void CheckIfWon()
     {
+        if (timeElapsed < 1.0)
+            return;//to fast to win, propably scene not created yet and bases = 0 so went here
+
         if(buildController.GetComponent<BuildController>().playerAliveBases <= 0)//jestli oba 0 to i tak lost
         {
             //game over

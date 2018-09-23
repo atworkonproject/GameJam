@@ -1,13 +1,14 @@
 TO DO list
 --na pocz¹tku farma dla obu druzyn
 --budynki HP i ich niszczenie przez ludzi
-to ze jak sie zniszczy wszysktie budynki to przejdzie do nast levelu
+--to ze jak sie zniszczy wszysktie budynki to przejdzie do nast levelu
 --enemy I piesi (nie wychodzic poza plansze)
-grafiki: budynki, ludzie, UI, kursor
-UI z opisaem co to, ile kosztuje, skrót klawiaturowy, background, i wersje ludzików: obronca atakujacy i atakujacy budynki
+--grafiki: budynki, ludzie, UI, kursor
+--UI z opisaem co to, ile kosztuje, skrót klawiaturowy, background, i wersje ludzików: obronca atakujacy i atakujacy budynki
 na koñcu wypoziomowaæ trudnoœæ: ceny produktów, spawnowanie, AI... czas?
 sortowanie tak by sie obiekty nie zaslanialy	
 w config jest ile kosztuje soldier i co ile czasu ale w takiej formie jakby cena za tyle sek by³a...
+cienie
 
 BUGFIX
 przy kliknieciu na pole rzeczy do wyboru powinny byæ wycentrowane wzgl. pola a nie mousepos

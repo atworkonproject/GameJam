@@ -14,17 +14,15 @@ public class BuildController : MonoBehaviour {
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
 
-    public static int FARM_COST = 30;
-    public static int BARRACKS_COST = 20;
-
 	public int playerAliveBases;
 	public int AIaliveBases;
-
 
 	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
+
+        playerAliveBases = AIaliveBases = 0;
     }
 	
 	// Update is called once per frame
@@ -45,7 +43,12 @@ public class BuildController : MonoBehaviour {
 					go.GetComponent<SlowBuildingBase>().Init(BarracksBasePrefab.gameObject,
 						selectedTileC, builder);
 
-					builder.Credits -= BuildController.BARRACKS_COST;
+                    if (builder.fallen == gameController.playerData.fallen)
+                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
+                    else
+                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
+
+                    builder.Credits -= ConfigController.Config.BarracksBuyCost;
 					SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
 					selectedTileC.HideSelectionTile();
@@ -73,7 +76,12 @@ public class BuildController : MonoBehaviour {
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, BarracksBasePrefab.gameObject,
 			selectedTileC, builder);
 
-		builder.Credits -= BuildController.BARRACKS_COST;
+        if (builder.fallen == gameController.playerData.fallen)
+            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
+        else
+            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
+
+        builder.Credits -= ConfigController.Config.BarracksBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
@@ -90,8 +98,13 @@ public class BuildController : MonoBehaviour {
 					go.GetComponent<SlowBuildingBase>().Init(FarmBasePrefab.gameObject,
 						selectedTileC, builder);
 
-					builder.Credits -= BuildController.FARM_COST;
-					SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+                    if (builder.fallen == gameController.playerData.fallen)
+                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
+                    else
+                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
+
+                    builder.Credits -= ConfigController.Config.FarmBuyCost;
+                    SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
 					selectedTileC.HideSelectionTile();
 
@@ -121,16 +134,15 @@ public class BuildController : MonoBehaviour {
 			selectedTileC, builder);
 
 		if (isThisFirstFarm)//build instantenously
-		{
 			go.GetComponent<SlowBuildingBase>().FinishBuilding();
-			if (builder.fallen == gameController.playerData.fallen)
-				GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>().playerAliveBases++;
-			else
-				GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>().AIaliveBases++;
 
-			builder.Credits -= BuildController.FARM_COST;
-			SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
-		}
+        if (builder.fallen == gameController.playerData.fallen)
+            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
+        else
+            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
+
+        builder.Credits -= ConfigController.Config.FarmBuyCost;
+        SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
     }
 
 	[Serializable]
