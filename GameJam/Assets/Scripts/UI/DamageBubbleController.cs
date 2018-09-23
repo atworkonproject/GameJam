@@ -40,12 +40,12 @@ public class DamageBubbleController : MonoBehaviour {
 		if (isPositive)
 		{
 			MytextMesh.text = "+" + damagePositive.ToString();
-			MytextMesh.color = Color.green;
+			MytextMesh.color = new Color(0.0f / 255.0f, 84.0f / 255.0f, 6.0f / 255.0f);//green
 		}
 		else
 		{
 			MytextMesh.text = "-" + damagePositive;
-			MytextMesh.color = Color.red;
+			MytextMesh.color = new Color(186.0f / 255.0f, 37.0f / 255.0f, 0.0f / 255.0f);//red
 		}
 		if(isCash)
 		{
