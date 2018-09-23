@@ -16,13 +16,15 @@ MonoBehaviour:
   BarracksMaxHP: 100
   FarmMaxHP: 30
   Soldier01MaxHP: 30
-  Soldier01Dmg: 10
+  Soldier01Dmg: 6
+  Soldier01DmgVar: 3
   Soldier01AttackSpeed: 1
+  Soldier01MoveSpeed: 2.5
   BarracksBuyCost: 20
   FarmBuyCost: 30
   FarmEarn: 10
   FarmEarnPeriod: 5
   CostForSoldier: 5
-  BarrackSpawnEverySec: 10
+  BarrackSpawnEverySec: 5
   InfoTextDisplayTime: 3
   AIDecisionEverySec: 2.1

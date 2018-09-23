@@ -100,7 +100,7 @@ public class gameController : MonoBehaviour
         bc.AIaliveBases = 0;
         
         foreach (var x in soldiers)
-            Destroy(x.transform.parent.gameObject);
+            Destroy(x.gameObject);
         soldiers.Clear();
         GameObject[] units = GameObject.FindGameObjectsWithTag("soldier");
         foreach (var u in units)
@@ -108,7 +108,7 @@ public class gameController : MonoBehaviour
             HPBar bar = u.GetComponentInChildren<HPBar>(true);
             if (bar != null)
                 Destroy(bar.gameObject);
-            Destroy(u.transform.parent.gameObject);
+            Destroy(u.gameObject);
         }
 
         GameObject[] slowlyBuilded = GameObject.FindGameObjectsWithTag("SlowBuilding");

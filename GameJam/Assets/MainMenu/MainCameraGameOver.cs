@@ -18,7 +18,7 @@ public class MainCameraGameOver : MonoBehaviour {
 	{
 
 		transform.position = new Vector3(transform.position.x,
-			Mathf.Lerp(transform.position.y, -2.5f, Time.deltaTime * Speed),//going down to y=-2.0f;
+			Mathf.Lerp(transform.position.y, -2.5f, Time.deltaTime * 0.5f),//going down to y=-2.0f;
 			transform.position.z);
 	}
 	public void OnRestartButtonClicked()

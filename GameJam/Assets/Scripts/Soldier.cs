@@ -15,8 +15,11 @@ public class Soldier : MonoBehaviour
     protected float attackDist = 0.16f, rangeDist = 2.0f;
 
     public int getHP() { return HP; }
-
-    public virtual void Hurt(Soldier attacker, int damage)
+	public void Start()
+	{
+		speed = ConfigController.Config.Soldier01MoveSpeed;
+	}
+	public virtual void Hurt(Soldier attacker, int damage)
     {
         //HP -= damage;
         //if(HP <= 0)

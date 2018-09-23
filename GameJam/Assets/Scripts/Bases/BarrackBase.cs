@@ -37,7 +37,9 @@ public class BarrackBase : BaseBaseClass {
 			if (owner.Credits >= ConfigController.Config.CostForSoldier)
 			{
 				timeToSpawn = 0;
-				GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, 0, -2), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
+				GameObject soldier = Instantiate(
+					Soldier01prefab, this.transform.position + new Vector3(0, 0, -2), 
+					Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
                 Soldier01Controller ctrl = soldier.GetComponent<Soldier01Controller>();
                 ctrl.Init(owner);
                 gameController.soldiers.Add(ctrl);
