@@ -421,7 +421,7 @@ using UnityEngine.SceneManagement;
         /// <returns>The ID of the created Audio object</returns>
         public static int PlayMusic(AudioClip clip)
         {
-            return PlayMusic(clip, 1f, false, false, 1f, 1f, -1f, null);
+            return PlayMusic(clip, 1f, false, false, 1f, 1f, -1f, null, 1);
         }
 
         /// <summary>
@@ -432,7 +432,7 @@ using UnityEngine.SceneManagement;
         /// <returns>The ID of the created Audio object</returns>
         public static int PlayMusic(AudioClip clip, float volume)
         {
-            return PlayMusic(clip, volume, false, false, 1f, 1f, -1f, null);
+            return PlayMusic(clip, volume, false, false, 1f, 1f, -1f, null, 1);
         }
 
         /// <summary>
@@ -445,7 +445,7 @@ using UnityEngine.SceneManagement;
         /// <returns>The ID of the created Audio object</returns>
         public static int PlayMusic(AudioClip clip, float volume, bool loop, bool persist)
         {
-            return PlayMusic(clip, volume, loop, persist, 1f, 1f, -1f, null);
+            return PlayMusic(clip, volume, loop, persist, 1f, 1f, -1f, null, 1);
         }
 
         /// <summary>
@@ -460,7 +460,7 @@ using UnityEngine.SceneManagement;
         /// <returns>The ID of the created Audio object</returns>
         public static int PlayMusic(AudioClip clip, float volume, bool loop, bool persist, float fadeInSeconds, float fadeOutSeconds)
         {
-            return PlayMusic(clip, volume, loop, persist, fadeInSeconds, fadeOutSeconds, -1f, null);
+            return PlayMusic(clip, volume, loop, persist, fadeInSeconds, fadeOutSeconds, -1f, null, 1);
         }
 
         /// <summary>
@@ -475,7 +475,7 @@ using UnityEngine.SceneManagement;
         /// <param name="currentMusicfadeOutSeconds"> How many seconds it needs for current music audio to fade out. It will override its own fade out seconds. If -1 is passed, current music will keep its own fade out seconds</param>
         /// <param name="sourceTransform">The transform that is the source of the music (will become 3D audio). If 3D audio is not wanted, use null</param>
         /// <returns>The ID of the created Audio object</returns>
-        public static int PlayMusic(AudioClip clip, float volume, bool loop, bool persist, float fadeInSeconds, float fadeOutSeconds, float currentMusicfadeOutSeconds, Transform sourceTransform)
+        public static int PlayMusic(AudioClip clip, float volume, bool loop, bool persist, float fadeInSeconds, float fadeOutSeconds, float currentMusicfadeOutSeconds, Transform sourceTransform, float pitch)
         {
             if (clip == null)
             {
@@ -498,7 +498,7 @@ using UnityEngine.SceneManagement;
             StopAllMusic(currentMusicfadeOutSeconds);
 
             // Create the audioSource
-            Audio audio = new Audio(Audio.AudioType.Music, clip, loop, persist, volume, fadeInSeconds, fadeOutSeconds, sourceTransform);
+            Audio audio = new Audio(Audio.AudioType.Music, clip, loop, persist, volume, fadeInSeconds, fadeOutSeconds, sourceTransform, pitch);
 
             // Add it to music list
             musicAudio.Add(audio.audioID, audio);
@@ -513,18 +513,23 @@ using UnityEngine.SceneManagement;
         /// <returns>The ID of the created Audio object</returns>
         public static int PlaySound(AudioClip clip)
         {
-            return PlaySound(clip, 1f, false, null);
+            return PlaySound(clip, 1f, false, null, 1);
         }
 
-        /// <summary>
-        /// Play a sound fx
-        /// </summary>
-        /// <param name="clip">The audio clip to play</param>
-        /// <param name="volume"> The volume the music will have</param>
-        /// <returns>The ID of the created Audio object</returns>
-        public static int PlaySound(AudioClip clip, float volume)
+        public static int PlaySound(float pitch, AudioClip clip)
         {
-            return PlaySound(clip, volume, false, null);
+            return PlaySound(clip, 1f, false, null, pitch);
+        }
+
+    /// <summary>
+    /// Play a sound fx
+    /// </summary>
+    /// <param name="clip">The audio clip to play</param>
+    /// <param name="volume"> The volume the music will have</param>
+    /// <returns>The ID of the created Audio object</returns>
+    public static int PlaySound(AudioClip clip, float volume)
+        {
+            return PlaySound(clip, volume, false, null, 1);
         }
 
         /// <summary>
@@ -535,7 +540,7 @@ using UnityEngine.SceneManagement;
         /// <returns>The ID of the created Audio object</returns>
         public static int PlaySound(AudioClip clip, bool loop)
         {
-            return PlaySound(clip, 1f, loop, null);
+            return PlaySound(clip, 1f, loop, null, 1);
         }
 
         /// <summary>
@@ -546,7 +551,7 @@ using UnityEngine.SceneManagement;
         /// <param name="loop">Wether the sound is looped</param>
         /// <param name="sourceTransform">The transform that is the source of the sound (will become 3D audio). If 3D audio is not wanted, use null</param>
         /// <returns>The ID of the created Audio object</returns>
-        public static int PlaySound(AudioClip clip, float volume, bool loop, Transform sourceTransform)
+        public static int PlaySound(AudioClip clip, float volume, bool loop, Transform sourceTransform, float pitch)
         {
             if (clip == null)
             {
@@ -566,7 +571,7 @@ using UnityEngine.SceneManagement;
             }
 
             // Create the audioSource
-            Audio audio = new Audio(Audio.AudioType.Sound, clip, loop, false, volume, 0f, 0f, sourceTransform);
+            Audio audio = new Audio(Audio.AudioType.Sound, clip, loop, false, volume, 0f, 0f, sourceTransform, pitch);
 
             // Add it to music list
             soundsAudio.Add(audio.audioID, audio);
@@ -610,7 +615,7 @@ using UnityEngine.SceneManagement;
             }
 
             // Create the audioSource
-            Audio audio = new Audio(Audio.AudioType.UISound, clip, false, false, volume, 0f, 0f, null);
+            Audio audio = new Audio(Audio.AudioType.UISound, clip, false, false, volume, 0f, 0f, null, 1);
 
             // Add it to music list
             UISoundsAudio.Add(audio.audioID, audio);
@@ -814,6 +819,7 @@ using UnityEngine.SceneManagement;
         private AudioType audioType;
         private AudioClip initClip;
         private Transform sourceTransform;
+    private float pitch;
 
         /// <summary>
         /// The ID of the Audio
@@ -883,7 +889,7 @@ using UnityEngine.SceneManagement;
             UISound
         }
 
-        public Audio(AudioType audioType, AudioClip clip, bool loop, bool persist, float volume, float fadeInValue, float fadeOutValue, Transform sourceTransform)
+        public Audio(AudioType audioType, AudioClip clip, bool loop, bool persist, float volume, float fadeInValue, float fadeOutValue, Transform sourceTransform, float pitch)
         {
             if (sourceTransform == null)
             {
@@ -907,6 +913,7 @@ using UnityEngine.SceneManagement;
             this.volume = 0f;
             this.fadeInSeconds = fadeInValue;
             this.fadeOutSeconds = fadeOutValue;
+            this.pitch = pitch;
 
             this.playing = false;
             this.paused = false;
@@ -923,6 +930,7 @@ using UnityEngine.SceneManagement;
             audioSource.clip = clip;
             audioSource.loop = loop;
             audioSource.volume = 0f;
+            audioSource.pitch = pitch;
             if (sourceTransform != SoundManager.gameobject.transform)
             {
                 audioSource.spatialBlend = 1;

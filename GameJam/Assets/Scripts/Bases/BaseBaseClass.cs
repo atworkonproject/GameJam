@@ -35,21 +35,29 @@ public class BaseBaseClass : MonoBehaviour {
 	}
 
     public int getHP() { return HP; }
+    virtual protected int getMaxHP() { return 10; }
     public void Hurt(int atk)
     {
         if (HP <= 0) return;
 
         HP -= atk;
+        if (HP <= 0) HP = 0;
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
         damBubbleController.CreateDamageBubble(transform.position, atk);
 
-        if(HP <= 0)
+        //destroy this building - change the color
+        float color = (float)HP / (float)getMaxHP();
+        this.GetComponent<SpriteRenderer>().color = new Color(color, color, color);
+
+        if (HP <= 0)
         {
-            HP = 0;
-            //destroy this building - change the color
-            this.GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
             SFXController.PlaySound(SOUNDS.BASE_DESTROY);
+            var bc = GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>();
+            if (owner.amIPlayer)
+                bc.playerAliveBases--;
+            else
+                bc.AIaliveBases--;
         }
     }
 }

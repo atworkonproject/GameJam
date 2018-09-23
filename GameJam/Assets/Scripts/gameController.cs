@@ -66,6 +66,8 @@ public class gameController : MonoBehaviour
 
     private void GameLoop()
     {
+        CheckIfWon();
+
          playerData.manualUpdate();
          AIData.manualUpdate();
         if (Input.GetKeyDown("r"))//temp
@@ -81,7 +83,6 @@ public class gameController : MonoBehaviour
         if (Input.GetKeyDown("2"))
             bc.BuildFarmPlayer(playerData);
 
-
         ai.Update();
 
         timeElapsed += Time.deltaTime;
@@ -89,10 +90,13 @@ public class gameController : MonoBehaviour
 
     private void CleanStage()
     {
-        GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().CleanAllBasesOnMap();
+        BuildController bc = GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>();
+        bc.CleanAllBasesOnMap();
         playerData.DestroyAllBases();
         AIData.DestroyAllBases();
 
+        bc.playerAliveBases = 0;
+        bc.AIaliveBases = 0;
         
         foreach (var x in soldiers)
             Destroy(x);
@@ -100,7 +104,7 @@ public class gameController : MonoBehaviour
         GameObject[] units = GameObject.FindGameObjectsWithTag("soldier");
         foreach (var u in units)
             Destroy(u.gameObject);
-        //soldiers.RemoveAll();
+
     }
 
     public void Win()
@@ -128,6 +132,20 @@ public class gameController : MonoBehaviour
         CleanStage();
         //change scene
         SceneManager.LoadScene(2);
+    }
+
+    public void CheckIfWon()
+    {
+        if(buildController.GetComponent<BuildController>().playerAliveBases <= 0)//jestli oba 0 to i tak lost
+        {
+            //game over
+            GameOver();
+        }
+        else if (buildController.GetComponent<BuildController>().AIaliveBases <= 0)
+        {
+            //you wiin!
+            Win();
+        }
     }
 
 }

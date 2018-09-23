@@ -13,6 +13,8 @@ public class FarmBase : BaseBaseClass {
     override public void Init2()
     {
         GetComponent<SpriteRenderer>().sprite = (owner.fallen) ? DevilBase : AngelBase;
-        HP = ConfigController.Config.FarmMaxHP;
+        HP = getMaxHP();
     }
+
+    override protected int getMaxHP() { return ConfigController.Config.FarmMaxHP; }
 }

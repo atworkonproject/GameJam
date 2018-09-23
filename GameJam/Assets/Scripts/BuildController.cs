@@ -12,13 +12,15 @@ public class BuildController : MonoBehaviour {
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
 
-    public static int FARM_COST = 30;
-    public static int BARRACKS_COST = 20;
+    public int playerAliveBases;
+    public int AIaliveBases;
 
     void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
+
+        playerAliveBases = AIaliveBases = 0;
     }
 	
 	// Update is called once per frame
@@ -44,11 +46,12 @@ public class BuildController : MonoBehaviour {
                     builder.Barracks.Add((BarrackBase)b);
                     ((BarrackBase)b).Init(builder, b.MyIndexes);
 
-                    builder.Credits -= BuildController.BARRACKS_COST;
+                    builder.Credits -= ConfigController.Config.BarracksBuyCost;
                     SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
-
-					selectedTileC.HideSelectionTile();
+                    if (builder.amIPlayer) playerAliveBases++;
+                    else AIaliveBases++;
+                    selectedTileC.HideSelectionTile();
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -77,8 +80,10 @@ public class BuildController : MonoBehaviour {
         BaseArrayController.PutBase(pos, b);
         builder.Barracks.Add((BarrackBase)b);
         ((BarrackBase)b).Init(builder, b.MyIndexes);
+        if (builder.amIPlayer) playerAliveBases++;
+        else AIaliveBases++;
 
-        builder.Credits -= BuildController.BARRACKS_COST;
+        builder.Credits -= ConfigController.Config.BarracksBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
@@ -100,11 +105,13 @@ public class BuildController : MonoBehaviour {
                     builder.Farms.Add((FarmBase)b);
                     ((FarmBase)b).Init(builder, b.MyIndexes);
 
-                    builder.Credits -= BuildController.FARM_COST;
+                    builder.Credits -= ConfigController.Config.FarmBuyCost;
                     SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
                     builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
+                    if (builder.amIPlayer) playerAliveBases++;
+                    else AIaliveBases++;
 
-					selectedTileC.HideSelectionTile();
+                    selectedTileC.HideSelectionTile();
 				}
 				else
 					UIController.DisplayInfoForPlayer0("place occupied");
@@ -132,8 +139,10 @@ public class BuildController : MonoBehaviour {
         BaseArrayController.PutBase(pos, b);
         builder.Farms.Add((FarmBase)b);
         ((FarmBase)b).Init(builder, b.MyIndexes);
+        if (builder.amIPlayer) playerAliveBases++;
+        else AIaliveBases++;
 
-        builder.Credits -= BuildController.FARM_COST;
+        builder.Credits -= ConfigController.Config.FarmBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
     }
 

@@ -107,15 +107,25 @@ public class Soldier01Controller : Soldier {
         {
             //search for closest building
             targetBase = SearchForClosestEnemyBase();
-            if(GetDistance(targetBase.transform) <= attackDist)
+            if (targetBase)
             {
-                action = ACTION.ATTACK_BASE;
-                target = targetBase.transform;
-                AttackBase();
-                return;
+                if (GetDistance(targetBase.transform) <= attackDist)
+                {
+                    action = ACTION.ATTACK_BASE;
+                    target = targetBase.transform;
+                    AttackBase();
+                    return;
+                }
+                else
+                {
+                    action = ACTION.GOTO_BASE;
+                    target = targetBase.transform;
+                    return;
+                }
             }
-            action = ACTION.GOTO_BASE;
-            target = targetBase.transform;
+            else //you won. no buildings.
+                target = null;
+
         }
     }
 
@@ -223,6 +233,7 @@ public class Soldier01Controller : Soldier {
         {
             HP = 0;
             this.GetComponentInChildren<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f, 0.7f);//temp
+            SFXController.PlaySound( !fallen ? SOUNDS.DIE_ANGEL : SOUNDS.DIE_DEVIL);
             gameController.soldiers.Remove(this);
             Destroy(this.gameObject);
             return;
@@ -260,6 +271,9 @@ public class Soldier01Controller : Soldier {
                 close = GetDistance(x.transform);
             }
         }
+        if (!closest)
+            return null;
+
         return closest.GetComponent<BaseBaseClass>();
     }
 

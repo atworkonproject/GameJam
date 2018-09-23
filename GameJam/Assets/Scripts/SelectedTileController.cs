@@ -66,7 +66,7 @@ public class SelectedTileController : MonoBehaviour {
             SFXController.PlaySound(SOUNDS.SELECT_BASE);
 		}
 		else
-			HideSelectionTile();
+			HideSelectionTile();    
 	}
 
 	public void HideSelectionTile()
