@@ -40,6 +40,7 @@ public class SoldierController : MonoBehaviour
 				_targetObjectSoldierController = value.GetComponent<SoldierController>();
 		}
 	}
+
 	public Vector2 MyOffsetToLeader;//if we go to leader we set this random offset
 
 	public List<GameObject> Friends;
@@ -55,8 +56,20 @@ public class SoldierController : MonoBehaviour
     public float AttackDelay;
     public int Charisma;
 
-    public int Hp;
-    private float lastAttack;
+	private int hp;
+	public int Hp
+	{
+		get
+		{
+			return hp;
+		}
+
+		set
+		{
+			hp = value;
+		}
+	}
+	private float lastAttack;
     private int leaderCharisma = 7;
 
     public enum Strategies
