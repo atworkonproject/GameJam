@@ -20,6 +20,7 @@ public class BarrackBase : BaseBaseClass {
 	override public void Init2()
     {
         GetComponent<SpriteRenderer>().sprite = (owner.fallen) ? DevilBase : AngelBase;
+        shadow.GetComponent<SpriteRenderer>().sprite = (owner.fallen) ? DevilBaseShadow : AngelBaseShadow;
         HP = getMaxHP();
     }
 
