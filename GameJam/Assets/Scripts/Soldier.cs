@@ -10,8 +10,7 @@ public class Soldier : MonoBehaviour
     protected Transform target;
 
     public Sprite angelSprite, devilSprite;
-
-    protected float speed = 0.4f;
+    
     protected float attackDist = 0.16f, rangeDist = 2.0f;
 
     public int getHP() { return HP; }

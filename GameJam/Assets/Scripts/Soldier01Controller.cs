@@ -78,7 +78,7 @@ public class Soldier01Controller : Soldier {
                 if (GetDistance(target) <= attackDist)
                     action = ACTION.ATTACK_BASE;
                 else
-                    this.transform.Translate((target.position - this.transform.position).normalized * speed * Time.deltaTime);
+                    this.transform.Translate((target.position - this.transform.position).normalized * ConfigController.Config.Soldier01MoveSpeed * Time.deltaTime);
                 break;
             case ACTION.GOTO_ENEMY:
                 //if yo'll find closer enemy, then take it
@@ -91,7 +91,7 @@ public class Soldier01Controller : Soldier {
                 if (GetDistance(target) <= attackDist)
                     action = ACTION.ATTACK_ENEMY;
                 else
-                    this.transform.Translate((target.position - this.transform.position).normalized * speed * Time.deltaTime);
+                    this.transform.Translate((target.position - this.transform.position).normalized * ConfigController.Config.Soldier01MoveSpeed * Time.deltaTime);
                 break;
             case ACTION.NONE:
             default:

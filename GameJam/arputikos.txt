@@ -12,6 +12,8 @@ w config jest ile kosztuje soldier i co ile czasu ale w takiej formie jakby cena
 napis ktory raz gramy ze soba i ze zmiana planszy
 
 BUGFIX
+PC ma chyba za duzo kasy
+slowlyBuilding przy restarcie siê nie restetuje, kilka pozostaje na planie
 przy kliknieciu na pole rzeczy do wyboru powinny byæ wycentrowane wzgl. pola a nie mousepos
 przy krawedzi ekranu nie widaæ rzeczy do wyboru
 rzeczy do wyboru siê nie skaluj¹ i nie przesuwaj¹ wzgl. selected base

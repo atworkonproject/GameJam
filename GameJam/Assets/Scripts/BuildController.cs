@@ -45,11 +45,6 @@ public class BuildController : MonoBehaviour {
 					go.GetComponent<SlowBuildingBase>().Init(BarracksBasePrefab.gameObject,
 						selectedTileC, builder);
 
-                    if (builder.fallen == gameController.playerData.fallen)
-                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
-                    else
-                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
-
 					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
 						ConfigController.Config.BarracksBuyCost, false, true);
                     builder.Credits -= ConfigController.Config.BarracksBuyCost;
@@ -80,11 +75,6 @@ public class BuildController : MonoBehaviour {
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, BarracksBasePrefab.gameObject,
 			selectedTileC, builder);
 
-        if (builder.fallen == gameController.playerData.fallen)
-            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
-        else
-            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
-
 		builder.Credits -= ConfigController.Config.BarracksBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
@@ -101,11 +91,6 @@ public class BuildController : MonoBehaviour {
 					GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(FarmBasePrefab.gameObject,
 						selectedTileC, builder);
-
-                    if (builder.fallen == gameController.playerData.fallen)
-                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
-                    else
-                        GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
 					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
 						ConfigController.Config.FarmBuyCost, false, true);
@@ -125,7 +110,6 @@ public class BuildController : MonoBehaviour {
 			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
 	
-
     public void BuildFarmAI(UserData builder, Vector2Int pos, bool isThisFirstFarm = false)
     {
         if (builder.Credits < ConfigController.Config.FarmBuyCost)
@@ -138,14 +122,9 @@ public class BuildController : MonoBehaviour {
 		GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, FarmBasePrefab.gameObject,
 			selectedTileC, builder);
-
-		if (isThisFirstFarm)//build instantenously
-			go.GetComponent<SlowBuildingBase>().FinishBuilding();
-
-        if (builder.fallen == gameController.playerData.fallen)
-            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
-        else
-            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
+        
+		//if (isThisFirstFarm)//build instantenously
+		//	go.GetComponent<SlowBuildingBase>().FinishBuilding();
 
         builder.Credits -= ConfigController.Config.FarmBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);

@@ -94,16 +94,21 @@ public class SlowBuildingBase : MonoBehaviour
 		{
 			builder.Barracks.Add((BarrackBase)b);
 			((BarrackBase)b).Init(builder, b.MyIndexes);
-		}
+            builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
+        }
 		else if (b is FarmBase)
 		{
 			builder.Farms.Add((FarmBase)b);
 			((FarmBase)b).Init(builder, b.MyIndexes);
-		}
-		builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
-		builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
+            builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
+        }
 
-		//this.gameObject.SetActive(false);//hide
-		Destroy(this.gameObject);
+        if (builder.fallen == gameController.playerData.fallen)
+            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
+        else
+            GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
+
+        //this.gameObject.SetActive(false);//hide
+        Destroy(this.gameObject);
 	}
 }
