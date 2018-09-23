@@ -49,13 +49,10 @@ public class BaseBaseClass : MonoBehaviour {
 		if (this is FarmBase)
 		{
 			MyHPBar.SetHP(HP, ConfigController.Config.FarmMaxHP);
-			Debug.Log("farm");
 		}
 		else if (this is BarrackBase)
 		{
 			MyHPBar.SetHP(HP, ConfigController.Config.BarracksMaxHP);
-			Debug.Log("barrack");
-
 		}
 
 		DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
