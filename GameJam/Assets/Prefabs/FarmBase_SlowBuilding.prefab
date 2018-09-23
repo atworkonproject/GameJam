@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SecondsBuildingLeft: 0
-  Mask: {fileID: 0}
+  Mask: {fileID: 331685921763425826}
+  AngelBase: {fileID: 21300000, guid: 438b245998ea09949bfc6a09a59a29d4, type: 3}
+  DevilBase: {fileID: 21300000, guid: 33a6badc42ce5224cb2aab48574f75af, type: 3}
 --- !u!212 &212462324999002234
 SpriteRenderer:
   m_ObjectHideFlags: 1

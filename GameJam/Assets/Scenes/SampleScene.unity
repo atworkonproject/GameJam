@@ -2505,6 +2505,10 @@ MonoBehaviour:
     type: 2}
   FarmBasePrefab: {fileID: 114449194808420530, guid: 3095fcf2837adb74f906eee8e2bfa215,
     type: 2}
+  BarracksSlowBuildingBasePrefab: {fileID: 114286266985015196, guid: 97419899613909e49bce859050de627e,
+    type: 2}
+  FarmSlowBuildingBasePrefab: {fileID: 114437268059594722, guid: 21e86534f0df0c340814ec3a01ec61de,
+    type: 2}
   BackgroundSprite: {fileID: 0}
   selectedTileC: {fileID: 0}
   baseArrayC: {fileID: 0}
