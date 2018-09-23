@@ -15,7 +15,9 @@ public class ConfigurationObject : ScriptableObject {
     [Header("HP and DMG of soldiers")]
     public int Soldier01MaxHP = 75;
     public int Soldier01Dmg = 25;
+    public int Soldier01DmgVar = 3;
     public float Soldier01AttackSpeed = 0.5f;//every n sec
+    
 
     [Header("BaseBuy")]
 	public float BarracksBuyCost = 20.0f;

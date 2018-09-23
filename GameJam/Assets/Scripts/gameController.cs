@@ -57,6 +57,7 @@ public class gameController : MonoBehaviour
     private void UpdateBgSprite()//rotate map if player is evil or good
     {
          GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().flipY = playerData.fallen;
+        GameObject.FindWithTag("BackgroundSprite2").GetComponent<SpriteRenderer>().flipY = playerData.fallen;
     }
 
     void Update()

@@ -199,8 +199,9 @@ public class Soldier01Controller : Soldier {
             return;
         }
 
+        int dmgVar = ConfigController.Config.Soldier01DmgVar;
         attackedAlready = true;
-        targetSoldier.Hurt(this, ConfigController.Config.Soldier01Dmg);
+        targetSoldier.Hurt(this, ConfigController.Config.Soldier01Dmg + UnityEngine.Random.Range(0,2* dmgVar+1) - dmgVar);
         if (targetSoldier.getHP() <= 0)
             action = ACTION.NONE;
     }

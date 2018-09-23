@@ -12,6 +12,7 @@ TagManager:
   - soldier
   - TopRightHalf
   - DamageBubble
+  - BackgroundSprite2
   layers:
   - Default
   - TransparentFX
