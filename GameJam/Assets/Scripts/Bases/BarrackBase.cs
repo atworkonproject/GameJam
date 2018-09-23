@@ -32,7 +32,9 @@ public class BarrackBase : BaseBaseClass {
 			{
 				timeToSpawn = 0;
 				GameObject soldier = Instantiate(Soldier01prefab, this.transform.position + new Vector3(0, 0, -2), Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-				soldier.GetComponent<SoldierController>().Fallen = owner.fallen;
+                Soldier01Controller ctrl = soldier.GetComponent<Soldier01Controller>();
+                ctrl.Init(owner);
+                gameController.soldiers.Add(ctrl);
 				owner.Credits -= ConfigController.Config.CostForSoldier;
                 if(owner.amIPlayer)
                     DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier);

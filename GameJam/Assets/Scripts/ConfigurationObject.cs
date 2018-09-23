@@ -8,8 +8,14 @@ using UnityEngine;
 public class ConfigurationObject : ScriptableObject {
 	public float startPlayerCredits = 100.0f;
 	public float maxPlayerCredits = 200.0f;
+    [Header("HP of buildings")]
     public int BarracksMaxHP = 30;
     public int FarmMaxHP = 10;
+
+    [Header("HP and DMG of soldiers")]
+    public int Soldier01MaxHP = 100;
+    public int Soldier01Dmg = 30;
+    public float Soldier01AttackSpeed = 0.5f;//every n sec
 
     [Header("BaseBuy")]
 	public float BarracksBuyCost = 20.0f;

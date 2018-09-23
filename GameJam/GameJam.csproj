@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.2.9f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -317,6 +319,7 @@
     <Compile Include="Assets\Scripts\Bases\FarmBase.cs" />
     <Compile Include="Assets\Scripts\BuildController.cs" />
     <Compile Include="Assets\Scripts\cameraScript.cs" />
+    <Compile Include="Assets\Scripts\Soldier.cs" />
     <Compile Include="Assets\Scripts\ConfigController.cs" />
     <Compile Include="Assets\Scripts\ConfigurationObject.cs" />
     <Compile Include="Assets\Scripts\gameController.cs" />
@@ -324,7 +327,7 @@
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
-    <Compile Include="Assets\Scripts\SoldierController.cs" />
+    <Compile Include="Assets\Scripts\Soldier01Controller.cs" />
     <Compile Include="Assets\Scripts\TopRedSprite.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
     <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />

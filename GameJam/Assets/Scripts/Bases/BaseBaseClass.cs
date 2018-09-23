@@ -34,8 +34,11 @@ public class BaseBaseClass : MonoBehaviour {
 		
 	}
 
-    void Damage(int atk)
+    public int getHP() { return HP; }
+    public void Hurt(int atk)
     {
+        if (HP <= 0) return;
+
         HP -= atk;
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
