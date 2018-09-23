@@ -46,6 +46,8 @@ public class SoldierController : MonoBehaviour
     public List<GameObject> Enemies;
     public Collider2D[] Soldiers;
 
+    public Strategies Strategy;
+
     [Header("Battle Stats")]
 
     public int MaxHp;
@@ -56,6 +58,35 @@ public class SoldierController : MonoBehaviour
     public int Hp;
     private float lastAttack;
     private int leaderCharisma = 7;
+
+    public enum Strategies
+    {
+        attackEnemy, attackBase, defend
+    };
+
+    // strategy Enemy attack
+
+
+
+
+    // strategy Base attack
+
+    public Collider2D[] Bases;
+
+    public List<GameObject> FriendBases;
+    public List<GameObject> EnemyBases;
+
+    public LayerMask basesLayer;
+
+
+
+
+    // strategy Defend
+
+    GameObject defendedBuilding;
+
+    Vector2 offsetFromBuilding;
+
 
 
     // Use this for initialization
@@ -73,7 +104,24 @@ public class SoldierController : MonoBehaviour
         Hp = MaxHp;
         Charisma = Random.Range(0, 10);
 
-		//random offset to leader but it shouldn't be zero
+        switch (Strategy)
+        {
+            case Strategies.attackEnemy:
+
+                break;
+
+            case Strategies.attackBase:
+
+                break;
+
+            case Strategies.defend:
+
+                break;
+        }
+
+
+
+        /*random offset to leader but it shouldn't be zero
 		float offsetX, offsetY;
 		if (Random.Range(0, 1) == 0)
 			offsetX = Random.Range(-1.5f, -.5f);
@@ -84,61 +132,202 @@ public class SoldierController : MonoBehaviour
 		else
 			offsetY = Random.Range(.5f, 1.5f);
 		MyOffsetToLeader = new Vector2(offsetX, offsetY);
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkNearSoldiers();
         checkHp();
-        setTarget();
+        checkNearSoldiers();
+
+        switch (Strategy)
+        {
+            case Strategies.attackEnemy:
+                if (Enemies.Count > 0)
+                {
+                    setTargetEnemyByObject();
+                }
+                else
+                {
+                    if (transform.position == targetPosition)
+                    {
+                        setRandomTargetPosition();
+                    }
+                }
+                break;
+
+            case Strategies.attackBase:
+                if (Enemies.Count > 0)
+                {
+                    if (EnemyBases.Count > 0)
+                    {
+                        if(Random.Range(0,2)==0)
+                        // z dwojga złego woli zaatakować budynek
+                        {
+                            setTargetBaseByObject();
+                        }
+                        else
+                        // z dwojga złego woli zaatakować wroga
+                        {
+                            setTargetEnemyByObject();
+                        }
+                    }
+                    else
+                    {
+                        setTargetEnemyByObject();
+                    }
+                }
+                else
+                {
+                    if (EnemyBases.Count > 0)
+                    {
+                        setTargetBaseByObject();
+                    }
+                    else if (transform.position == targetPosition)
+                    {
+                        setRandomTargetPosition();
+                    }
+                }
+                break;
+
+            case Strategies.defend:
+                if (Enemies.Count > 0)
+                {
+                    setTargetEnemyByObject();
+                }
+                break;
+        }
+
     }
+
 
     private void FixedUpdate()
     {
-		float dist = (transform.position - targetPosition).magnitude;
+        switch (Strategy)
+        {
+            case Strategies.attackEnemy:
+                if (Enemies.Count > 0)
+                {
+                    moveToTarget(1); 
+                }
+                else
+                {
+                    if (transform.position != targetPosition)
+                    {
+                        moveToTarget(1);
+                    }
+                }
+                break;
 
-		if (_targetObjectSoldierController != null)
-			if(_targetObjectSoldierController.Fallen != Fallen)
-			{
-				//enemy
-				if (dist > AttackRange)
-				{
-					//Debug.Log("Poza zasiegiem ataku");
-					moveToTarget(1);
-				}
-				else if (dist < minimumDistance && targetObject != null)
-				{
-					//Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
-					moveToTarget(-1);
-				}
-				else
-				{
-					doAction();
-				}
-			}
-			else
-			{
-				//leader
-				if (dist > AttackRange)
-				{
-					//Debug.Log("Poza zasiegiem ataku");
-					moveToLeaderTarget(1);
-				}
-				else if (dist < minimumDistance && targetObject != null)
-				{
-					//Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
-					moveToLeaderTarget(-1);
-				}
-				else
-				{
-					doAction();
-				}
-			}
+            case Strategies.attackBase:
+                if (Enemies.Count > 0)
+                {
+                    moveToTarget(1);
+                }
+                else
+                {
+                    if (transform.position != targetPosition)
+                    {
+                        moveToTarget(1);
+                    }
+                }
+                break;
 
-        if ((int)Time.time %5==0 && outOfBounds())
-            Damage(1);
+            case Strategies.defend:
+                if(Enemies.Count > 0)
+                {
+                    moveToTarget(1);
+                }
+                else
+                {
+                    if(transform.position != targetPosition)
+                    {
+                        moveToTarget(1);
+                    }
+                }
+                break;
+        }
     }
+
+
+    /*
+    private void FixedUpdate()
+    {
+        float dist = (transform.position - targetPosition).magnitude;
+
+        if (_targetObjectSoldierController != null)
+            if (_targetObjectSoldierController.Fallen != Fallen)
+            {
+                //enemy
+                if (dist > AttackRange)
+                {
+                    //Debug.Log("Poza zasiegiem ataku");
+                    moveToTarget(1);
+                }
+                else if (dist < minimumDistance && targetObject != null)
+                {
+                    //Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
+                    moveToTarget(-1);
+                }
+                else
+                {
+                    doAction();
+                }
+            }
+        /*
+        else
+        {
+            //leader
+            if (dist > AttackRange)
+            {
+                //Debug.Log("Poza zasiegiem ataku");
+                moveToLeaderTarget(1);
+            }
+            else if (dist < minimumDistance && targetObject != null)
+            {
+                //Debug.Log("Za blisko: " + dist.ToString() + " < " + minimumDistance);
+                moveToLeaderTarget(-1);
+            }
+            else
+            {
+                doAction();
+            }
+        }
+
+
+        if ((int)(Time.time * 10)%5 == 0 && outOfBounds())
+        {
+            Debug.Log(Time.time);
+            Damage(1);
+        }
+    }
+    */
+
+    void setTargetEnemyByObject()
+    {
+        if (targetObject == null)
+        {
+            targetObject = Enemies[Random.Range(0, Enemies.Count)];
+        }
+        else
+        {
+            targetPosition = targetObject.transform.position;
+        }
+    }
+
+    void setTargetBaseByObject()
+    {
+        if (targetObject == null)
+        {
+            targetObject = EnemyBases[Random.Range(0, EnemyBases.Count)];
+        }
+        else
+        {
+            targetPosition = targetObject.transform.position;
+        }
+    }
+
 
     void setTarget()
     {
@@ -178,11 +367,6 @@ public class SoldierController : MonoBehaviour
             if(targetObject.GetComponent<SoldierController>().Fallen != Fallen)
                 doAttack(targetObject);
         }
-        else
-        // Ustaw nowy cel
-        {
-            setRandomTargetPosition();
-        }
     }
 
 
@@ -208,12 +392,12 @@ public class SoldierController : MonoBehaviour
 	void setRandomTargetPosition()
     {
         float radius = Random.Range(0.0f, SightRange);
-        float angle = Random.Range(Mathf.PI / 2 - 0.5f, Mathf.PI / 2 + 0.5f) * (Fallen ? -1 : 1);
+        float angle = Random.Range(Mathf.PI / 2 - 0.5f, Mathf.PI / 2 + 0.5f) * (gameController.playerData.fallen^Fallen ? -1 : 1);
 
         targetPosition = transform.position + new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0.0f);
     }
 
-    void checkNearSoldiers()
+    bool checkNearSoldiers()
     {
         Friends.Clear();
         Enemies.Clear();
@@ -235,8 +419,36 @@ public class SoldierController : MonoBehaviour
             }
 
         }
-
+        return (Soldiers.Length > 0);
     }
+
+    bool checkNearBuildings()
+    {
+        FriendBases.Clear();
+        EnemyBases.Clear();
+
+        Bases = Physics2D.OverlapCircleAll(transform.position, SightRange, basesLayer);
+
+        foreach (Collider2D item in Bases)
+        {
+            GameObject obj = item.gameObject;
+
+            BaseBaseClass building = obj.GetComponent<BaseBaseClass>();
+
+            if (building.fallen == Fallen)
+            {
+                if (!obj.Equals(gameObject))
+                    FriendBases.Add(obj);
+            }
+            else
+            {
+                EnemyBases.Add(obj);
+            }
+        }
+        return (Bases.Length > 0);
+    }
+
+
     
     bool isTargetAchieved()
     {
