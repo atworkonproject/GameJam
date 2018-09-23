@@ -8,7 +8,7 @@ TO DO list
 na koñcu wypoziomowaæ trudnoœæ: ceny produktów, spawnowanie, AI... czas?
 sortowanie tak by sie obiekty nie zaslanialy	
 w config jest ile kosztuje soldier i co ile czasu ale w takiej formie jakby cena za tyle sek by³a...
-cienie
+--cienie
 napis ktory raz gramy ze soba i ze zmiana planszy
 
 BUGFIX

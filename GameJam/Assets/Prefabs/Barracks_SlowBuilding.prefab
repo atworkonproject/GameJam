@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114286266985015196}
   m_Layer: 9
   m_Name: Barracks_SlowBuilding
-  m_TagString: Untagged
+  m_TagString: SlowBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +175,9 @@ MonoBehaviour:
   MyHPBar: {fileID: 0}
   AngelBase: {fileID: 21300000, guid: d97d14532396042469c92e440cbeab5a, type: 3}
   DevilBase: {fileID: 21300000, guid: 9ce9e65bf90559f4ca7cd1a0d6a2295b, type: 3}
+  AngelBaseShadow: {fileID: 0}
+  DevilBaseShadow: {fileID: 0}
+  shadow: {fileID: 0}
   Soldier01prefab: {fileID: 1348803311977976, guid: 8db96ebf13b4c914985c65da1313e1d9,
     type: 2}
   DamageBubblC: {fileID: 0}
