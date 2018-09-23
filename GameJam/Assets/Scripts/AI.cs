@@ -51,7 +51,7 @@ public class AI
             //make an decision every second to slow down
             if(decisionTimer >= ConfigController.Config.AIDecisionEverySec)
             {
-                HahahahaEvilPlanOfTheAI();
+                //HahahahaEvilPlanOfTheAI();
                 decisionTimer = 0;
             }
             decisionTimer += Time.deltaTime;

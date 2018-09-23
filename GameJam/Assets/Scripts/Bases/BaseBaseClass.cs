@@ -34,17 +34,30 @@ public class BaseBaseClass : MonoBehaviour {
 		
 	}
 
-    public int getHP() { return HP; }
-    public void Hurt(int atk)
+    public void Damage(SoldierController attacker)
     {
-        if (HP <= 0) return;
+        int damage = Random.Range(0, attacker.Atk) + 1;
+        HP -= damage;
 
+        DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+        damBubbleController.CreateDamageBubble(transform.position, damage);
+
+        if(HP <= 0)
+        {
+            HP = 0;
+            //destroy this building - change the color
+            this.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+        }
+    }
+
+    public void Damage(int atk)
+    {
         HP -= atk;
 
         DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
         damBubbleController.CreateDamageBubble(transform.position, atk);
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             HP = 0;
             //destroy this building - change the color
