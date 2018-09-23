@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowBuildingMask : MonoBehaviour {
+public class SlowBuildingBase : MonoBehaviour {
 	public float SecondsBuildingLeft;
 	private float SecondsBuildingTotal;
 	public SpriteMask Mask;
@@ -10,7 +10,7 @@ public class SlowBuildingMask : MonoBehaviour {
 	void Start () {
 		SecondsBuildingTotal = 7.0f;//how much time will it build. todo move to config
 		SecondsBuildingLeft = SecondsBuildingTotal;
-		Mask = GetComponent<SpriteMask>();
+		Mask = GetComponentInChildren<SpriteMask>(true);
 	}
 	
 	// Update is called once per frame

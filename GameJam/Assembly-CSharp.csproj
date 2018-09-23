@@ -80,7 +80,7 @@
     <Compile Include="Assets\Scripts\InputController.cs" />
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
-    <Compile Include="Assets\Scripts\SlowBuildingMask.cs" />
+    <Compile Include="Assets\Scripts\SlowBuildingBase.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
     <Compile Include="Assets\Scripts\TopRedSprite.cs" />
     <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />

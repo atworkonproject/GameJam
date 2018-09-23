@@ -7,6 +7,8 @@ public class BuildController : MonoBehaviour {
 	[Header("to link")]
 	public BarrackBase BarracksBasePrefab;
 	public FarmBase FarmBasePrefab;
+	public SlowBuildingBase BarracksSlowBuildingBasePrefab;
+	public FarmBase FarmSlowBuildingBasePrefab;
 	[Header("other")]
 	public Sprite BackgroundSprite;
 	public SelectedTileController selectedTileC;
