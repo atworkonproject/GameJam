@@ -6,9 +6,10 @@ using UnityEngine;
 public class BaseArrayController : MonoBehaviour {
     public static List<BaseListRow> GlobalBaseArray;//two dimmensional
     public List<BaseListRow> GlobalBaseArrayToView_X;//to view in iinspector
-	public static BaseBaseClass NoBase;
-	public static BaseBaseClass SlowBuildingBase;//for putting into array
-
+	public static BaseBaseClass NoBaseStatic;
+	public static BaseBaseClass SlowBuildingBaseStatic;//for putting into array
+	public BaseBaseClass NobasePrefab;
+	public BaseBaseClass SlowBuildingBasePrefab;
 	//public static BaseBaseClass EmptyClass;
 	static SelectedTileController selectedTileC;
     BuildController baseC;
@@ -16,6 +17,8 @@ public class BaseArrayController : MonoBehaviour {
     public static Vector2Int mapSize;//read only
 
     void Start() {
+		NoBaseStatic = NobasePrefab;
+		SlowBuildingBaseStatic = SlowBuildingBasePrefab;
         baseC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>();
         selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 
@@ -41,7 +44,7 @@ public class BaseArrayController : MonoBehaviour {
             BaseArrayController.GlobalBaseArray[i].row_Y = new List<BaseBaseClass>();
             for (int j = 0; j <= maxIndexY; j++)
             {
-                BaseArrayController.GlobalBaseArray[i].row_Y.Add(BaseArrayController.NoBase);
+                BaseArrayController.GlobalBaseArray[i].row_Y.Add(BaseArrayController.NoBaseStatic);
                 //BaseArrayController.GlobalBaseArray[i].row_Y[j] = ;
             }
         }
@@ -92,7 +95,7 @@ public class BaseArrayController : MonoBehaviour {
 	}
 	public static void RemoveBase(Vector2Int indexes)
 	{
-		BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y] = NoBase;
+		BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y] = NoBaseStatic;
 	}
 
 
@@ -116,7 +119,7 @@ public class BaseArrayController : MonoBehaviour {
         {
             for (int j = 0; j <= maxIndexY; j++)
             {
-                BaseArrayController.GlobalBaseArray[i].row_Y[j] = BaseArrayController.NoBase;
+                BaseArrayController.GlobalBaseArray[i].row_Y[j] = BaseArrayController.NoBaseStatic;
             }
         }
     }

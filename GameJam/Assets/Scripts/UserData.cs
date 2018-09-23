@@ -71,7 +71,7 @@ public class UserData : MonoBehaviour
 				creditIncrement += ConfigController.Config.FarmEarn;
 				if (farm.owner.amIPlayer)
 					GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>().CreateDamageBubble(
-						    farm.transform.position, ConfigController.Config.FarmEarn, true);
+						    farm.transform.position, ConfigController.Config.FarmEarn, true, true);
 				farm.LastTimeFarmEarned = Time.timeSinceLevelLoad;
 			}
 		}

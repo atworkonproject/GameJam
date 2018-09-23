@@ -44,7 +44,7 @@ public class BarrackBase : BaseBaseClass {
                 SFXController.PlaySound(SOUNDS.SPAWN);
 				owner.Credits -= ConfigController.Config.CostForSoldier;
                 if(owner.amIPlayer)
-                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier);
+                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier, false, true);
 			}
 			else
             {

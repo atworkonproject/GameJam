@@ -13,6 +13,7 @@ public class BuildController : MonoBehaviour {
 	public Sprite BackgroundSprite;
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
+	public DamageBubbleController DamageBubbleC;
 
 	public int playerAliveBases;
 	public int AIaliveBases;
@@ -20,6 +21,7 @@ public class BuildController : MonoBehaviour {
 	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
+		DamageBubbleC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
 
         playerAliveBases = AIaliveBases = 0;
@@ -37,7 +39,7 @@ public class BuildController : MonoBehaviour {
 		{
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
-				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
+				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBaseStatic)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(BarracksSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(BarracksBasePrefab.gameObject,
@@ -48,6 +50,8 @@ public class BuildController : MonoBehaviour {
                     else
                         GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
+					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
+						ConfigController.Config.BarracksBuyCost, false, true);
                     builder.Credits -= ConfigController.Config.BarracksBuyCost;
 					SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
@@ -67,7 +71,7 @@ public class BuildController : MonoBehaviour {
     {
         if (builder.Credits < ConfigController.Config.BarracksBuyCost)
             return;
-        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic)
             return;
         if (pos.x < 0 || pos.y < 0)
             return;
@@ -81,7 +85,7 @@ public class BuildController : MonoBehaviour {
         else
             GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
-        builder.Credits -= ConfigController.Config.BarracksBuyCost;
+		builder.Credits -= ConfigController.Config.BarracksBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
@@ -92,7 +96,7 @@ public class BuildController : MonoBehaviour {
 			
 			if (selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
 			{
-				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBase)//if is not occupied by another building
+				if (BaseArrayController.GetBase(selectedTileC.DisplayedSelectedTile.MyIndexes) == BaseArrayController.NoBaseStatic)//if is not occupied by another building
 				{
 					GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(FarmBasePrefab.gameObject,
@@ -103,7 +107,9 @@ public class BuildController : MonoBehaviour {
                     else
                         GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
-                    builder.Credits -= ConfigController.Config.FarmBuyCost;
+					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
+						ConfigController.Config.FarmBuyCost, false, true);
+					builder.Credits -= ConfigController.Config.FarmBuyCost;
                     SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
 					selectedTileC.HideSelectionTile();
@@ -124,7 +130,7 @@ public class BuildController : MonoBehaviour {
     {
         if (builder.Credits < ConfigController.Config.FarmBuyCost)
             return;
-        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBase)
+        if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic)
             return;
         if (pos.x < 0 || pos.y < 0)
             return;

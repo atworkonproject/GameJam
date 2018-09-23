@@ -41,9 +41,9 @@ public class SelectedTileController : MonoBehaviour {
 			GameObject.FindWithTag("TopRightHalf").GetComponent<TopRedSprite>().ShowRedHalf();
 			HideSelectionTile();
 		}
-		else if(BaseArrayController.GetBase(Indexes) == BaseArrayController.NoBase)
+		else if(BaseArrayController.GetBase(Indexes) == BaseArrayController.NoBaseStatic &&
+			BaseArrayController.GetBase(Indexes) != BaseArrayController.SlowBuildingBaseStatic)
 		{
-			//user clicked already occupied tile, do nothing, maybe later display upgrade option
 			DisplayedSelectedTile.MyIndexes = Indexes;
 			DisplayedSelectedTile.transform.position = worldIndexedPosition;
 			DisplayedSelectedTile.gameObject.SetActive(true);//show
@@ -52,6 +52,7 @@ public class SelectedTileController : MonoBehaviour {
 		}
 		else
 		{
+			//user clicked already occupied tile, do nothing, maybe later display upgrade option
 
 			HideSelectionTile();
 
