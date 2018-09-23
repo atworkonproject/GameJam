@@ -6,10 +6,11 @@ using UnityEngine;
 public class BaseArrayController : MonoBehaviour {
     public static List<BaseListRow> GlobalBaseArray;//two dimmensional
     public List<BaseListRow> GlobalBaseArrayToView_X;//to view in iinspector
-    public static BaseBaseClass NoBase;
+	public static BaseBaseClass NoBase;
+	public static BaseBaseClass SlowBuildingBase;//for putting into array
 
-    //public static BaseBaseClass EmptyClass;
-    static SelectedTileController selectedTileC;
+	//public static BaseBaseClass EmptyClass;
+	static SelectedTileController selectedTileC;
     BuildController baseC;
 
     public static Vector2Int mapSize;//read only
@@ -85,11 +86,17 @@ public class BaseArrayController : MonoBehaviour {
         return BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y];
     }
 
-    public static void PutBase(Vector2Int indexes, BaseBaseClass baseToPut)
-    {
-        BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y] = baseToPut;
-    }
-    public void GetXIndexOfPositionX(float positionX)
+	public static void PutBase(Vector2Int indexes, BaseBaseClass baseToPut)
+	{
+		BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y] = baseToPut;
+	}
+	public static void RemoveBase(Vector2Int indexes)
+	{
+		BaseArrayController.GlobalBaseArray[indexes.x].row_Y[indexes.y] = NoBase;
+	}
+
+
+	public void GetXIndexOfPositionX(float positionX)
     {
 
     }
