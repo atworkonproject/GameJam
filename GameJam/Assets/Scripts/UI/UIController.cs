@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour {
 	public Text CreditsText;
 	public Text InfoForPlayerText0;
 	public Text InfoForPlayerText1;
+	public Text BuyBarracksPriceText;
+	public Text BuyFarmPriceText;
 	[Header("no need to link")]
 	public float InfoForPlayer_LastDisplayedTime0;
 	public float InfoForPlayer_LastDisplayedTime1;
@@ -32,6 +34,8 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		nieUzywac_CreditsTextStatic = CreditsText;
 
+		BuyBarracksPriceText.text = Mathf.RoundToInt(ConfigController.Config.BarracksBuyCost).ToString();
+		BuyFarmPriceText.text = Mathf.RoundToInt(ConfigController.Config.FarmBuyCost).ToString();
 
         InfoForPlayerText0.gameObject.SetActive(false);//hide
 		InfoForPlayerText1.gameObject.SetActive(false);//hide

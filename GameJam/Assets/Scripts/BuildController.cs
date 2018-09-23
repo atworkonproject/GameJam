@@ -13,6 +13,7 @@ public class BuildController : MonoBehaviour {
 	public Sprite BackgroundSprite;
 	public SelectedTileController selectedTileC;
 	public BaseArrayController baseArrayC;
+	public DamageBubbleController DamageBubbleC;
 
 	public int playerAliveBases;
 	public int AIaliveBases;
@@ -20,6 +21,7 @@ public class BuildController : MonoBehaviour {
 	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
+		DamageBubbleC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
 
         playerAliveBases = AIaliveBases = 0;
@@ -48,6 +50,8 @@ public class BuildController : MonoBehaviour {
                     else
                         GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
+					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
+						ConfigController.Config.BarracksBuyCost, false, true);
                     builder.Credits -= ConfigController.Config.BarracksBuyCost;
 					SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
@@ -81,7 +85,7 @@ public class BuildController : MonoBehaviour {
         else
             GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
-        builder.Credits -= ConfigController.Config.BarracksBuyCost;
+		builder.Credits -= ConfigController.Config.BarracksBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
@@ -103,7 +107,9 @@ public class BuildController : MonoBehaviour {
                     else
                         GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;
 
-                    builder.Credits -= ConfigController.Config.FarmBuyCost;
+					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
+						ConfigController.Config.FarmBuyCost, false, true);
+					builder.Credits -= ConfigController.Config.FarmBuyCost;
                     SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 
 					selectedTileC.HideSelectionTile();
