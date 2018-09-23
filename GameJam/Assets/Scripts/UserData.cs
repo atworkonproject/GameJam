@@ -54,7 +54,7 @@ public class UserData : MonoBehaviour
         else
             firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y * 7 / 8);
         //we can use this because AI version of build farm don't record and don't use  selection base - cursor
-        GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().BuildFarmAI(this, firstFarmPos);
+        GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().BuildFarmAI(this, firstFarmPos, true);
 
         Credits = ConfigController.Config.startPlayerCredits;//after creating first farm!
     }

@@ -17,7 +17,11 @@ public class BuildController : MonoBehaviour {
     public static int FARM_COST = 30;
     public static int BARRACKS_COST = 20;
 
-    void Start () {
+	public int playerAliveBases;
+	public int AIaliveBases;
+
+
+	void Start () {
 		selectedTileC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<SelectedTileController>();
 		baseArrayC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BaseArrayController>();
 		BackgroundSprite = GameObject.FindWithTag("BackgroundSprite").GetComponent<SpriteRenderer>().sprite;
@@ -101,7 +105,9 @@ public class BuildController : MonoBehaviour {
 		else
 			UIController.DisplayInfoForPlayer0("not enough credits");
 	}
-    public void BuildFarmAI(UserData builder, Vector2Int pos)
+	
+
+    public void BuildFarmAI(UserData builder, Vector2Int pos, bool isThisFirstFarm = false)
     {
         if (builder.Credits < ConfigController.Config.FarmBuyCost)
             return;
@@ -114,8 +120,17 @@ public class BuildController : MonoBehaviour {
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, FarmBasePrefab.gameObject,
 			selectedTileC, builder);
 
-		builder.Credits -= BuildController.FARM_COST;
-        SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+		if (isThisFirstFarm)//build instantenously
+		{
+			go.GetComponent<SlowBuildingBase>().FinishBuilding();
+			if (builder.fallen == gameController.playerData.fallen)
+				GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>().playerAliveBases++;
+			else
+				GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>().AIaliveBases++;
+
+			builder.Credits -= BuildController.FARM_COST;
+			SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+		}
     }
 
 	[Serializable]
