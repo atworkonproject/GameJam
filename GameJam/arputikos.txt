@@ -11,6 +11,7 @@ w config jest ile kosztuje soldier i co ile czasu ale w takiej formie jakby cena
 --cienie
 napis ktory raz gramy ze soba i ze zmiana planszy
 -przyspieszanie gry x1,5 x2 x3 x5 x10
+pokazac circle zasieg soldiera kiedy najedziemy na niego mysza
 
 BUGFIX
 PC ma chyba za duzo kasy

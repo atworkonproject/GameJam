@@ -135,10 +135,9 @@ public class gameController : MonoBehaviour
         playerData.rec = g;
         playerData.rec.ResetAll();
         AIData.rec.SwapSides();
+        AIData.rec.TrimInitialDelay(ConfigController.Config.MAX_TIME_FOR_AI_TO_START);
 
         UpdateBgSprite();
-
-        Debug.Log(AIData.rec.GetTotalActions());
     }
 
     public void GameOver()

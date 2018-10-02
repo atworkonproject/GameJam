@@ -22,9 +22,11 @@ MonoBehaviour:
   Soldier01MoveSpeed: 2
   BarracksBuyCost: 20
   FarmBuyCost: 30
-  FarmEarn: 100
+  FarmEarn: 50
   FarmEarnPeriod: 5
   CostForSoldier: 5
   BarrackSpawnEverySec: 5
   InfoTextDisplayTime: 3
-  AIDecisionEverySec: 4
+  AIDecisionEverySec: 7
+  BUILDING_TIME: 7
+  MAX_TIME_FOR_AI_TO_START: 1

@@ -30,6 +30,7 @@ public class gameplayRecorder {
             positionIndex = new Vector2Int(size.x - positionIndex.x - 1,
                                             size.y - positionIndex.y - 1);
         }
+        public void ChangeTime(float newTime) { time = newTime; }
     }
 
     List<Action> playerActions = new List<Action>();//chronogically set in the list!
@@ -70,5 +71,19 @@ public class gameplayRecorder {
     {
         foreach(Action i in playerActions)
             i.SwapPosition();
+    }
+
+    public void TrimInitialDelay(float maxTrim)//if delay before first action is more than 'maxTrim' then make it short, = 'maxTrim'. (if player slowly begins first level)
+    {
+        if (GetTotalActions() <= 0 || maxTrim < 0)
+            return;
+
+        float firstActionTime = playerActions[0].time;
+
+        if (firstActionTime > maxTrim)
+        {
+            foreach (Action a in playerActions)
+                a.ChangeTime(a.time - firstActionTime + maxTrim);
+        }
     }
 }

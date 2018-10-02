@@ -125,8 +125,8 @@ public class BuildController : MonoBehaviour {
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, FarmBasePrefab.gameObject,
 			selectedTileC, builder, !isThisFirstFarm);//todo - do not record a first farm
 
-        //if (isThisFirstFarm)//build instantenously
-        //	go.GetComponent<SlowBuildingBase>().FinishBuilding();
+        if (isThisFirstFarm)//build instantenously
+        	go.GetComponent<SlowBuildingBase>().FinishBuilding();
 
         builder.Credits -= ConfigController.Config.FarmBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);

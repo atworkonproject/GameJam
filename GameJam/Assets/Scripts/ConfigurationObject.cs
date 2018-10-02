@@ -34,6 +34,7 @@ public class ConfigurationObject : ScriptableObject {
 	public float InfoTextDisplayTime = 3.0f;
     public float AIDecisionEverySec = 2.1f;
     public float BUILDING_TIME = 7.0f;
+    public float MAX_TIME_FOR_AI_TO_START = 4.0f;//if the time tom first action is too long then cut it to <-
     //public float CameraMinZoom = 0.2f;
     //public float CameraZoomSpeed = 1.4f;
 }
