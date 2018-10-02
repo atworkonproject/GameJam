@@ -5,9 +5,8 @@ using UnityEngine;
 public class UserData : MonoBehaviour
 {
     public List<FarmBase> Farms;
-    public List<FarmBase> FarmsDBG;
-    public List<BarrackBase> Barracks;
-    public List<BarrackBase> BarracksDBG;
+    public List<BarrackBase01> Barracks01;
+    public List<BarrackBase03> Barracks03;
 
     public float Credits;
     public bool fallen; //god or evil
@@ -20,10 +19,8 @@ public class UserData : MonoBehaviour
     public void NewGame(bool isFallen, bool isPlayer)
     {
         Farms = new List<FarmBase>();
-        Barracks = new List<BarrackBase>();
-
-        FarmsDBG = Farms;
-        BarracksDBG = Barracks;
+        Barracks01 = new List<BarrackBase01>();
+        Barracks03 = new List<BarrackBase03>();
 
         rec = new gameplayRecorder();
 
@@ -54,7 +51,7 @@ public class UserData : MonoBehaviour
         else
             firstFarmPos = new Vector2Int(BaseArrayController.mapSize.x / 2, BaseArrayController.mapSize.y * 7 / 8);
         //we can use this because AI version of build farm don't record and don't use  selection base - cursor
-        GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().BuildFarmAI(this, firstFarmPos, true);
+        //GameObject.FindGameObjectWithTag("BuildController").GetComponent<BuildController>().Build(this, BASE_ID.FARM, firstFarmPos, true);
 
         Credits = ConfigController.Config.startPlayerCredits;//after creating first farm!
     }
@@ -79,7 +76,8 @@ public class UserData : MonoBehaviour
 
 
         income = ConfigController.Config.FarmEarn / ConfigController.Config.FarmEarnPeriod * Farms.Count;
-        outcome = ConfigController.Config.CostForSoldier / ConfigController.Config.BarrackSpawnEverySec * Barracks.Count;
+        outcome = ConfigController.Config.CostForSoldier01 / ConfigController.Config.Barrack01SpawnEverySec * Barracks01.Count;
+        outcome = ConfigController.Config.CostForSoldier03 / ConfigController.Config.Barrack03SpawnEverySec * Barracks03.Count;
 
         Credits = Mathf.Clamp(Credits, 0.0f, ConfigController.Config.maxPlayerCredits);
     }
@@ -89,10 +87,13 @@ public class UserData : MonoBehaviour
     {
         foreach (var i in Farms)
             Destroy(i.gameObject);
-        foreach (var i in Barracks)
+        foreach (var i in Barracks01)
+            Destroy(i.gameObject);
+        foreach (var i in Barracks03)
             Destroy(i.gameObject);
 
         Farms.Clear();
-        Barracks.Clear();
+        Barracks01.Clear();
+        Barracks03.Clear();
     }
 }

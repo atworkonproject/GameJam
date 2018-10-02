@@ -34,7 +34,7 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		nieUzywac_CreditsTextStatic = CreditsText;
 
-		BuyBarracksPriceText.text = Mathf.RoundToInt(ConfigController.Config.BarracksBuyCost).ToString();
+		BuyBarracksPriceText.text = Mathf.RoundToInt(ConfigController.Config.Barracks01BuyCost).ToString();
 		BuyFarmPriceText.text = Mathf.RoundToInt(ConfigController.Config.FarmBuyCost).ToString();
 
         InfoForPlayerText0.gameObject.SetActive(false);//hide

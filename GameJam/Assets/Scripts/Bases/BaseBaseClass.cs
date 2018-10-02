@@ -54,7 +54,7 @@ public class BaseBaseClass : MonoBehaviour {
 		{
 			MyHPBar.SetHP(HP, ConfigController.Config.FarmMaxHP);
 		}
-		else if (this is BarrackBase)
+		else if (this is BarrackBase01)
 		{
 			MyHPBar.SetHP(HP, ConfigController.Config.BarracksMaxHP);
 		}

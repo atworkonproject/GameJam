@@ -218,7 +218,7 @@ public class Soldier01Controller : Soldier {
             return;
         }
         if(!targetBase.GetComponent<FarmBase>() &&
-            !targetBase.GetComponent<BarrackBase>())
+            !targetBase.GetComponent<BarrackBase01>())
         {
             target = null;
             action = ACTION.NONE;//will change in next update()
@@ -268,7 +268,8 @@ public class Soldier01Controller : Soldier {
         Transform closest = null;
         float close = Mathf.Infinity;
         List<FarmBase> A = (owner.amIPlayer ? gameController.AIData.Farms : gameController.playerData.Farms);
-        List<BarrackBase> B = (owner.amIPlayer ? gameController.AIData.Barracks : gameController.playerData.Barracks);
+        List<BarrackBase01> B01 = (owner.amIPlayer ? gameController.AIData.Barracks01 : gameController.playerData.Barracks01);
+        List<BarrackBase03> B03 = (owner.amIPlayer ? gameController.AIData.Barracks03 : gameController.playerData.Barracks03);
 
         foreach (var x in A)
         {
@@ -279,7 +280,16 @@ public class Soldier01Controller : Soldier {
                 close = GetDistance(x.transform);
             }
         }
-        foreach (var x in B)
+        foreach (var x in B01)
+        {
+            if (x.getHP() <= 0) continue;
+            if (GetDistance(x.transform) < close)
+            {
+                closest = x.transform;
+                close = GetDistance(x.transform);
+            }
+        }
+        foreach (var x in B03)
         {
             if (x.getHP() <= 0) continue;
             if (GetDistance(x.transform) < close)

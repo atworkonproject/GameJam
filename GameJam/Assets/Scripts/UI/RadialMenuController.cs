@@ -22,13 +22,13 @@ public class RadialMenuController : MonoBehaviour {
 
 	public void OnFarmClicked()
 	{
-		buildC.BuildFarmPlayer(gameController.playerData);
+		buildC.BuildPlayer(gameController.playerData, BASE_ID.FARM);
 		this.gameObject.SetActive(false);
 	}
 
-	public void OnBarrackClicked()
+	public void OnBarrack01Clicked()
 	{
-		buildC.BuildBarracksPlayer(gameController.playerData);
+		buildC.BuildPlayer(gameController.playerData, BASE_ID.BARRACKS_01);
 		this.gameObject.SetActive(false);
 	}
 

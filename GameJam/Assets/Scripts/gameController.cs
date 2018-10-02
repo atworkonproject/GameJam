@@ -73,7 +73,7 @@ public class gameController : MonoBehaviour
 
          playerData.manualUpdate();
          AIData.manualUpdate();
-        if (Input.GetKeyDown("r"))//temp
+        if (Input.GetKeyDown("r"))//todo 
             Win();
         if (Input.GetKeyDown("g"))//temp
             GameOver();
@@ -82,9 +82,13 @@ public class gameController : MonoBehaviour
         BuildController bc = buildController.GetComponent<BuildController>();
 
         if (Input.GetKeyDown("1"))
-            bc.BuildBarracksPlayer(playerData);
+            bc.BuildPlayer(playerData, BASE_ID.FARM);
         if (Input.GetKeyDown("2"))
-            bc.BuildFarmPlayer(playerData);
+            bc.BuildPlayer(playerData, BASE_ID.BARRACKS_01);
+        //if (Input.GetKeyDown("3"))
+        //    bc.BuildPlayer(playerData, BASE_ID.BARRACKS_02);
+        if (Input.GetKeyDown("4"))
+            bc.BuildPlayer(playerData, BASE_ID.BARRACKS_03);
 
         ai.Update();
 

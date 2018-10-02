@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyFarmButton : MonoBehaviour {
 
-	public BuildController buildC;
-	public SelectedTileController selectedTileC;
+public class BuyBaseButton : MonoBehaviour {
+
+	BuildController buildC;
+	SelectedTileController selectedTileC;
+    public BASE_ID id;
+
 	public void Start()
 	{
 		buildC = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<BuildController>();
@@ -14,6 +17,6 @@ public class BuyFarmButton : MonoBehaviour {
 
 	public void OnClickedMe()
 	{
-		buildC.BuildFarmPlayer(gameController.playerData);
-	}
+		buildC.BuildPlayer(gameController.playerData, id);
+    }
 }

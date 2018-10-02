@@ -309,7 +309,8 @@
     <Compile Include="Assets\MainMenu\MainCameraGameOver.cs" />
     <Compile Include="Assets\MainMenu\MainCameraMainMenu.cs" />
     <Compile Include="Assets\Scripts\AI.cs" />
-    <Compile Include="Assets\Scripts\Bases\BarrackBase.cs" />
+    <Compile Include="Assets\Scripts\Bases\BarrackBase01.cs" />
+    <Compile Include="Assets\Scripts\Bases\BarrackBase03.cs" />
     <Compile Include="Assets\Scripts\Bases\BaseArrayController.cs" />
     <Compile Include="Assets\Scripts\Bases\BaseBaseClass.cs" />
     <Compile Include="Assets\Scripts\Bases\FarmBase.cs" />
@@ -331,8 +332,7 @@
     <Compile Include="Assets\Scripts\SoldierController.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\TopRedSprite.cs" />
-    <Compile Include="Assets\Scripts\UI\BuyBarracksButton.cs" />
-    <Compile Include="Assets\Scripts\UI\BuyFarmButton.cs" />
+    <Compile Include="Assets\Scripts\UI\BuyBaseButton.cs" />
     <Compile Include="Assets\Scripts\UI\DamageBubble.cs" />
     <Compile Include="Assets\Scripts\UI\DamageBubbleController.cs" />
     <Compile Include="Assets\Scripts\UI\RadialMenuController.cs" />

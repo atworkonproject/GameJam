@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrackBase : BaseBaseClass {
+public class BarrackBase01 : BaseBaseClass {
     float timeToSpawn;
     //public static float spawnEverySec = 5.0f;//moved to config Controller
     //public static int COST_FOR_SOLDIER = 5;
 
-    public GameObject Soldier01prefab;
+    public GameObject Soldierprefab;
 
 	public DamageBubbleController DamageBubblC;
 
@@ -32,21 +32,21 @@ public class BarrackBase : BaseBaseClass {
             return;
 
         timeToSpawn += Time.deltaTime;
-		if (timeToSpawn >= ConfigController.Config.BarrackSpawnEverySec)
+		if (timeToSpawn >= ConfigController.Config.Barrack01SpawnEverySec)
 		{
-			if (owner.Credits >= ConfigController.Config.CostForSoldier)
+			if (owner.Credits >= ConfigController.Config.CostForSoldier01)
 			{
 				timeToSpawn = 0;
 				GameObject soldier = Instantiate(
-					Soldier01prefab, this.transform.position + new Vector3(0, 0, -2), 
+					Soldierprefab, this.transform.position + new Vector3(0, 0, -2), 
 					Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
                 Soldier01Controller ctrl = soldier.GetComponent<Soldier01Controller>();
                 ctrl.Init(owner);
                 gameController.soldiers.Add(ctrl);
                 SFXController.PlaySound(SOUNDS.SPAWN);
-				owner.Credits -= ConfigController.Config.CostForSoldier;
+				owner.Credits -= ConfigController.Config.CostForSoldier01;
                 if(owner.amIPlayer)
-                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier, false, true);
+                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier01, false, true);
 			}
 			else
             {

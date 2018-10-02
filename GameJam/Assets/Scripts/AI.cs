@@ -34,14 +34,19 @@ public class AI
             {
                 switch (a.type)
                 {
-                    case gameplayRecorder.ACTION_TYPE.ADD_FARM:
-                        bc.BuildFarmAI(AIData, a.positionIndex);
+                    case ACTION_ID.ADD_FARM:
+                        bc.BuildAI(AIData, BASE_ID.FARM, a.positionIndex);
                         break;
-                    case gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01:
-                        bc.BuildBarracksAI(AIData, a.positionIndex);
+                    case ACTION_ID.ADD_BARRACKS_01:
+                        bc.BuildAI(AIData, BASE_ID.BARRACKS_01, a.positionIndex);
                         break;
-                    case gameplayRecorder.ACTION_TYPE._COUNT:
+                    case ACTION_ID.ADD_BARRACKS_02:
+                        bc.BuildAI(AIData, BASE_ID.BARRACKS_02, a.positionIndex);
+                        break;
+                    case ACTION_ID.ADD_BARRACKS_03:
+                    case ACTION_ID._COUNT:
                     default:
+                        bc.BuildAI(AIData, BASE_ID.BARRACKS_03, a.positionIndex);
                         break;
                 }
             }
@@ -65,11 +70,14 @@ public class AI
             AIData.income < AIData.outcome)
         {
             //try to build a farm
-            bc.BuildFarmAI(AIData, GetRandomFreePos());
+            bc.BuildAI(AIData, BASE_ID.FARM, GetRandomFreePos());
         }
         else
         {
-            bc.BuildBarracksAI(AIData, GetRandomFreePos());
+            if(AIData.Barracks03.Count < 3 && UnityEngine.Random.Range(0,4) == 1)
+                bc.BuildAI(AIData, BASE_ID.BARRACKS_03, GetRandomFreePos());
+            else
+                bc.BuildAI(AIData, BASE_ID.BARRACKS_01, GetRandomFreePos());
         }
     }
 

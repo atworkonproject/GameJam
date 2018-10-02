@@ -2,22 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum BASE_ID
+{
+    FARM,
+    BARRACKS_01,
+    BARRACKS_02,
+    BARRACKS_03,
+
+    _COUNT
+
+}
+
+public enum ACTION_ID
+{
+    ADD_FARM,
+    ADD_BARRACKS_01,
+    ADD_BARRACKS_02,
+    ADD_BARRACKS_03,
+
+    _COUNT
+}
+
 public class gameplayRecorder {
 
-    public enum ACTION_TYPE
-    {
-        ADD_FARM,
-        ADD_BARRACKS_01,
-
-        _COUNT
-    }
     public class Action
     {
-        public ACTION_TYPE type { get; private set; }
+        public ACTION_ID type { get; private set; }
         public float time { get; private set; }//counting from level start
         public Vector2Int positionIndex { get; private set; }//position of newly base on the map (optionally)
 
-        public Action(ACTION_TYPE _type, float _time, Vector2Int pos)
+        public Action(ACTION_ID _type, float _time, Vector2Int pos)
         {
             type = _type;
             time = _time;
@@ -53,7 +68,7 @@ public class gameplayRecorder {
         return actions;
     }
 
-    public void AddAction(ACTION_TYPE type, float elapsedTime, Vector2Int pos)
+    public void AddAction(ACTION_ID type, float elapsedTime, Vector2Int pos)
     {
         Action a = new Action(type, elapsedTime, pos);
         playerActions.Add(a);
