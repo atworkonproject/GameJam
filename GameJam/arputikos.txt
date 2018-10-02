@@ -10,6 +10,7 @@ sortowanie tak by sie obiekty nie zaslanialy
 w config jest ile kosztuje soldier i co ile czasu ale w takiej formie jakby cena za tyle sek by³a...
 --cienie
 napis ktory raz gramy ze soba i ze zmiana planszy
+-przyspieszanie gry x1,5 x2 x3 x5 x10
 
 BUGFIX
 PC ma chyba za duzo kasy

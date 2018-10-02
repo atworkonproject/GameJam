@@ -199,9 +199,8 @@ public class Soldier01Controller : Soldier {
             return;
         }
 
-        int dmgVar = ConfigController.Config.Soldier01DmgVar;
         attackedAlready = true;
-        targetSoldier.Hurt(this, ConfigController.Config.Soldier01Dmg + UnityEngine.Random.Range(0,2* dmgVar+1) - dmgVar);
+        targetSoldier.Hurt(this, CalcDamage());
         if (targetSoldier.getHP() <= 0)
             action = ACTION.NONE;
     }
@@ -227,9 +226,16 @@ public class Soldier01Controller : Soldier {
         }
 
         attackedAlready = true;
-        targetBase.Hurt(ConfigController.Config.Soldier01Dmg);
+        targetBase.Hurt(CalcDamage());
         if (targetBase.getHP() <= 0)
             action = ACTION.NONE;
+    }
+
+    int CalcDamage()
+    {
+        int dmgVar = ConfigController.Config.Soldier01DmgVar;
+
+        return ConfigController.Config.Soldier01Dmg + UnityEngine.Random.Range(0, 2 * dmgVar + 1) - dmgVar;
     }
 
     override public void Hurt(Soldier attacker, int damage)

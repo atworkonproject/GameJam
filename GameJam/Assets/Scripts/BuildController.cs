@@ -43,7 +43,7 @@ public class BuildController : MonoBehaviour {
 				{
 					GameObject go = Instantiate(BarracksSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(BarracksBasePrefab.gameObject,
-						selectedTileC, builder);
+						selectedTileC, builder, true);
 
 					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
 						ConfigController.Config.BarracksBuyCost, false, true);
@@ -73,12 +73,13 @@ public class BuildController : MonoBehaviour {
 
 		GameObject go = Instantiate(BarracksSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, BarracksBasePrefab.gameObject,
-			selectedTileC, builder);
+			selectedTileC, builder, true);
 
 		builder.Credits -= ConfigController.Config.BarracksBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
 	}
 
+    //todo merge the two functions for ai and player
 	public void BuildFarmPlayer(UserData builder)
 	{
 		if (gameController.playerData.Credits >= ConfigController.Config.FarmBuyCost)
@@ -90,7 +91,7 @@ public class BuildController : MonoBehaviour {
 				{
 					GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 					go.GetComponent<SlowBuildingBase>().Init(FarmBasePrefab.gameObject,
-						selectedTileC, builder);
+						selectedTileC, builder, true);
 
 					DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
 						ConfigController.Config.FarmBuyCost, false, true);
@@ -119,12 +120,13 @@ public class BuildController : MonoBehaviour {
         if (pos.x < 0 || pos.y < 0)
             return;
 
+        
 		GameObject go = Instantiate(FarmSlowBuildingBasePrefab.gameObject, GameObject.FindGameObjectWithTag("BASES").transform);
 		go.GetComponent<SlowBuildingBase>().InitForAI(pos, FarmBasePrefab.gameObject,
-			selectedTileC, builder);
-        
-		//if (isThisFirstFarm)//build instantenously
-		//	go.GetComponent<SlowBuildingBase>().FinishBuilding();
+			selectedTileC, builder, !isThisFirstFarm);//todo - do not record a first farm
+
+        //if (isThisFirstFarm)//build instantenously
+        //	go.GetComponent<SlowBuildingBase>().FinishBuilding();
 
         builder.Credits -= ConfigController.Config.FarmBuyCost;
         SFXController.PlaySound(SOUNDS.PLACE_BUILDING);

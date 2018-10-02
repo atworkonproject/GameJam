@@ -13,7 +13,7 @@ public class SlowBuildingBase : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		SecondsBuildingTotal = 7.0f;//how much time will it build. todo move to config
+        SecondsBuildingTotal = ConfigController.Config.BUILDING_TIME;
 		SecondsBuildingLeft = SecondsBuildingTotal;
 		Mask = GetComponentInChildren<SpriteMask>(true);
 		oneSecondCounter = 0.0f;
@@ -49,13 +49,15 @@ public class SlowBuildingBase : MonoBehaviour
 	UserData builder;
 	Vector2 basePosition;
 	Vector2Int DisplayedSelectedTile_MyIndexes;
+    bool record;//is the action recorded for later use
 
-	public void Init(GameObject prefabGO, SelectedTileController selectedTileContr, UserData builder)
+	public void Init(GameObject prefabGO, SelectedTileController selectedTileContr, UserData builder, bool _record)
 	{
 		this.prefabGO = prefabGO;
 		this.selectedTileC = selectedTileContr;
 		this.builder = builder;
-		basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
+        record = _record;
+        basePosition = selectedTileC.DisplayedSelectedTile.transform.position;
 		DisplayedSelectedTile_MyIndexes = selectedTileC.DisplayedSelectedTile.MyIndexes;
 
 		this.gameObject.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
@@ -64,11 +66,12 @@ public class SlowBuildingBase : MonoBehaviour
 
 	}
 
-	public void InitForAI(Vector2Int pos, GameObject prefabGO, SelectedTileController selectedTileContr, UserData builder)
+	public void InitForAI(Vector2Int pos, GameObject prefabGO, SelectedTileController selectedTileContr, UserData builder, bool _record)
 	{
 		this.prefabGO = prefabGO;
 		this.selectedTileC = selectedTileContr;
 		this.builder = builder;
+        record = _record;
 
 		basePosition = BaseArrayController.getWorldPositionForIndexes(pos);
 		DisplayedSelectedTile_MyIndexes = pos;
@@ -77,7 +80,7 @@ public class SlowBuildingBase : MonoBehaviour
 		GetComponent<SpriteRenderer>().sprite = (builder.fallen) ? DevilBase : AngelBase;
 	}
 
-	public void FinishBuilding()
+    public void FinishBuilding()
 	{
 		GameObject go = Instantiate(prefabGO, GameObject.FindGameObjectWithTag("BASES").transform);
 		go.transform.position = new Vector3(basePosition.x, basePosition.y, -1.0f);//-1.0f to be in front of backgroundSprite
@@ -90,20 +93,23 @@ public class SlowBuildingBase : MonoBehaviour
 		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, BaseArrayController.NoBaseStatic);
 
 		BaseArrayController.PutBase(DisplayedSelectedTile_MyIndexes, b);
+
 		if (b is BarrackBase)
 		{
 			builder.Barracks.Add((BarrackBase)b);
 			((BarrackBase)b).Init(builder, b.MyIndexes);
+            if(record)
             builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_BARRACKS_01, gameController.timeElapsed, b.MyIndexes);
         }
 		else if (b is FarmBase)
 		{
 			builder.Farms.Add((FarmBase)b);
 			((FarmBase)b).Init(builder, b.MyIndexes);
+            if(record)
             builder.rec.AddAction(gameplayRecorder.ACTION_TYPE.ADD_FARM, gameController.timeElapsed, b.MyIndexes);
         }
 
-        if (builder.fallen == gameController.playerData.fallen)
+        if (builder == gameController.playerData)
             GameObject.FindWithTag("BuildController").GetComponent<BuildController>().playerAliveBases++;
         else
             GameObject.FindWithTag("BuildController").GetComponent<BuildController>().AIaliveBases++;

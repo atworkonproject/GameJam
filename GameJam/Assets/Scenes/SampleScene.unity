@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 175724934}
   - component: {fileID: 175724933}
   m_Layer: 0
-  m_Name: plaer
+  m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2156,7 +2156,7 @@ GameObject:
   - component: {fileID: 1660010981}
   - component: {fileID: 1660010982}
   m_Layer: 0
-  m_Name: DamageBubbleController
+  m_Name: BubbleController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

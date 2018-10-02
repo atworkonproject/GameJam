@@ -137,6 +137,8 @@ public class gameController : MonoBehaviour
         AIData.rec.SwapSides();
 
         UpdateBgSprite();
+
+        Debug.Log(AIData.rec.GetTotalActions());
     }
 
     public void GameOver()

@@ -33,6 +33,7 @@ public class ConfigurationObject : ScriptableObject {
     [Header("Other")]
 	public float InfoTextDisplayTime = 3.0f;
     public float AIDecisionEverySec = 2.1f;
+    public float BUILDING_TIME = 7.0f;
     //public float CameraMinZoom = 0.2f;
     //public float CameraZoomSpeed = 1.4f;
 }

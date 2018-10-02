@@ -16,7 +16,7 @@ public class Soldier : MonoBehaviour
     public int getHP() { return HP; }
 	public void Start()
 	{
-		speed = ConfigController.Config.Soldier01MoveSpeed;
+
 	}
 	public virtual void Hurt(Soldier attacker, int damage)
     {

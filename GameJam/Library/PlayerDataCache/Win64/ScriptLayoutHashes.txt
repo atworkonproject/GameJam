@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/SUPERCACHE/Digital_Night_Game_Jam_2018/build2/GameJam.exe
+C:/SUPERCACHE/Digital_Night_Game_Jam_2018/build3/GameJam.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/SampleScene.unity
