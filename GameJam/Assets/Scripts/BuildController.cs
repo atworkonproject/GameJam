@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class BuildController : MonoBehaviour {
 	[Header("to link")]
-	public BarrackBase01 BarracksBasePrefab;
-	public FarmBase FarmBasePrefab;
-	public SlowBuildingBase BarracksSlowBuildingBasePrefab;
-	public FarmBase FarmSlowBuildingBasePrefab;
+	public BarrackBase01 Barracks01BasePrefab;
+    public BarrackBase01 Barracks03BasePrefab;
+    public FarmBase FarmBasePrefab;
+	public SlowBuildingBase Barracks01SlowBuildingBasePrefab;
+    public SlowBuildingBase Barracks03SlowBuildingBasePrefab;
+    public FarmBase FarmSlowBuildingBasePrefab;
 	[Header("other")]
 	public Sprite BackgroundSprite;
 	public SelectedTileController selectedTileC;
@@ -38,7 +40,7 @@ public class BuildController : MonoBehaviour {
     {
         if (!selectedTileC.DisplayedSelectedTile.isActiveAndEnabled)
         {
-            UIController.DisplayInfoForPlayer0("Place for new building is not selected");
+            UIController.DisplayUserInfo("Place for new building is not selected", builder);
             return;
         }
 
@@ -67,7 +69,7 @@ public class BuildController : MonoBehaviour {
         //check position if free
         if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic)
         {
-            UIController.DisplayInfoForPlayer0("The place is occupied");
+            UIController.DisplayUserInfo("The place is occupied", builder);
             return;
         }
 
@@ -92,7 +94,7 @@ public class BuildController : MonoBehaviour {
         }
         if (builder.Credits < creditsNeeded)
         {
-            UIController.DisplayInfoForPlayer0("Not enough $");
+            UIController.DisplayUserInfo("Not enough $", builder);
             return;
         }
         

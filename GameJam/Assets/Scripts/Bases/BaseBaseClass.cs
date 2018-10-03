@@ -50,16 +50,10 @@ public class BaseBaseClass : MonoBehaviour {
         HP -= atk;
         if (HP <= 0) HP = 0;
 
-		if (this is FarmBase)
-		{
-			MyHPBar.SetHP(HP, ConfigController.Config.FarmMaxHP);
-		}
-		else if (this is BarrackBase01)
-		{
-			MyHPBar.SetHP(HP, ConfigController.Config.BarracksMaxHP);
-		}
+        MyHPBar.SetHP(HP, getMaxHP());
 
-		DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
+
+        DamageBubbleController damBubbleController = GameObject.FindWithTag("_SCRIPTS_").GetComponentInChildren<DamageBubbleController>();
         damBubbleController.CreateDamageBubble(transform.position, atk);
 
         //destroy this building - change the color

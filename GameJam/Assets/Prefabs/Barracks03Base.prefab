@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4417231784491710}
   - component: {fileID: 212074978076630326}
-  - component: {fileID: 114963443399272250}
+  - component: {fileID: 114077915427068316}
   m_Layer: 9
   m_Name: Barracks03Base
   m_TagString: Untagged
@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789042872999352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.497751, y: 5.212511, z: -1}
+  m_LocalPosition: {x: 396.85654, y: -179.37675, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4719470423181564}
@@ -132,6 +132,27 @@ Transform:
   m_Father: {fileID: 4417231784491710}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114077915427068316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789042872999352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65762a2be219a7f489893c7900a0bc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyIndexes: {x: 0, y: 0}
+  MyHPBar: {fileID: 0}
+  AngelBase: {fileID: 21300000, guid: 2d1c27942a0d52748a7d2ac270b33c78, type: 3}
+  DevilBase: {fileID: 21300000, guid: d409cc089306262428044b0ff5df8f7e, type: 3}
+  AngelBaseShadow: {fileID: 21300000, guid: 7bce14da785dcb44584edecb373eb7ca, type: 3}
+  DevilBaseShadow: {fileID: 21300000, guid: ba054fa4186b74f4295f563ad452babe, type: 3}
+  shadow: {fileID: 212414225240579486}
+  Soldierprefab: {fileID: 1255098804996634, guid: be28d16271f72734b9fd186a42f905aa,
+    type: 2}
+  DamageBubblC: {fileID: 0}
 --- !u!114 &114469074557808674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,27 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Foreground: {fileID: 212650289328411360}
---- !u!114 &114963443399272250
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1789042872999352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa76e5f95d0f5c429dbfa70611db0b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MyIndexes: {x: 0, y: 0}
-  MyHPBar: {fileID: 0}
-  AngelBase: {fileID: 21300000, guid: 2d1c27942a0d52748a7d2ac270b33c78, type: 3}
-  DevilBase: {fileID: 21300000, guid: d409cc089306262428044b0ff5df8f7e, type: 3}
-  AngelBaseShadow: {fileID: 21300000, guid: 7bce14da785dcb44584edecb373eb7ca, type: 3}
-  DevilBaseShadow: {fileID: 21300000, guid: ba054fa4186b74f4295f563ad452babe, type: 3}
-  shadow: {fileID: 212414225240579486}
-  Soldierprefab: {fileID: 1348803311977976, guid: 8db96ebf13b4c914985c65da1313e1d9,
-    type: 2}
-  DamageBubblC: {fileID: 0}
 --- !u!212 &212074978076630326
 SpriteRenderer:
   m_ObjectHideFlags: 1

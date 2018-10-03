@@ -26,7 +26,7 @@ public class BarrackBase03 : BaseBaseClass
         HP = getMaxHP();
     }
 
-    override protected int getMaxHP() { return ConfigController.Config.BarracksMaxHP; }
+    override protected int getMaxHP() { return ConfigController.Config.Barracks03MaxHP; }
 
     // Update is called once per frame
     void Update()
@@ -35,7 +35,7 @@ public class BarrackBase03 : BaseBaseClass
             return;
 
         timeToSpawn += Time.deltaTime;
-        if (timeToSpawn >= ConfigController.Config.Barrack01SpawnEverySec)
+        if (timeToSpawn >= ConfigController.Config.Barrack03SpawnEverySec)
         {
             if (owner.Credits >= ConfigController.Config.CostForSoldier01)
             {
@@ -47,17 +47,13 @@ public class BarrackBase03 : BaseBaseClass
                 ctrl.Init(owner);
                 gameController.soldiers.Add(ctrl);
                 SFXController.PlaySound(SOUNDS.SPAWN);
-                owner.Credits -= ConfigController.Config.CostForSoldier01;
+                owner.Credits -= ConfigController.Config.CostForSoldier03;
                 if (owner.amIPlayer)
-                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier01, false, true);
+                    DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier03, false, true);
             }
             else
             {
-                if (owner.amIPlayer)
-                    UIController.DisplayInfoForPlayer0("no money for a new soldier");
-                else
-                    UIController.DisplayInfoForPlayer1("no money for a new soldier");
-
+                UIController.DisplayUserInfo("No money for a new soldier", owner);
             }
         }
     }

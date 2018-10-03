@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4794224849815968}
   - component: {fileID: 212896144954348034}
-  - component: {fileID: 114259551060743500}
+  - component: {fileID: 114541856379277982}
   - component: {fileID: 114248244390756210}
   m_Layer: 9
   m_Name: Barracks03_SlowBuilding
@@ -148,7 +148,7 @@ MonoBehaviour:
   Mask: {fileID: 331631625870134492}
   AngelBase: {fileID: 21300000, guid: 2d1c27942a0d52748a7d2ac270b33c78, type: 3}
   DevilBase: {fileID: 21300000, guid: d409cc089306262428044b0ff5df8f7e, type: 3}
---- !u!114 &114259551060743500
+--- !u!114 &114541856379277982
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,17 +156,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1572095744960014}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa76e5f95d0f5c429dbfa70611db0b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 65762a2be219a7f489893c7900a0bc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MyIndexes: {x: 0, y: 0}
   MyHPBar: {fileID: 0}
   AngelBase: {fileID: 21300000, guid: 2d1c27942a0d52748a7d2ac270b33c78, type: 3}
   DevilBase: {fileID: 21300000, guid: d409cc089306262428044b0ff5df8f7e, type: 3}
-  AngelBaseShadow: {fileID: 0}
-  DevilBaseShadow: {fileID: 0}
-  shadow: {fileID: 0}
-  Soldierprefab: {fileID: 0}
+  AngelBaseShadow: {fileID: 21300000, guid: 7bce14da785dcb44584edecb373eb7ca, type: 3}
+  DevilBaseShadow: {fileID: 21300000, guid: ba054fa4186b74f4295f563ad452babe, type: 3}
+  shadow: {fileID: 212414225240579486, guid: 6566ffb683a59d94b9f998756978cd9f, type: 2}
+  Soldierprefab: {fileID: 1255098804996634, guid: be28d16271f72734b9fd186a42f905aa,
+    type: 2}
   DamageBubblC: {fileID: 0}
 --- !u!114 &114554824712552360
 MonoBehaviour:

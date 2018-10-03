@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 511126034}
   - component: {fileID: 511126033}
   m_Layer: 5
-  m_Name: BarracksPrice
+  m_Name: BarracksPrice1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1231,7 +1231,7 @@ GameObject:
   - component: {fileID: 637454445}
   - component: {fileID: 637454444}
   m_Layer: 5
-  m_Name: BarracksPrice
+  m_Name: BarracksPrice3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2515,7 +2515,8 @@ MonoBehaviour:
   CreditsText: {fileID: 1766644176}
   InfoForPlayerText0: {fileID: 1379274026}
   InfoForPlayerText1: {fileID: 1947401190}
-  BuyBarracksPriceText: {fileID: 511126033}
+  BuyBarracks01PriceText: {fileID: 511126033}
+  BuyBarracks03PriceText: {fileID: 637454444}
   BuyFarmPriceText: {fileID: 177957064}
   InfoForPlayer_LastDisplayedTime0: 0
   InfoForPlayer_LastDisplayedTime1: 0
@@ -2559,12 +2560,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95eb7bf1352903249ae3accebc255cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BarracksBasePrefab: {fileID: 114539774189909572, guid: 27b66cc6f8389f74cb95f5110dd205ea,
-    type: 2}
+  Barracks01BasePrefab: {fileID: 0}
+  Barracks03BasePrefab: {fileID: 0}
   FarmBasePrefab: {fileID: 114449194808420530, guid: 3095fcf2837adb74f906eee8e2bfa215,
     type: 2}
-  BarracksSlowBuildingBasePrefab: {fileID: 114286266985015196, guid: 97419899613909e49bce859050de627e,
-    type: 2}
+  Barracks01SlowBuildingBasePrefab: {fileID: 0}
+  Barracks03SlowBuildingBasePrefab: {fileID: 0}
   FarmSlowBuildingBasePrefab: {fileID: 114437268059594722, guid: 21e86534f0df0c340814ec3a01ec61de,
     type: 2}
   BackgroundSprite: {fileID: 0}

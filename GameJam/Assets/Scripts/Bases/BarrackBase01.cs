@@ -24,7 +24,7 @@ public class BarrackBase01 : BaseBaseClass {
         HP = getMaxHP();
     }
 
-    override protected int getMaxHP() { return ConfigController.Config.BarracksMaxHP; }
+    override protected int getMaxHP() { return ConfigController.Config.Barracks01MaxHP; }
 
     // Update is called once per frame
     void Update () {
@@ -49,13 +49,7 @@ public class BarrackBase01 : BaseBaseClass {
                     DamageBubblC.CreateDamageBubble(this.transform.position, ConfigController.Config.CostForSoldier01, false, true);
 			}
 			else
-            {
-                if(owner.amIPlayer)
-                    UIController.DisplayInfoForPlayer0("no money for a new soldier");
-                else
-                    UIController.DisplayInfoForPlayer1("no money for a new soldier");
-
-            }
+                UIController.DisplayUserInfo("No money for a new soldier", owner);
         }
     }
 

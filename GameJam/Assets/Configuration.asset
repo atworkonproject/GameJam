@@ -20,13 +20,22 @@ MonoBehaviour:
   Soldier01DmgVar: 3
   Soldier01AttackSpeed: 1
   Soldier01MoveSpeed: 2
-  BarracksBuyCost: 20
+  Soldier03MaxHP: 150
+  Soldier03Dmg: 100
+  Soldier03DmgVar: 25
+  Soldier03AttackSpeed: 1.5
+  Soldier03MoveSpeed: 2
+  Barracks01BuyCost: 20
+  Barracks02BuyCost: 30
+  Barracks03BuyCost: 50
   FarmBuyCost: 30
   FarmEarn: 50
   FarmEarnPeriod: 5
-  CostForSoldier: 5
-  BarrackSpawnEverySec: 5
+  CostForSoldier01: 5
+  CostForSoldier03: 10
+  Barrack01SpawnEverySec: 5
+  Barrack03SpawnEverySec: 10
   InfoTextDisplayTime: 3
-  AIDecisionEverySec: 7
+  AIDecisionEverySec: 1
   BUILDING_TIME: 7
   MAX_TIME_FOR_AI_TO_START: 1

@@ -218,7 +218,8 @@ public class Soldier01Controller : Soldier {
             return;
         }
         if(!targetBase.GetComponent<FarmBase>() &&
-            !targetBase.GetComponent<BarrackBase01>())
+            !targetBase.GetComponent<BarrackBase01>() &&
+            !targetBase.GetComponent<BarrackBase03>())
         {
             target = null;
             action = ACTION.NONE;//will change in next update()

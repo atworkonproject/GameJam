@@ -9,7 +9,8 @@ public class ConfigurationObject : ScriptableObject {
 	public float startPlayerCredits = 100.0f;
 	public float maxPlayerCredits = 200.0f;
     [Header("HP of buildings")]
-    public int BarracksMaxHP = 150;
+    public int Barracks01MaxHP = 150;
+    public int Barracks03MaxHP = 200;
     public int FarmMaxHP = 100;
 
     [Header("HP and DMG of soldiers")]

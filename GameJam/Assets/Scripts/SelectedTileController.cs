@@ -37,7 +37,7 @@ public class SelectedTileController : MonoBehaviour {
 
 		if (Indexes.y > (BaseArrayC.GlobalBaseArrayToView_X[0].row_Y.Count / 2) - 1)
 		{
-			UIController.DisplayInfoForPlayer0("build only on bottom half!");
+			UIController.DisplayUserInfo("build only on bottom half!", gameController.playerData);
 			GameObject.FindWithTag("TopRightHalf").GetComponent<TopRedSprite>().ShowRedHalf();
 			HideSelectionTile();
 		}
