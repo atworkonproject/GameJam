@@ -37,13 +37,13 @@ public class BarrackBase03 : BaseBaseClass
         timeToSpawn += Time.deltaTime;
         if (timeToSpawn >= ConfigController.Config.Barrack03SpawnEverySec)
         {
-            if (owner.Credits >= ConfigController.Config.CostForSoldier01)
+            if (owner.Credits >= ConfigController.Config.CostForSoldier03)
             {
                 timeToSpawn = 0;
                 GameObject soldier = Instantiate(
                     Soldierprefab, this.transform.position + new Vector3(0, 0, -2),
                     Quaternion.identity, GameObject.FindGameObjectWithTag("SOLDIERS").transform);
-                Soldier01Controller ctrl = soldier.GetComponent<Soldier01Controller>();
+                Soldier03Controller ctrl = soldier.GetComponent<Soldier03Controller>();
                 ctrl.Init(owner);
                 gameController.soldiers.Add(ctrl);
                 SFXController.PlaySound(SOUNDS.SPAWN);

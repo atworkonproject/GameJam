@@ -14,6 +14,7 @@ TagManager:
   - DamageBubble
   - BackgroundSprite2
   - SlowBuilding
+  - OTHER
   layers:
   - Default
   - TransparentFX

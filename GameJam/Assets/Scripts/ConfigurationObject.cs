@@ -14,18 +14,21 @@ public class ConfigurationObject : ScriptableObject {
     public int FarmMaxHP = 100;
 
     [Header("HP and DMG of soldiers")]
+    public float minCollisionDist = 0.16f;
     public int Soldier01MaxHP = 75;
     public int Soldier01Dmg = 25;
     public int Soldier01DmgVar = 3;
 	public float Soldier01AttackSpeed = 0.5f;//every n sec
 	public float Soldier01MoveSpeed = 5.0f;//every n sec
+    public float Soldier01SeeRange = 2.0f;
 
     public int Soldier03MaxHP = 150;
     public int Soldier03Dmg = 100;
     public int Soldier03DmgVar = 25;
     public float Soldier03AttackSpeed = 1.5f;//every n sec
     public float Soldier03MoveSpeed = 2.0f;//every n sec
-
+    public float Soldier03ShotRange = 2.0f;
+    public float Soldier03MissleSpeed = 4.0f;
 
     [Header("BaseBuy")]
 	public float Barracks01BuyCost = 20.0f;

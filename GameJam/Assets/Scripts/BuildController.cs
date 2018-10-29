@@ -45,32 +45,54 @@ public class BuildController : MonoBehaviour {
         }
 
         Vector2Int pos = selectedTileC.DisplayedSelectedTile.MyIndexes;
-        Build(builder, id, pos);
+        if(Build(builder, id, pos))
+        {
+            float cost = 100;
+            switch (id)
+            {
+                case BASE_ID.FARM:
+                    cost = ConfigController.Config.FarmBuyCost;
+                    break;
+                case BASE_ID.BARRACKS_01:
+                    cost = ConfigController.Config.Barracks01BuyCost;
+                    break;
+                case BASE_ID.BARRACKS_02:
+                    cost = ConfigController.Config.Barracks02BuyCost;
+                    break;
+                case BASE_ID.BARRACKS_03:
+                    cost = ConfigController.Config.Barracks03BuyCost;
+                    break;
+                case BASE_ID._COUNT:
+                default:
+                    cost = 100;
+                    break;
+            }
+            //build succesfuly
+            DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
+                cost, false, true);
 
-        DamageBubbleC.CreateDamageBubble(selectedTileC.DisplayedSelectedTile.transform.position,
-            ConfigController.Config.Barracks01BuyCost, false, true);
-
-        selectedTileC.HideSelectionTile();
+            selectedTileC.HideSelectionTile();
+        }
     }
     public void BuildAI(UserData builder, BASE_ID id, Vector2Int pos)
     {
         Build(builder, id, pos);
     }
     //with recording (player uses this)
-    public void Build(UserData builder, BASE_ID id, Vector2Int pos, bool isStartGameBuilding = false)
+    public bool Build(UserData builder, BASE_ID id, Vector2Int pos, bool isStartGameBuilding = false)
     {
         //check correct pos
         if (pos.x < 0 || pos.y < 0)
         {
             Debug.LogError("random position for new " + id.ToString() + "is not ok");
-            return;
+            return false;
         }
 
         //check position if free
         if (BaseArrayController.GetBase(pos) != BaseArrayController.NoBaseStatic)
         {
             UIController.DisplayUserInfo("The place is occupied", builder);
-            return;
+            return false;
         }
 
         //check credit
@@ -95,7 +117,7 @@ public class BuildController : MonoBehaviour {
         if (builder.Credits < creditsNeeded)
         {
             UIController.DisplayUserInfo("Not enough $", builder);
-            return;
+            return false;
         }
         
 		GameObject go = Instantiate(GetPrefab(id, true), GameObject.FindGameObjectWithTag("BASES").transform);
@@ -103,7 +125,7 @@ public class BuildController : MonoBehaviour {
         if (!go.GetComponent<SlowBuildingBase>())
         {
             Debug.LogError("error no slow building");
-            return;
+            return false;
         }
 
         go.GetComponent<SlowBuildingBase>().Init(pos, GetPrefab(id, false),
@@ -118,6 +140,8 @@ public class BuildController : MonoBehaviour {
 
         builder.Credits -= creditsNeeded;
 		SFXController.PlaySound(SOUNDS.PLACE_BUILDING);
+
+        return true;
 	}
 
 	[Serializable]

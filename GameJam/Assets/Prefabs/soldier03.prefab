@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4426064722128606}
-  - component: {fileID: 114102819240013776}
+  - component: {fileID: 114486818277614196}
   m_Layer: 0
   m_Name: soldier03
   m_TagString: Untagged
@@ -161,19 +161,6 @@ Transform:
   m_Father: {fileID: 4426064722128606}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114102819240013776
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1255098804996634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24572594cb1e9dd47832de6781311ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angelSprite: {fileID: 21300000, guid: ed6d1b5301ae01d4ca8dd267a6291876, type: 3}
-  devilSprite: {fileID: 21300000, guid: 14a2328b17959c04998f953724d8ef0d, type: 3}
 --- !u!114 &114423260458868872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Foreground: {fileID: 212728314709898682}
+--- !u!114 &114486818277614196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255098804996634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4d275d7a9a88a418a7465d46d2226c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angelSprite: {fileID: 21300000, guid: 6bf4bb15b023d7f44a074eaccd232f6f, type: 3}
+  devilSprite: {fileID: 21300000, guid: ff45a89e6cfb2a5438720303036d9d6a, type: 3}
+  ShotPrefab: {fileID: 1924832093392026, guid: f7314b2e31df8054a8d53809469a65f8, type: 2}
 --- !u!212 &212402426053708336
 SpriteRenderer:
   m_ObjectHideFlags: 1

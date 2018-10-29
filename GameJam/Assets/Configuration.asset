@@ -13,18 +13,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPlayerCredits: 100
   maxPlayerCredits: 200
-  BarracksMaxHP: 150
+  Barracks01MaxHP: 150
+  Barracks03MaxHP: 200
   FarmMaxHP: 100
+  minCollisionDist: 0.16
   Soldier01MaxHP: 50
   Soldier01Dmg: 10
   Soldier01DmgVar: 3
   Soldier01AttackSpeed: 1
   Soldier01MoveSpeed: 2
-  Soldier03MaxHP: 150
-  Soldier03Dmg: 100
-  Soldier03DmgVar: 25
-  Soldier03AttackSpeed: 1.5
-  Soldier03MoveSpeed: 2
+  Soldier01SeeRange: 3
+  Soldier03MaxHP: 100
+  Soldier03Dmg: 50
+  Soldier03DmgVar: 10
+  Soldier03AttackSpeed: 3
+  Soldier03MoveSpeed: 1
+  Soldier03ShotRange: 2
+  Soldier03MissleSpeed: 3
   Barracks01BuyCost: 20
   Barracks02BuyCost: 30
   Barracks03BuyCost: 50
@@ -32,10 +37,10 @@ MonoBehaviour:
   FarmEarn: 50
   FarmEarnPeriod: 5
   CostForSoldier01: 5
-  CostForSoldier03: 10
+  CostForSoldier03: 15
   Barrack01SpawnEverySec: 5
-  Barrack03SpawnEverySec: 10
+  Barrack03SpawnEverySec: 12
   InfoTextDisplayTime: 3
-  AIDecisionEverySec: 1
+  AIDecisionEverySec: 5
   BUILDING_TIME: 7
   MAX_TIME_FOR_AI_TO_START: 1

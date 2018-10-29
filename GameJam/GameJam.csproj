@@ -326,9 +326,11 @@
     <Compile Include="Assets\Scripts\SelectedTile.cs" />
     <Compile Include="Assets\Scripts\SelectedTileController.cs" />
     <Compile Include="Assets\Scripts\SFXController.cs" />
+    <Compile Include="Assets\Scripts\shotAI.cs" />
     <Compile Include="Assets\Scripts\SlowBuildingBase.cs" />
     <Compile Include="Assets\Scripts\Soldier.cs" />
     <Compile Include="Assets\Scripts\Soldier01Controller.cs" />
+    <Compile Include="Assets\Scripts\Soldier03Controller.cs" />
     <Compile Include="Assets\Scripts\SoldierController.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\TopRedSprite.cs" />

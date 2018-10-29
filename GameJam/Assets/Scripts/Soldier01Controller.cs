@@ -70,12 +70,12 @@ public class Soldier01Controller : Soldier {
             case ACTION.GOTO_BASE:
                 //if yo'll find closer enemy, then take it
                 SearchForEnemiesAround();
-                if (targetBase.getHP() <= 0)
+                if (targetBase.getHP() <= 0 || !target)
                 {
                     action = ACTION.NONE;
                     return;
                 }
-                if (GetDistance(target) <= attackDist)
+                if (GetDistance(target) <= ConfigController.Config.minCollisionDist)
                     action = ACTION.ATTACK_BASE;
                 else
                     this.transform.Translate((target.position - this.transform.position).normalized * ConfigController.Config.Soldier01MoveSpeed * Time.deltaTime);
@@ -83,12 +83,12 @@ public class Soldier01Controller : Soldier {
             case ACTION.GOTO_ENEMY:
                 //if yo'll find closer enemy, then take it
                 SearchForEnemiesAround();
-                if (targetSoldier.getHP() <= 0)
+                if (targetSoldier.getHP() <= 0 || !target)
                 {
                     action = ACTION.NONE;
                     return;
                 }
-                if (GetDistance(target) <= attackDist)
+                if (GetDistance(target) <= ConfigController.Config.minCollisionDist)
                     action = ACTION.ATTACK_ENEMY;
                 else
                     this.transform.Translate((target.position - this.transform.position).normalized * ConfigController.Config.Soldier01MoveSpeed * Time.deltaTime);
@@ -116,7 +116,7 @@ public class Soldier01Controller : Soldier {
             targetBase = SearchForClosestEnemyBase();
             if (targetBase)
             {
-                if (GetDistance(targetBase.transform) <= attackDist)
+                if (GetDistance(targetBase.transform) <= ConfigController.Config.minCollisionDist)
                 {
                     action = ACTION.ATTACK_BASE;
                     target = targetBase.transform;
@@ -162,7 +162,7 @@ public class Soldier01Controller : Soldier {
         }
 
 
-        if (GetDistance(closest.transform) <= attackDist)
+        if (GetDistance(closest.transform) <= ConfigController.Config.minCollisionDist)
         {//is in attack distance - ATTACK
             targetSoldier = closest;
             target = targetSoldier.transform;
@@ -170,7 +170,7 @@ public class Soldier01Controller : Soldier {
             AttackSoldier();
             return;
         }
-        if (GetDistance(closest.transform) <= rangeDist)
+        if (GetDistance(closest.transform) <= ConfigController.Config.Soldier01SeeRange)
         {//is in range distance - GOTO ENEMY
             targetSoldier = closest;
             target = targetSoldier.transform;
@@ -192,7 +192,7 @@ public class Soldier01Controller : Soldier {
         if (action != ACTION.ATTACK_ENEMY)
             return;
 
-        if(!targetSoldier || !targetSoldier.GetComponent<Soldier01Controller>())
+        if(!targetSoldier || !targetSoldier.GetComponent<Soldier>())
         {
             target = null;
             action = ACTION.NONE;//will change in next update()
